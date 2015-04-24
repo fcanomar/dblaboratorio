@@ -2,6 +2,7 @@ import datetime
 
 import openerp
 from openerp import models, fields, api
+from datetime import date
 
 class dblaboratorio_product_template (models.Model) :
     _inherit = "product.template"
@@ -13,19 +14,32 @@ class dblaboratorio_product_template (models.Model) :
     x_formato = fields.Many2one('dblaboratorio.formato', 'Formato', ondelete='cascade')
     x_conservacion = fields.Char('Conservacion')
     x_caducidad = fields.Date('Fecha de Caducidad')
+    x_today = fields.Date('Today', compute='_get_today')
     x_trestante = fields.Integer('Meses Caducidad', compute='_get_trestante')
+    x_daysrestante = fields.Integer('Dias Caducidad', compute='_get_daysrestante')
     x_estado = fields.Selection([('solido','Solido'),('liquido','Liquido'),('gaseoso','Gaseoso')],'Estado')
     x_tipocodigo = fields.Selection([('ean13','EAN13'),('qweb','Qweb')],'Tipo de Codigo')
     x_qweb = fields.Char('Codigo Qweb')
     x_secuenciaprod = fields.Many2one('ir.sequence','Secuencia producto', ondelete='cascade')
    
+    #para asegurar que x_trestante esta actualizado segun vayamos avanzando en el tiempo
+    @api.one
+    def _get_today(self):
+        self.x_today = date.today()
      
-    @api.depends('x_caducidad')
+    @api.depends('x_caducidad','x_today')
     def _get_trestante(self):
         for record in self:
             days = record.x_caducidad and (fields.Date.from_string(record.x_caducidad) - fields.Date.from_string(fields.Date.today())).days
-            record.x_trestante = days/30     
-
+            record.x_trestante = days/30    
+            
+            
+            
+    @api.depends('x_caducidad','x_today')
+    def _get_daysrestante(self):
+        for record in self:
+            days = record.x_caducidad and (fields.Date.from_string(record.x_caducidad) - fields.Date.from_string(fields.Date.today())).days
+            record.x_daysrestante = days
 
 
 class calidad_cm(models.Model) :
