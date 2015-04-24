@@ -21,6 +21,7 @@ class dblaboratorio_product_template (models.Model) :
     x_tipocodigo = fields.Selection([('ean13','EAN13'),('qweb','Qweb')],'Tipo de Codigo')
     x_qweb = fields.Char('Codigo Qweb')
     x_secuenciaprod = fields.Many2one('ir.sequence','Secuencia producto', ondelete='cascade')
+    x_codigo = fields.Char('Codigo Secuencia', compute='_get_codigo')
    
     #para asegurar que x_trestante esta actualizado segun vayamos avanzando en el tiempo
     @api.one
@@ -41,6 +42,11 @@ class dblaboratorio_product_template (models.Model) :
             days = record.x_caducidad and (fields.Date.from_string(record.x_caducidad) - fields.Date.from_string(fields.Date.today())).days
             record.x_daysrestante = days
 
+    @api.depends('x_tipolabo')
+    def _get_codigo(self):
+        if self.x_tipolabo == 'reactivo':
+            #self.x_codigo = self.env['ir.sequence'].search(['code','=','react'])
+            self.x_codigo = 'RCODIGO'
 
 class calidad_cm(models.Model) :
     _name = 'dblaboratorio.calidadcm'

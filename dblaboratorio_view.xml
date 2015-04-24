@@ -27,6 +27,7 @@ ref="product.product_template_only_form_view"/>
 	
      <field name="x_tipolabo"/>
      <field name="x_secuenciaprod" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
+     <field name="x_codigo" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
      
 	 <field name="x_marca" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" widget="selection"/>
 	 <field name="x_calidadfabr" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" widget="selection"/>
