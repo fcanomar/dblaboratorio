@@ -45,8 +45,8 @@ class dblaboratorio_product_template (models.Model) :
     @api.depends('x_tipolabo')
     def _get_codigo(self):
         if self.x_tipolabo == 'reactivo':
-            #self.x_codigo = self.env['ir.sequence'].search(['code','=','react'])
-            self.x_codigo = 'RCODIGO'
+            #print seq
+            self.x_codigo = self.env['ir.sequence'].get('react')
 
 class calidad_cm(models.Model) :
     _name = 'dblaboratorio.calidadcm'
