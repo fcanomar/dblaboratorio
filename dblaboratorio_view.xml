@@ -23,10 +23,12 @@ ref="product.product_template_only_form_view"/>
       <field name="ean13" attrs="{'invisible':[('x_tipocodigo','!=','ean13')]}"/>
       </field>
       
-	<field name="default_code" position="after">
+      <field name='default_code' position="replace">
+	
+	 <field name="default_code" attrs="{'invisible':[('x_tipolabo','=','reactivo')]}"/>
 	
      <field name="x_tipolabo"/>
-     <field name="x_secuenciaprod" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
+     <!--field name="x_secuenciaprod" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"-->
      <field name="x_codigo" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
      
 	 <field name="x_marca" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" widget="selection"/>
@@ -39,7 +41,7 @@ ref="product.product_template_only_form_view"/>
 
     <field name="x_conservacion"  attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
     <field name="x_caducidad"  attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
-    <field name="x_today"  attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
+    <!--field name="x_today"  attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/-->
     <field name="x_trestante"  attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
     <field name="x_daysrestante"  attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
     

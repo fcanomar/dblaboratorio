@@ -12,16 +12,16 @@ class dblaboratorio_product_template (models.Model) :
     x_calidadfabr = fields.Many2one('dblaboratorio.calidadesmarca','Calidad Fabricante', ondelete='cascade', domain="[('x_marca','=',x_marca)]")
     x_calidadcm = fields.Many2one('dblaboratorio.calidadcm','Cumple Especificaciones', ondelete='cascade', domain="[('x_eqespec','=',x_calidadfabr),('x_marca','=',x_marca)]") 
     x_formato = fields.Many2one('dblaboratorio.formato', 'Formato', ondelete='cascade')
-    x_conservacion = fields.Char('Conservacion')
+    x_conservacion = fields.Many2one('dblaboratorio.conservacion', 'Conservacion', ondelete='cascade')
     x_caducidad = fields.Date('Fecha de Caducidad')
     x_today = fields.Date('Today', compute='_get_today')
-    x_trestante = fields.Integer('Meses Caducidad', compute='_get_trestante')
-    x_daysrestante = fields.Integer('Dias Caducidad', compute='_get_daysrestante')
+    x_trestante = fields.Integer('Caducidad en Meses', compute='_get_trestante')
+    x_daysrestante = fields.Integer('Caducidad en Dias', compute='_get_daysrestante')
     x_estado = fields.Selection([('solido','Solido'),('liquido','Liquido'),('gaseoso','Gaseoso')],'Estado')
     x_tipocodigo = fields.Selection([('ean13','EAN13'),('qweb','Qweb')],'Tipo de Codigo')
     x_qweb = fields.Char('Codigo Qweb')
     x_secuenciaprod = fields.Many2one('ir.sequence','Secuencia producto', ondelete='cascade')
-    x_codigo = fields.Char('Codigo Secuencia', compute='_get_codigo')
+    x_codigo = fields.Char('Referencia de Laboratorio', compute='_get_codigo')
    
     #para asegurar que x_trestante esta actualizado segun vayamos avanzando en el tiempo
     @api.one
@@ -112,4 +112,9 @@ class formato_reactivo(models.Model) :
     _name = 'dblaboratorio.formato'
 
     name = fields.Char('Formato')
+    
+class conservacion_reactivo(models.Model) :
+    _name = 'dblaboratorio.conservacion'
+
+    name = fields.Char('Conservacion')
     
