@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data> 
+
+	<record id="seq_type_reactivos" model="ir.sequence.type">
+		<field name="name">Reactivos Code</field>
+		<field name="code">react</field>
+	</record>
+
+	<record id="seq_id_reactivos" model="ir.sequence">
+		<field name="name">Reactivos</field>
+		<field name="code">react</field>
+		<field name="padding">4</field>
+		<field name="prefix">R</field>
+		<field name="company_id" eval="False"/>
+	</record>
+	
+	</data>
+</openerp>
