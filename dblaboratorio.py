@@ -33,9 +33,7 @@ class dblaboratorio_product_template (models.Model) :
         for record in self:
             days = record.x_caducidad and (fields.Date.from_string(record.x_caducidad) - fields.Date.from_string(fields.Date.today())).days
             record.x_trestante = days/30    
-            
-            
-            
+                  
     @api.depends('x_caducidad','x_today')
     def _get_daysrestante(self):
         for record in self:
@@ -48,32 +46,18 @@ class dblaboratorio_product_template (models.Model) :
             #print seq
             self.x_codigo = self.env['ir.sequence'].get('react')
 
+
 class calidad_cm(models.Model) :
     _name = 'dblaboratorio.calidadcm'
-    #_inherit = 'dblaboratorio.calidadesmarca'
-    #_inherit = 'dblaboratorio.marca'
 
     name = fields.Char('Calidad CM')
     x_eqespec = fields.One2many('dblaboratorio.calidadesmarca', 'x_calidadfab_id', string='Calidad Fabricante')
     x_marca = fields.Many2one(string='Fabricante', related='x_eqespec.x_marca')
-    #x_marca = fields.Char('Marca #')
-    
-#     @api.onchange('x_marca')
-#     def _onchange_x_marca(self):
-#     
-#         self.x_marca=self.x_eqespec.x_marca
-#         #marca_form = self.env['product.template'].x_marca
-#         #self.x_marca = marca_form
-#         # Can optionally return a warning and domains
-#         return {
-#             'warning': {
-#                 'title': "Esto es una prueba dos",
-#                 'message': "Esto es un mensaje de prueba dos",
-#             }
-#         }
+
 
     _sql_constraints = [
     ('name_unique', 'UNIQUE(name)', "La calidad que pretende crear ya existe"),]
+
 
 class calidades_marca(models.Model) :
     _name = 'dblaboratorio.calidadesmarca'
@@ -81,23 +65,10 @@ class calidades_marca(models.Model) :
     name = fields.Char('Calidad Fabricante')
     x_calidadfab_id = fields.Many2one('dblaboratorio.calidadcm','Calidad Fabricante ID', ondelete='cascade', copy=True)
     x_marca = fields.Many2one('dblaboratorio.marca','Fabricante', ondelete='cascade', copy=True)
-    
-#     @api.onchange('x_marca')
-#     def _onchange_x_marca(self):
-#     
-#         self.x_marca=self.x_calidadfab_id.x_marca
-#         #marca_form = self.env['product.template'].x_marca
-#         #self.x_marca = marca_form
-#         # Can optionally return a warning and domains
-#         return {
-#             'warning': {
-#                 'title': "Esto es una prueba",
-#                 'message': "Esto es un mensaje de prueba",
-#             }
-#         }
 
     _sql_constraints = [
         ('name_unique', 'UNIQUE(name,x_marca)', "La calidad que pretende crear ya existe para dicho fabricante"),]
+ 
     
 class marca_reactivo(models.Model) :
     _name = 'dblaboratorio.marca'
@@ -112,6 +83,7 @@ class formato_reactivo(models.Model) :
     _name = 'dblaboratorio.formato'
 
     name = fields.Char('Formato')
+  
     
 class conservacion_reactivo(models.Model) :
     _name = 'dblaboratorio.conservacion'

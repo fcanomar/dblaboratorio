@@ -1,168 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data> 
- 
- 	<!-- Vistas Calidad CM -->
-        	
-        	<!--<record id="dblaboratorio_calidadcm_form" model="ir.ui.view">
-            <field name="name">dblaboratorio.calidadcm.form</field>
-            <field name="model">dblaboratorio.calidadcm</field>
-            <field name="arch" type="xml">
-                <form string="Calidad CM">
-                <group>
-                	<field name="name" string="Calidad CM"/>
-                </group>
-                    <field name="x_eqespec" mode='tree'>
-                    		<!~~<tree>
-                    		    <field name="name" string="Calidad Fabricante"/>  
-                                <field name="x_marca" string="Fabricante"/>   
-                            </tree>
-                            <form>
-                            	<group col="2">
-                                	<field name="name" string="Calidad Fabricante"/>  
-                                	<field name="x_marca" string="Fabricante"/>                            
-                            	</group>
-                			</form>~~>
-            		</field>
-            	</form>
-            </field>
-        	</record>-->
-        	
-        	<!-- vistas para Calidad CM-->
-        	
-        	<record id="dblaboratorio_calidadcm_form" model="ir.ui.view">
-            <field name="name">dblaboratorio.calidadcm.form</field>
-            <field name="model">dblaboratorio.calidadcm</field>
-            <field name="arch" type="xml">
-                <form string="Calidad CM">
-                	<group>
-                	<field name="name" string="Calidad CM"/>
-                	</group>
-                    <field name="x_eqespec">
-                    		<tree>
-                    		    <field name="name" string="Calidad Fabricante"/>  
-                                <field name="x_marca" string="Fabricante"/>   
-                            </tree>
-                            <form>
-                            	<group col="2">
-                                	<field name="name" string="Calidad Fabricante"/>  
-                                	<field name="x_marca" string="Fabricante"/>                            
-                            	</group>
-                			</form>
-            		</field>
-            	</form>
-            </field>
-        	</record>
-        		
-        	
-        	
-        	<record id="dblaboratorio_calidadcm_tree" model="ir.ui.view">
-            <field name="name">dblaboratorio.calidadcm.tree</field>
-            <field name="model">dblaboratorio.calidadcm</field>
-            <field name="arch" type="xml">
-                <tree>
-                	<field name="name"/>
-                </tree>
-            </field>
-        	</record>
-        	
-        	
-        <!-- Vistas para Calidades Marca -->
-        	        	
-        	<record id="dblaboratorio_calidadfab_form" model="ir.ui.view">
-            <field name="name">dblaboratorio.calidadesmarca.form</field>
-            <field name="model">dblaboratorio.calidadesmarca</field>
-            <field name="arch" type="xml">
-                    <form string="Calidad Fabricante" create="false">
-                         <group>
-                            <field name="name"/>  
-                            <field name="x_marca" string="Fabricante"/>  
-                            <!--<field name="x_calidadcm" string="Calidad CM"/>-->                         
-                        </group>
-                    </form>
-            </field>
-        	</record>
-        	
-        	<record id="dblaboratorio_calidadfab_tree" model="ir.ui.view">
-            <field name="name">dblaboratorio.calidadesmarca.tree</field>
-            <field name="model">dblaboratorio.calidadesmarca</field>
-            <field name="arch" type="xml">
-        	        <tree  create="false">
-                        <field name="name"/>  
-                        <field name="x_marca" string="Fabricante"/> 
-                        <!--<field name="x_calidadcm" string="Calidad CM"/>-->
-                    </tree>
-            </field>
-        	</record>
+	<data>
 
- 
-        
-<!--ej search view
+		<!-- vistas para Calidad CM -->
 
-            <record model="ir.ui.view" id="dblaboratorio_marca_view_search">
-            <field name="name">dblaboratorio.marca.search</field>
-            <field name="model">dblaboratorio.marca</field>
-            <field name="arch" type="xml">
-                <search string="Marcas de Reactivos">
-                    <field name="name"/>
-                    <field name="x_calidadesmarca"/>
-                </search>
-            </field>
-        	</record>
-        
--->     
- 
- 
-
- 
-  			<!-- Menú para las Calidades Marca -->
- 	
-<!-- 
-            <record id="dblaboratorio_calidadesmarca_action" model="ir.actions.act_window">
-            <field name="name">Calidades Fabricante</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">dblaboratorio.calidadesmarca</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <!~~<field name="search_view_id" ref="dblaboratorio_marca_view_search" />~~>
-     		</record>
-
- 
-
-        <menuitem
-            action="dblaboratorio_calidadesmarca_action" id="db_calidadesmarca_menu_stock"
-            parent="stock.menu_stock_product" sequence="60"/>
-            
-            
-            
-        <menuitem
-            action="dblaboratorio_calidadesmarca_action" id="db_marca_calidadesmarca_menu_purchase"
-            parent="purchase.menu_procurement_management_product" sequence="60"/>
- -->
+		<record id="dblaboratorio_calidadcm_form" model="ir.ui.view">
+			<field name="name">dblaboratorio.calidadcm.form</field>
+			<field name="model">dblaboratorio.calidadcm</field>
+			<field name="arch" type="xml">
+				<form string="Calidad CM">
+					<group>
+						<field name="name" string="Calidad CM" />
+					</group>
+					<field name="x_eqespec">
+						<tree>
+							<field name="name" string="Calidad Fabricante" />
+							<field name="x_marca" string="Fabricante" />
+						</tree>
+						<form>
+							<group col="2">
+								<field name="name" string="Calidad Fabricante" />
+								<field name="x_marca" string="Fabricante" />
+							</group>
+						</form>
+					</field>
+				</form>
+			</field>
+		</record>
 
 
-            
-             <!-- Menú para las Calidad CM -->
- 	
-            <record id="dblaboratorio_calidadcm_action" model="ir.actions.act_window">
-            <field name="name">Calidades CM</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">dblaboratorio.calidadcm</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <!--<field name="search_view_id" ref="dblaboratorio_marca_view_search" />-->
-     		</record>
-     		
-     	<menuitem
-            action="dblaboratorio_calidadcm_action" id="db_calidadcm_menu_stock"
-            parent="stock.menu_stock_product" sequence="50"/>
-            
-            
-            
-        <menuitem
-            action="dblaboratorio_calidadcm_action" id="db_calidadcm_menu_purchase"
-            parent="purchase.menu_procurement_management_product" sequence="50"/>
 
-        
-    </data>
+		<record id="dblaboratorio_calidadcm_tree" model="ir.ui.view">
+			<field name="name">dblaboratorio.calidadcm.tree</field>
+			<field name="model">dblaboratorio.calidadcm</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+
+		<!-- Vistas para Calidades Marca -->
+
+		<record id="dblaboratorio_calidadfab_form" model="ir.ui.view">
+			<field name="name">dblaboratorio.calidadesmarca.form</field>
+			<field name="model">dblaboratorio.calidadesmarca</field>
+			<field name="arch" type="xml">
+				<form string="Calidad Fabricante" create="false">
+					<group>
+						<field name="name" />
+						<field name="x_marca" string="Fabricante" />
+						<!--<field name="x_calidadcm" string="Calidad CM"/> -->
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record id="dblaboratorio_calidadfab_tree" model="ir.ui.view">
+			<field name="name">dblaboratorio.calidadesmarca.tree</field>
+			<field name="model">dblaboratorio.calidadesmarca</field>
+			<field name="arch" type="xml">
+				<tree create="false">
+					<field name="name" />
+					<field name="x_marca" string="Fabricante" />
+					<!--<field name="x_calidadcm" string="Calidad CM"/> -->
+				</tree>
+			</field>
+		</record>
+
+		<menuitem action="dblaboratorio_calidadesmarca_action" id="db_calidadesmarca_menu_stock"
+			parent="stock.menu_stock_product" sequence="60" />
+
+
+
+		<menuitem action="dblaboratorio_calidadesmarca_action" id="db_marca_calidadesmarca_menu_purchase"
+			parent="purchase.menu_procurement_management_product" sequence="60" />
+
+
+		<!-- Menú para las Calidad CM -->
+
+		<record id="dblaboratorio_calidadcm_action" model="ir.actions.act_window">
+			<field name="name">Calidades CM</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">dblaboratorio.calidadcm</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<!--<field name="search_view_id" ref="dblaboratorio_marca_view_search" 
+				/> -->
+		</record>
+
+		<menuitem action="dblaboratorio_calidadcm_action" id="db_calidadcm_menu_stock"
+			parent="stock.menu_stock_product" sequence="50" />
+
+
+		<menuitem action="dblaboratorio_calidadcm_action" id="db_calidadcm_menu_purchase"
+			parent="purchase.menu_procurement_management_product" sequence="50" />
+
+
+	</data>
 </openerp>
