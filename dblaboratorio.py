@@ -7,6 +7,14 @@ from datetime import date
 class dblaboratorio_product_template (models.Model) :
     _inherit = "product.template"
     
+    
+    @api.onchange('x_tipolabo')
+    def _get_codigo(self):
+        #if self.x_tipolabo == 'reactivo':
+            #print seq
+            return self.env['ir.sequence'].get('react')  
+    
+    
     x_tipolabo = fields.Selection([('reactivo','Reactivo'),('materiallabo','Material de Laboratorio'),('materialrefe','Material de Referencia'),('equipo','Equipo')],'Clase de Producto') 
     x_marca = fields.Many2one('dblaboratorio.marca','Marca', ondelete='cascade')
     x_calidadfabr = fields.Many2one('dblaboratorio.calidadesmarca','Calidad Fabricante', ondelete='cascade', domain="[('x_marca','=',x_marca)]")
@@ -21,7 +29,8 @@ class dblaboratorio_product_template (models.Model) :
     x_tipocodigo = fields.Selection([('ean13','EAN13'),('qweb','Qweb')],'Tipo de Codigo')
     x_qweb = fields.Char('Codigo Qweb')
     x_secuenciaprod = fields.Many2one('ir.sequence','Secuencia producto', ondelete='cascade')
-    x_codigo = fields.Char('Referencia de Laboratorio', compute='_get_codigo')
+    x_codigo = fields.Char('Referencia de Laboratorio', default=_get_codigo)
+   
    
     #para asegurar que x_trestante esta actualizado segun vayamos avanzando en el tiempo
     @api.one
@@ -38,13 +47,7 @@ class dblaboratorio_product_template (models.Model) :
     def _get_daysrestante(self):
         for record in self:
             days = record.x_caducidad and (fields.Date.from_string(record.x_caducidad) - fields.Date.from_string(fields.Date.today())).days
-            record.x_daysrestante = days
-
-    @api.depends('x_tipolabo')
-    def _get_codigo(self):
-        if self.x_tipolabo == 'reactivo':
-            #print seq
-            self.x_codigo = self.env['ir.sequence'].get('react')
+            record.x_daysrestante = days 
 
 
 class calidad_cm(models.Model) :
