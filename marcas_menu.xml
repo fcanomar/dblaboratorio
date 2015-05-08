@@ -69,13 +69,13 @@
 			</field>
 		</record>
 
-		<menuitem action="dblaboratorio_calidadesmarca_action" id="db_calidadesmarca_menu_stock"
+		<!--<menuitem action="dblaboratorio_calidadesmarca_action" id="db_calidadesmarca_menu_stock"
 			parent="stock.menu_stock_product" sequence="60" />
 
 
 
 		<menuitem action="dblaboratorio_calidadesmarca_action" id="db_marca_calidadesmarca_menu_purchase"
-			parent="purchase.menu_procurement_management_product" sequence="60" />
+			parent="purchase.menu_procurement_management_product" sequence="60" />-->
 
 
 		<!-- Menú para las Calidad CM -->
