@@ -49,6 +49,18 @@ class dblaboratorio_product_template (models.Model) :
             days = record.x_caducidad and (fields.Date.from_string(record.x_caducidad) - fields.Date.from_string(fields.Date.today())).days
             record.x_daysrestante = days 
 
+    @api.onchange('x_caducidad')
+    def onchange_warning_caducidad(self):
+    
+        titulo = 'titulo de ejemplo'
+        mensaje = 'mensaje de ejemplo'
+        warning = {
+                'title': titulo,
+                'message': mensaje,
+        }
+        
+        return {'value':{},'warning':warning}
+
 
 class calidad_cm(models.Model) :
     _name = 'dblaboratorio.calidadcm'
