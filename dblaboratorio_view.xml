@@ -41,6 +41,7 @@
 					<field name="x_conservacion" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
 					<field name="x_caducidad" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
 					<!--field name="x_today" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/ -->
+					<field name="x_time"/>
 					<field name="x_trestante" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
 					<field name="x_daysrestante" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
 

@@ -6,7 +6,7 @@ Añade los campos necesarios para la base de datos de productos de laboratorio
 """,
 'author' : 'Francisco Cano Marchal',
 'depends' : ['base','purchase'],
-'data' : ['dblaboratorio_view.xml','marcas_menu.xml','sequences.xml'],
+'data' : ['dblaboratorio_view.xml','marcas_menu.xml','sequences.xml','caducidad_scheduler.xml'],
 'demo': [],
 'installable' : True,
 'auto_install' : False,

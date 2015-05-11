@@ -14,6 +14,33 @@ class dblaboratorio_product_template (models.Model) :
             #print seq
             return self.env['ir.sequence'].get('react')  
     
+    def run_caducidad_scheduler(self, cr, uid, context=None):
+        print ('scheduler!!')
+      
+    @api.onchange('x_time')
+    def onchange_warning_caducidad(self):
+    
+        titulo = 'Caducidad Reactivo'
+        mensaje = 'El reactivo %s caduca el dia %s' %{self.name,self.x_caducidad}
+        warning = {
+                'title': titulo,
+                'message': mensaje,
+        }
+        
+        #expires tomorrow. warning each 10 minutes
+        if self.x_daysrestante <= 1 & self.x_time == '$0' :
+            return {'value':{},'warning':warning}
+        
+        #expires next week. warning everyday at 11 am
+        elif self.x_daysrestante <= 7 & self.x_time == '11:00' :
+            return {'value':{},'warning':warning}
+        
+        #expires next month. warning at 11 am Monday
+        elif self.x_daysrestante <= 30 & datetime.datetime.today().weekday() == 0 & self.x_time == '11:00' :
+            return {'value':{},'warning':warning}
+
+
+    
     
     x_tipolabo = fields.Selection([('reactivo','Reactivo'),('materiallabo','Material de Laboratorio'),('materialrefe','Material de Referencia'),('equipo','Equipo')],'Clase de Producto') 
     x_marca = fields.Many2one('dblaboratorio.marca','Marca', ondelete='cascade')
@@ -23,6 +50,7 @@ class dblaboratorio_product_template (models.Model) :
     x_conservacion = fields.Many2one('dblaboratorio.conservacion', 'Conservacion', ondelete='cascade')
     x_caducidad = fields.Date('Fecha de Caducidad')
     x_today = fields.Date('Today', compute='_get_today')
+    x_time = fields.Char('Time', compute='_get_time')
     x_trestante = fields.Integer('Caducidad en Meses', compute='_get_trestante')
     x_daysrestante = fields.Integer('Caducidad en Dias', compute='_get_daysrestante')
     x_estado = fields.Selection([('solido','Solido'),('liquido','Liquido'),('gaseoso','Gaseoso')],'Estado')
@@ -32,10 +60,15 @@ class dblaboratorio_product_template (models.Model) :
     x_codigo = fields.Char('Referencia de Laboratorio', default=_get_codigo)
    
    
-    #para asegurar que x_trestante esta actualizado segun vayamos avanzando en el tiempo
     @api.one
     def _get_today(self):
         self.x_today = date.today()
+    
+    @api.one
+    @api.depends()
+    def _get_time(self):
+        self.x_time = datetime.datetime.strftime(datetime.datetime.now(), '%H:%M')
+        print('hora!')
      
     @api.depends('x_caducidad','x_today')
     def _get_trestante(self):
@@ -49,17 +82,6 @@ class dblaboratorio_product_template (models.Model) :
             days = record.x_caducidad and (fields.Date.from_string(record.x_caducidad) - fields.Date.from_string(fields.Date.today())).days
             record.x_daysrestante = days 
 
-    @api.onchange('x_caducidad')
-    def onchange_warning_caducidad(self):
-    
-        titulo = 'titulo de ejemplo'
-        mensaje = 'mensaje de ejemplo'
-        warning = {
-                'title': titulo,
-                'message': mensaje,
-        }
-        
-        return {'value':{},'warning':warning}
 
 
 class calidad_cm(models.Model) :
