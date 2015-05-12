@@ -9,7 +9,16 @@
 			<field name="inherit_id" ref="product.product_template_only_form_view" />
 
 			<field name="arch" type="xml">
+			
 
+				<field name="list_price" position="replace">
+					<field name="list_price" attrs="{'invisible':[('x_tipolabo','=','reactivo')]}" />
+				</field>
+				
+				<field name="type" position="replace">
+					<field name="type"/>
+				</field>
+				
 				<field name="ean13" position="before">
 					<field name="x_tipocodigo" />
 					<field name="x_qweb" attrs="{'invisible':[('x_tipocodigo','!=','qweb')]}" />
@@ -18,14 +27,27 @@
 				<field name="ean13" position="replace">
 					<field name="ean13" attrs="{'invisible':[('x_tipocodigo','!=','ean13')]}" />
 				</field>
-
+				
+				
+				
 				<field name='default_code' position="replace">
 
+					
 					<field name="default_code" attrs="{'invisible':[('x_tipolabo','=','reactivo')]}" />
+					
 
 					<field name="x_tipolabo" />
 					<!--field name="x_secuenciaprod" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" -->
+
+					
+					<group colspan="2">
+					<button name="action_get_codigo_reactivo" string="Generar Referencia Reactivo" type="object" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
+					</group>
+					
+
 					<field name="x_codigo" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
+
+					
 
 					<field name="x_marca" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"
 						widget="selection" />
@@ -34,19 +56,23 @@
 					<field name="x_calidadcm" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"
 						widget="selection" />
 
+					
+					
 					<field name="x_formato" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
 
 					<field name="x_estado" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
+					
 
 					<field name="x_conservacion" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
 					<field name="x_caducidad" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
-					<!--field name="x_today" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/ -->
-					<field name="x_time"/>
+					<!--field name="x_today" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" -->
+					<!--<field name="x_time" -->
 					<field name="x_trestante" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
 					<field name="x_daysrestante" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
-					<button name="action_mensaje_caducidad" string="Enviar mensaje caducidad" type="object"/>
 
+					
 				</field>
+				
 			</field>
 		</record>
 

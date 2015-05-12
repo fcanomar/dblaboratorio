@@ -19,9 +19,9 @@ class dblaboratorio_product_template (models.Model) :
                 record.message_post(body="Alguna unidad de este producto caduca en menos de 30 dias",subject="Caducidad Reactivo")
     
     @api.multi
-    def action_mensaje_caducidad(self):
-        self.enviar_mensajes_caducidad_reactivos()
-       
+    def action_get_codigo_reactivo(self):
+        #self.enviar_mensajes_caducidad_reactivos()
+        self.x_codigo = self._get_codigo()
     
     @api.multi
     def _get_codigo(self):
@@ -50,7 +50,7 @@ class dblaboratorio_product_template (models.Model) :
     x_tipocodigo = fields.Selection([('ean13','EAN13'),('qweb','Qweb')],'Tipo de Codigo')
     x_qweb = fields.Char('Codigo Qweb')
     x_secuenciaprod = fields.Many2one('ir.sequence','Secuencia producto', ondelete='cascade')
-    x_codigo = fields.Char('Referencia de Laboratorio', default=_get_codigo)
+    x_codigo = fields.Char('Referencia de Laboratorio')
    
    
     @api.one
