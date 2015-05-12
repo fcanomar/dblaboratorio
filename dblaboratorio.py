@@ -9,10 +9,11 @@ class dblaboratorio_product_template (models.Model) :
     
     @api.multi
     def action_mensaje_caducidad(self):
-        print('Mensaje!')
+        #print('Mensaje!')
         user = self.env['res.users'].browse(1)
-        print(user.name)
-        user.message_post(body="caducidad",subject="caducidad")
+        #print(user.name)
+        if self.x_daysrestante < 30:
+            user.message_post(body="El producto %s caduca en menos de 30 dias" %self.name,subject="Caducidad Reactivo")
         
     
     @api.onchange('x_tipolabo')
@@ -25,8 +26,7 @@ class dblaboratorio_product_template (models.Model) :
     
     def run_caducidad_scheduler(self, cr, uid, context=None):
         print ('scheduler!!')
-      
-       
+
     
     x_tipolabo = fields.Selection([('reactivo','Reactivo'),('materiallabo','Material de Laboratorio'),('materialrefe','Material de Referencia'),('equipo','Equipo')],'Clase de Producto') 
     x_marca = fields.Many2one('dblaboratorio.marca','Marca', ondelete='cascade')
@@ -51,10 +51,9 @@ class dblaboratorio_product_template (models.Model) :
         self.x_today = date.today()
     
     @api.one
-    @api.depends()
     def _get_time(self):
         self.x_time = datetime.datetime.strftime(datetime.datetime.now(), '%H:%M')
-        print('hora!')
+        #print('hora!')
      
     @api.depends('x_caducidad','x_today')
     def _get_trestante(self):
