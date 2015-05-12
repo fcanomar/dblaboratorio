@@ -10,6 +10,9 @@ class dblaboratorio_product_template (models.Model) :
     @api.multi
     def action_mensaje_caducidad(self):
         print('Mensaje!')
+        user = self.env['res.users'].browse(1)
+        print(user.name)
+        user.message_post(body="caducidad",subject="caducidad")
         
     
     @api.onchange('x_tipolabo')
