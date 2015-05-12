@@ -13,8 +13,8 @@ class dblaboratorio_product_template (models.Model) :
         user = self.env['res.users'].browse(1)
         #print(user.name)
         if self.x_daysrestante < 30:
-            user.message_post(body="El producto %s caduca en menos de 30 dias" %self.name,subject="Caducidad Reactivo")
-        
+            user.message_post(body="El producto %s %s caduca en menos de 30 dias" % (self.x_codigo, self.name),subject="Caducidad Reactivo")
+            self.message_post(body="Este producto caduca en menos de 30 dias",subject="Caducidad Reactivo")
     
     @api.onchange('x_tipolabo')
     def _get_codigo(self):
