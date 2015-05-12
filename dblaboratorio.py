@@ -85,7 +85,8 @@ class calidad_cm(models.Model) :
 
 
     _sql_constraints = [
-    ('name_unique', 'UNIQUE(name)', "La calidad que pretende crear ya existe"),]
+    ('name_unique', 'UNIQUE(name)', "La calidad que pretende crear ya existe"),
+    ('codigo_unico','UNIQUE(x_codigo)',"Dicha referencia de producto pertenece a un producto ya existente.")]
 
 
 class calidades_marca(models.Model) :
