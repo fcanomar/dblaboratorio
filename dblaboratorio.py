@@ -12,40 +12,19 @@ class dblaboratorio_product_template (models.Model) :
     def _get_codigo(self):
         #if self.x_tipolabo == 'reactivo':
             #print seq
-            return self.env['ir.sequence'].get('react')  
+            return self.env['ir.sequence'].get('react')
+              
+    
     
     def run_caducidad_scheduler(self, cr, uid, context=None):
         print ('scheduler!!')
       
-    @api.onchange('x_time')
-    def onchange_warning_caducidad(self):
-    
-        titulo = 'Caducidad Reactivo'
-        mensaje = 'El reactivo %s caduca el dia %s' %{self.name,self.x_caducidad}
-        warning = {
-                'title': titulo,
-                'message': mensaje,
-        }
-        
-        #expires tomorrow. warning each 10 minutes
-        if self.x_daysrestante <= 1 & self.x_time == '$0' :
-            return {'value':{},'warning':warning}
-        
-        #expires next week. warning everyday at 11 am
-        elif self.x_daysrestante <= 7 & self.x_time == '11:00' :
-            return {'value':{},'warning':warning}
-        
-        #expires next month. warning at 11 am Monday
-        elif self.x_daysrestante <= 30 & datetime.datetime.today().weekday() == 0 & self.x_time == '11:00' :
-            return {'value':{},'warning':warning}
-
-
-    
+       
     
     x_tipolabo = fields.Selection([('reactivo','Reactivo'),('materiallabo','Material de Laboratorio'),('materialrefe','Material de Referencia'),('equipo','Equipo')],'Clase de Producto') 
     x_marca = fields.Many2one('dblaboratorio.marca','Marca', ondelete='cascade')
     x_calidadfabr = fields.Many2one('dblaboratorio.calidadesmarca','Calidad Fabricante', ondelete='cascade', domain="[('x_marca','=',x_marca)]")
-    x_calidadcm = fields.Many2one('dblaboratorio.calidadcm','Cumple Especificaciones', ondelete='cascade', domain="[('x_eqespec','=',x_calidadfabr),('x_marca','=',x_marca)]") 
+    x_calidadcm = fields.Many2one('dblaboratorio.calidadcm','Cumple Especificaciones CM', ondelete='cascade', domain="[('x_eqespec','=',x_calidadfabr),('x_marca','=',x_marca)]") 
     x_formato = fields.Many2one('dblaboratorio.formato', 'Formato', ondelete='cascade')
     x_conservacion = fields.Many2one('dblaboratorio.conservacion', 'Conservacion', ondelete='cascade')
     x_caducidad = fields.Date('Fecha de Caducidad')
