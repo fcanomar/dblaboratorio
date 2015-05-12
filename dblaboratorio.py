@@ -15,8 +15,8 @@ class dblaboratorio_product_template (models.Model) :
 
         for record in recordset:
             if record.x_daysrestante < 30:
-                user.message_post(body="El producto %s %s caduca en menos de 30 dias" % (record.x_codigo, record.name),subject="Caducidad Reactivo")
-                record.message_post(body="Este producto caduca en menos de 30 dias",subject="Caducidad Reactivo")
+                user.message_post(body="Alguna unidad del producto %s %s caduca en menos de 30 dias" % (record.x_codigo, record.name),subject="Caducidad Reactivo")
+                record.message_post(body="Alguna unidad de este producto caduca en menos de 30 dias",subject="Caducidad Reactivo")
     
     @api.multi
     def action_mensaje_caducidad(self):
