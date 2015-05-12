@@ -44,6 +44,7 @@
 					<field name="x_time"/>
 					<field name="x_trestante" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
 					<field name="x_daysrestante" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
+					<button name="action_mensaje_caducidad" string="Enviar mensaje caducidad" type="object"/>
 
 				</field>
 			</field>

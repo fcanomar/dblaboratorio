@@ -7,6 +7,10 @@ from datetime import date
 class dblaboratorio_product_template (models.Model) :
     _inherit = "product.template"
     
+    @api.multi
+    def action_mensaje_caducidad(self):
+        print('Mensaje!')
+        
     
     @api.onchange('x_tipolabo')
     def _get_codigo(self):
@@ -105,4 +109,6 @@ class conservacion_reactivo(models.Model) :
     _name = 'dblaboratorio.conservacion'
 
     name = fields.Char('Conservacion')
+    
+
     
