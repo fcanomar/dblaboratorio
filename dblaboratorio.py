@@ -23,11 +23,11 @@ class dblaboratorio_product_template (models.Model) :
         self.enviar_mensajes_caducidad_reactivos()
        
     
-    @api.onchange('x_tipolabo')
+    @api.multi
     def _get_codigo(self):
         #if self.x_tipolabo == 'reactivo':
             #print seq
-            return self.env['ir.sequence'].get('react')
+            return self.env['ir.sequence'].next_by_code('react')
               
     
     
