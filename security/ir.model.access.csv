@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dblabo_calidad_cm,access.dblabo.calidad.cm,model_dblaboratorio_calidadcm,group_dblabo_usuario,1,0,0,0
+access_dblabo_calidades_marca,access.dblabo.calidades.marca,model_dblaboratorio_calidadesmarca,group_dblabo_usuario,1,0,0,0
+access_dblabo_marca_reactivo,access.dblabo.marca.reactivo,model_dblaboratorio_marca,group_dblabo_usuario,1,0,0,0
+access_dblabo_formato_reactivo,access.dblabo.formato.reactivo,model_dblaboratorio_formato,group_dblabo_usuario,1,0,0,0
+access_dblabo_conservacion_reactivo,access.dblabo.conservacion.reactivo,model_dblaboratorio_conservacion,group_dblabo_usuario,1,0,0,0
+access_dblabo_calidad_cm,access.dblabo.calidad.cm,model_dblaboratorio_calidadcm,group_dblabo_responsable,1,1,1,1
+access_dblabo_calidades_marca,access.dblabo.calidades.marca,model_dblaboratorio_calidadesmarca,group_dblabo_responsable,1,1,1,1
+access_dblabo_marca_reactivo,access.dblabo.marca.reactivo,model_dblaboratorio_marca,group_dblabo_responsable,1,1,1,1
+access_dblabo_formato_reactivo,access.dblabo.formato.reactivo,model_dblaboratorio_formato,group_dblabo_responsable,1,1,1,1
+access_dblabo_conservacion_reactivo,access.dblabo.conservacion.reactivo,model_dblaboratorio_conservacion,group_dblabo_responsable,1,1,1,1
