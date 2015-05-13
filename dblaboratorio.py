@@ -74,6 +74,8 @@ class dblaboratorio_product_template (models.Model) :
             days = record.x_caducidad and (fields.Date.from_string(record.x_caducidad) - fields.Date.from_string(fields.Date.today())).days
             record.x_daysrestante = days 
 
+    _sql_constraints = [
+    ('codigo_unico','UNIQUE(x_codigo)',"La referencia que pretende utilizar pertenece a un producto ya existente."),]       
 
 
 class calidad_cm(models.Model) :
@@ -85,8 +87,7 @@ class calidad_cm(models.Model) :
 
 
     _sql_constraints = [
-    ('name_unique', 'UNIQUE(name)', "La calidad que pretende crear ya existe"),
-    ('codigo_unico','UNIQUE(x_codigo)',"Dicha referencia de producto pertenece a un producto ya existente.")]
+    ('name_unique', 'UNIQUE(name)', "La calidad que pretende crear ya existe"),]
 
 
 class calidades_marca(models.Model) :

@@ -41,11 +41,11 @@
 
 					
 					<group colspan="2">
-					<button name="action_get_codigo_reactivo" string="Generar Referencia Reactivo" type="object" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
+					<button name="action_get_codigo_reactivo" string="Generar Referencia Reactivo" type="object" attrs="{'invisible':['|',('x_tipolabo','!=','reactivo'),('x_codigo','!=',False)]}"/>
 					</group>
 					
 
-					<field name="x_codigo" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
+					<field name="x_codigo" string="Referencia Reactivo" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
 
 					
 
