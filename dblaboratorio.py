@@ -9,8 +9,9 @@ class dblaboratorio_product_template (models.Model) :
     
  
     @api.multi
-    def enviar_mensajes_caducidad_reactivos(self):
+    def action_enviar_mensajes_caducidad_reactivos(self):
         user = self.env['res.users'].browse(1)
+        group = self.env['res.users']
         recordset = self.env['product.template'].search([['x_tipolabo','=','reactivo']])
 
         for record in recordset:
