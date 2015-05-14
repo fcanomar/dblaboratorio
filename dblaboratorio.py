@@ -10,14 +10,16 @@ class dblaboratorio_product_template (models.Model) :
  
     @api.multi
     def action_enviar_mensajes_caducidad_reactivos(self):
-        user = self.env['res.users'].browse(1)
-        group = self.env['res.users']
+        
+        #Responsable tambien pertenece al grupo Usuario
+        group = self.env['res.groups'].search([['full_name','=','Bases de Datos de Laboratorio / Usuario']])
         recordset = self.env['product.template'].search([['x_tipolabo','=','reactivo']])
 
         for record in recordset:
             if record.x_daysrestante < 30:
-                user.message_post(body="Alguna unidad del producto %s %s caduca en menos de 30 dias" % (record.x_codigo, record.name),subject="Caducidad Reactivo")
                 record.message_post(body="Alguna unidad de este producto caduca en menos de 30 dias",subject="Caducidad Reactivo")
+                for user in group.users :
+                    user.message_post(body="Alguna unidad del producto %s %s caduca en menos de 30 dias" % (record.x_codigo, record.name),subject="Caducidad Reactivo")
     
     @api.multi
     def action_get_codigo_reactivo(self):
