@@ -70,10 +70,7 @@
 					<field name="x_trestante" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
 					<field name="x_daysrestante" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
 
-
-					<button name="action_enviar_mensajes_caducidad_reactivos" string="Enviar Mensaje" type="object" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
-					
-					
+	
 				</field>
 				
 			</field>

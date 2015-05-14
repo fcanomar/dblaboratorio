@@ -9,17 +9,17 @@ class dblaboratorio_product_template (models.Model) :
     
  
     @api.multi
-    def action_enviar_mensajes_caducidad_reactivos(self):
+    def enviar_mensajes_caducidad_reactivos(self, dias):
         
         #Responsable tambien pertenece al grupo Usuario
         group = self.env['res.groups'].search([['full_name','=','Bases de Datos de Laboratorio / Usuario']])
         recordset = self.env['product.template'].search([['x_tipolabo','=','reactivo']])
 
         for record in recordset:
-            if record.x_daysrestante < 30:
-                record.message_post(body="Alguna unidad de este producto caduca en menos de 30 dias",subject="Caducidad Reactivo")
+            if record.x_daysrestante == dias:
+                record.message_post(body="Alguna unidad de este producto caduca en %s dias" % dias,subject="Caducidad Reactivo")
                 for user in group.users :
-                    user.message_post(body="Alguna unidad del producto %s %s caduca en menos de 30 dias" % (record.x_codigo, record.name),subject="Caducidad Reactivo")
+                    user.message_post(body="Alguna unidad del producto %s %s caduca en %s dias" % (record.x_codigo, record.name, dias),subject="Caducidad Reactivo")
     
     @api.multi
     def action_get_codigo_reactivo(self):
@@ -33,9 +33,12 @@ class dblaboratorio_product_template (models.Model) :
             return self.env['ir.sequence'].next_by_code('react')
               
     
-    
-    def run_caducidad_scheduler(self, cr, uid, context=None):
-        print ('scheduler!!')
+    @api.model
+    def run_caducidad_scheduler(self):
+        self.enviar_mensajes_caducidad_reactivos(30)
+        self.enviar_mensajes_caducidad_reactivos(7)
+        self.enviar_mensajes_caducidad_reactivos(1)
+        
 
     
     x_tipolabo = fields.Selection([('reactivo','Reactivo'),('materiallabo','Material de Laboratorio'),('materialrefe','Material de Referencia'),('equipo','Equipo')],'Clase de Producto') 
