@@ -31,24 +31,17 @@
 				
 				
 				<field name='default_code' position="replace">
-
 					
-					<field name="default_code" attrs="{'invisible':[('x_tipolabo','=','reactivo')]}" />
 					
-
 					<field name="x_tipolabo" />
 					<!--field name="x_secuenciaprod" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" -->
-
 					
-					<group colspan="2">
-					<button name="action_get_codigo_reactivo" string="Generar Referencia Reactivo" type="object" attrs="{'invisible':['|',('x_tipolabo','!=','reactivo'),('x_codigo','!=',False)]}"/>
+					<group colspan="2" attrs="{'invisible':['|',('x_tipolabo','!=','reactivo'),('default_code','!=',False)]}">
+					<button name="action_get_codigo_reactivo" string="Generar Referencia Reactivo" type="object"/>
 					</group>
 					
-
-					<field name="x_codigo" string="Referencia Reactivo" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
-
+					<field name="default_code"/>
 					
-
 					<field name="x_marca" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"
 						widget="selection" />
 					<field name="x_calidadfabr" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"
