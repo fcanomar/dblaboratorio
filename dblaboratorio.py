@@ -1,8 +1,13 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import datetime
 
 import openerp
 from openerp import models, fields, api
 from datetime import date
+
+
 
 class dblaboratorio_reactivo_quant (models.Model):
     _inherit = "stock.quant"
@@ -48,7 +53,7 @@ class dblaboratorio_product_template (models.Model) :
         
 
     
-    x_tipolabo = fields.Selection([('reactivo','Reactivo'),('materiallabo','Material de Laboratorio'),('materialrefe','Material de Referencia'),('equipo','Equipo')],'Clase de Producto') 
+    x_tipolabo = fields.Selection([('reactivo','Reactivo'),('materiallabo','Material de Laboratorio'),('materialrefe','Material de Referencia'),('patron','Patron'),('equipo','Equipo'),('generico','Genérico')],'Clase de Producto',default='generico') 
     x_marca = fields.Many2one('dblaboratorio.marca','Marca', ondelete='cascade')
     x_calidadfabr = fields.Many2one('dblaboratorio.calidadesmarca','Calidad Fabricante', ondelete='cascade', domain="[('x_marca','=',x_marca)]")
     x_calidadcm = fields.Many2one('dblaboratorio.calidadcm','Cumple Especificaciones CM', ondelete='cascade', domain="[('x_eqespec','=',x_calidadfabr),('x_marca','=',x_marca)]") 
