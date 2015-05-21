@@ -36,32 +36,28 @@
 					<field name="x_tipolabo" />
 					<!--field name="x_secuenciaprod" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" -->
 					
-					<group colspan="2" attrs="{'invisible':['|',('x_tipolabo','!=','reactivo'),('default_code','!=',False)]}">
+					<!--<group colspan="2" attrs="{'invisible':['|',('x_tipolabo','!=','reactivo'),('default_code','!=',False)]}">
 					<button name="action_get_codigo_reactivo" string="Generar Referencia Reactivo" type="object"/>
-					</group>
+					</group>-->
 					
-					<field name="default_code"/>
+					<field name="default_code" attrs="{'invisible':[('x_tipolabo','=','reactivo')]}"/>
 					
-					<field name="x_marca" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"
-						widget="selection" />
-					<field name="x_calidadfabr" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"
-						widget="selection" />
-					<field name="x_calidadcm" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"
-						widget="selection" />
-
+					<field name="x_espreact" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
 					
-					
+					<field name="x_marca" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
+				
 					<field name="x_formato" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
 
+					
 					<field name="x_estado" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
 					
-
 					<field name="x_conservacion" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
-					<field name="x_caducidad" attrs="{'invisible':[('x_tipolabo','!=','materialrefe')]}"/>
+					
+					<!--<field name="x_caducidad" attrs="{'invisible':[('x_tipolabo','!=','materialrefe')]}"/>-->
 					<!--field name="x_today" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" -->
 					<!--<field name="x_time" -->
-					<field name="x_trestante" attrs="{'invisible':[('x_tipolabo','!=','materialrefe')]}" />
-					<field name="x_daysrestante" attrs="{'invisible':[('x_tipolabo','!=','materialrefe'),]}" />
+					<!--<field name="x_trestante" attrs="{'invisible':[('x_tipolabo','!=','materialrefe')]}" />-->
+					<!--<field name="x_daysrestante" attrs="{'invisible':[('x_tipolabo','!=','materialrefe'),]}" />-->
 
 	
 				</field>
