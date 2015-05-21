@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<!-- Top menu item -->
+		<!--groups="group_dblabo_usuario,group_dblabo_responsable"--> <!-- meter esto dentro del menuitem siguiente para definir los grupos que tendran acceso -->
+        <menuitem name="Laboratorio"
+            id="dblaboratorio.menu_laboratorio_root"
+				
+            sequence="60"/>
+            
+        <menuitem id="menu_basesdedatos_laboratorio" name="Bases de Datos de Laboratorio"
+            parent="dblaboratorio.menu_laboratorio_root" sequence="1" />
+            
+        <!-- vistas para Reactivos Especificatorios -->
+
+		<record id="dblaboratorio_reactivoesp_form" model="ir.ui.view">
+			<field name="name">dblaboratorio.reactivoesp.form</field>
+			<field name="model">dblaboratorio.reactivoesp</field>
+			<field name="arch" type="xml">
+				<form string="Reactivos">
+					<group>
+						<field name="name" string="Reactivo"/>
+						<field name="x_nri" string="NRI"/>
+						<field name="x_estado"/>
+						<field name="x_conservacion"/>
+						<field name="x_observaciones"/>
+					</group>
+				</form>
+			</field>
+		</record>
+
+
+
+		<record id="dblaboratorio_reactivoesp_tree" model="ir.ui.view">
+			<field name="name">dblaboratorio.reactivoesp.tree</field>
+			<field name="model">dblaboratorio.reactivoesp</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="x_nri" string="NRI"/>
+					<field name="name" string="Reactivo"/>
+				</tree>
+			</field>
+		</record>
+		
+		<!-- Menú para los Reactivos Especificatorios -->
+
+		<record id="dblaboratorio_reactivoesp_action" model="ir.actions.act_window">
+			<field name="name">Reactivos</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">dblaboratorio.reactivoesp</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem action="dblaboratorio_reactivoesp_action" id="db_calidadcm_menu_reactivoesp"
+			parent="dblaboratorio.menu_basesdedatos_laboratorio" sequence="50" />
+		
+	</data>
+</openerp>
