@@ -68,12 +68,20 @@
 			<field name="inherit_id" ref="product.product_template_kanban_view" />
 
 			<field name="arch" type="xml">
+				
 				<field name="name" position="after">
+					
+					<span> </span>
 					<field name="x_marca"/>
+					<span> </span>
 					<field name="x_formato"/>
+
 				</field>
+				
 			</field>
 		</record>
+		
+
 		
 	</data>
 </openerp>
