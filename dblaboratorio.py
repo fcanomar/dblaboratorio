@@ -67,7 +67,7 @@ class dblaboratorio_product_template (models.Model) :
     x_estado = fields.Selection([('solido','Solido'),('liquido','Liquido'),('gaseoso','Gaseoso')],'Estado', domain="[('name','=',x_espreact)]")
     x_tipocodigo = fields.Selection([('ean13','EAN13'),('qweb','Qweb')],'Tipo de Codigo')
     x_qweb = fields.Char('Codigo Qweb')
-    x_espreact = fields.Many2one('dblaboratorio.reactivoesp','Cumple especificaciones',ondelete='cascade')
+    x_espreact = fields.Many2one('dblaboratorio.reactivoesp','Cumple Especificaciones',ondelete='cascade')
     #x_secuenciaprod = fields.Many2one('ir.sequence','Secuencia producto', ondelete='cascade')
     #x_codigo = fields.Char('Referencia de Laboratorio')
     
@@ -147,7 +147,7 @@ class conservacion_reactivo(models.Model) :
 class especificaciones_cm(models.Model):
     _name = 'dblaboratorio.reactivoesp' 
     
-    name = fields.Char('Reactivo Especificación')
+    name = fields.Char('Reactivo')
     x_nri = fields.Char('NRI')
     x_conservacion = fields.Many2one('dblaboratorio.conservacion', 'Conservacion', ondelete='cascade')
     x_estado = fields.Selection([('solido','Solido'),('liquido','Liquido'),('gaseoso','Gaseoso')],'Estado')
