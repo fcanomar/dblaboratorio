@@ -156,5 +156,16 @@ class especificaciones_cm(models.Model):
     _sql_constraints = [
         ('nri_unique', 'UNIQUE(x_nri)', "El NRI que pretende asignar ya existe."),]
     
+    @api.multi
+    def name_get(self):
+        #return_val = super(especificaciones_cm, self).name_get()
+        res = []
+
+        for reactivoesp in self:
+            name = '[%s] ' % (self['x_nri'],) + self.name
+            res.append((reactivoesp.id, (name)))
+            
+        return res
+    
 
     
