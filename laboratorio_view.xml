@@ -20,14 +20,14 @@
 			<field name="arch" type="xml">
 				<form string="Reactivos">
 					<group>
-						<span>
-						<field name="x_nri"/>
-						</span>
-						<field name="name" string="Reactivo"/>
-						<field name="x_nri" string="NRI"/>
+						<field name="name" string="Reactivo" required="True"/>
+						<field name="x_nri" string="NRI" required="True"/>
 						<field name="x_estado"/>
 						<field name="x_conservacion"/>
-						<field name="x_observaciones"/>
+						<br></br>
+						<div colspan="2">
+						<field name="x_observaciones" nolabel="1" placeholder="Observaciones..."/>
+						</div>
 					</group>
 				</form>
 			</field>
