@@ -113,7 +113,8 @@
             	<filter name="filter_to_sell" position="after">
             		<filter name="filter_reactivo" string="Reactivos" domain="[('x_tipolabo', '=', 'reactivo')]"/>
             	</filter>
-            	<field name="categ_id" position="after">
+            	<field name="categ_id" position="before">
+            		<field name='x_nri'/>
             		<field name='x_espreact'/>
             	</field>
             </field>
