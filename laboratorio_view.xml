@@ -113,8 +113,22 @@
             	<filter name="filter_to_sell" position="after">
             		<filter name="filter_reactivo" string="Reactivos" domain="[('x_tipolabo', '=', 'reactivo')]"/>
             	</filter>
+            	<field name="categ_id" position="after">
+            		<field name='x_espreact'/>
+            	</field>
             </field>
         </record>
+        
+<!--         <record id="reactivo_especificacion_search_view" model="ir.ui.view"> -->
+<!--             <field name="name">dblaboratorio.reactivoesp.search</field> -->
+<!--             <field name="model">dblaboratorio.reactivoesp</field> -->
+<!--             <field name="arch" type="xml"> -->
+<!--                 <search string="Cumple Especificaciones Reactivo"> -->
+<!--                     <field name="name" string="Reactivo"/> -->
+<!--                      <field name="x_nri"/> -->
+<!--                 </search> -->
+<!--             </field> -->
+<!--         </record> -->
 		
 		
 		<record id="dblaboratorio_reactivoart_action" model="ir.actions.act_window">
@@ -124,6 +138,7 @@
 			<field name="view_type">form</field>
 			<field name="view_mode">kanban,tree,form</field>
 			<field name="context">{'search_default_filter_reactivo':1}</field>
+<!-- 			<field name="search_view_id" ref="reactivo_especificacion_search_view"/> -->
 <!-- 			<field name="search_view_id" ref="reactivo_search_form_view"/> -->
 		</record>
 
