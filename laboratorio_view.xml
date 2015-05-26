@@ -12,6 +12,9 @@
         <menuitem id="menu_basesdedatos_laboratorio" name="Bases de Datos de Laboratorio"
             parent="dblaboratorio.menu_laboratorio_root" sequence="1" />
             
+        <menuitem id="menu_articulos_laboratorio" name="Productos de Laboratorio"
+            parent="dblaboratorio.menu_laboratorio_root" sequence="1" />
+            
         <!-- vistas para Reactivos Especificatorios -->
 
 		<record id="dblaboratorio_reactivoesp_form" model="ir.ui.view">
@@ -80,6 +83,52 @@
 				
 			</field>
 		</record>
+		
+		
+		<!-- Menú para los Artículos de Laboratorio -->
+		
+		
+<!-- 		<record id="dblabo_kanban_reactivo_articulo" model="ir.ui.view"> -->
+
+<!-- 			<field name="model">product.template</field> -->
+<!-- 			<field name="inherit_id" ref="product.product_template_kanban_view" /> -->
+			
+<!-- 		</record> -->
+
+<!-- 		<record id="reactivo_search_form_view" model="ir.ui.view"> -->
+<!--             <field name="name">product.reactivo.search</field> -->
+<!--             <field name="model">product.product</field> -->
+<!--             <field name="mode">primary</field> -->
+<!--             <field name="inherit_id" ref="product.product_template_search_view"/> -->
+<!--             <field name="arch" type="xml"> -->
+<!-- 				 <filter domain="[('x_tipolabo', '=', 'reactivo')]"/> -->
+<!--             </field> -->
+<!--         </record> -->
+
+		<record id="product_reactivo_search_view_purchase" model="ir.ui.view">
+            <field name="name">product.reactivo.search.purchase.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="arch" type="xml">
+            	<filter name="filter_to_sell" position="after">
+            		<filter name="filter_reactivo" string="Reactivos" domain="[('x_tipolabo', '=', 'reactivo')]"/>
+            	</filter>
+            </field>
+        </record>
+		
+		
+		<record id="dblaboratorio_reactivoart_action" model="ir.actions.act_window">
+			<field name="name">Reactivos</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">product.template</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,tree,form</field>
+			<field name="context">{'search_default_filter_reactivo':1}</field>
+<!-- 			<field name="search_view_id" ref="reactivo_search_form_view"/> -->
+		</record>
+
+		<menuitem action="dblaboratorio_reactivoart_action" id="db_laboratorio_menu_reactivoart"
+			parent="dblaboratorio.menu_articulos_laboratorio" sequence="50" />
 		
 
 		
