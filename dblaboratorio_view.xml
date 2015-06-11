@@ -54,6 +54,8 @@
 					
 					<field name="x_conservacion" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
 					
+					<button name="action_run_caducidad" string="Run Caducidad" type="object"/>
+					
 					
 					<!--<field name="x_caducidad" attrs="{'invisible':[('x_tipolabo','!=','materialrefe')]}"/>-->
 					<!--field name="x_today" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" -->
