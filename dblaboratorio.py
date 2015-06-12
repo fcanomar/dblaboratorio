@@ -28,7 +28,8 @@ class dblaboratorio_product_template (models.Model) :
                 for user in group.users :
                     user.message_post(body="Los articulos del producto %s %s %s de lote %s almacenados en %s caducan en %s dias" % (recordset[i].product_id.name, recordset[i].product_id.x_marca.name, recordset[i].product_id.x_formato.name , recordset[i].lot_id.name, recordset[i].location_id.name,  dias),subject="Caducidad Reactivo")
             i = i + 1
-            
+      
+    #para testeo con boton 'Run Caducidad'        
     @api.multi
     def action_run_caducidad(self):
         self.enviar_mensajes_caducidad_reactivos(30)
