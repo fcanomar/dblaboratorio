@@ -23,11 +23,25 @@ class dblaboratorio_product_template (models.Model) :
         caducidades = recordset.mapped(lambda r : (fields.Date.from_string(r.lot_id.life_date)-date.today()).days)
 
         i=0
+        productos = []
         for item in caducidades:
             if item == dias:
-                for user in group.users :
-                    user.message_post(body="Los articulos del producto %s %s %s de lote %s almacenados en %s caducan en %s dias" % (recordset[i].product_id.name, recordset[i].product_id.x_marca.name, recordset[i].product_id.x_formato.name , recordset[i].lot_id.name, recordset[i].location_id.name,  dias),subject="Caducidad Reactivo")
+                a = (recordset[i].product_id.name, recordset[i].product_id.x_marca.name, recordset[i].product_id.x_formato.name , recordset[i].lot_id.name, recordset[i].location_id.name,  dias)
+                productos.append(a)
             i = i + 1
+            
+        
+        #only one message for each lot
+        unique_productos = []
+        for item in productos:
+            if item not in unique_productos:
+                unique_productos.append(item)
+                
+
+        for producto in unique_productos: 
+            for user in group.users :   
+                user.message_post(body="Los articulos del producto %s %s %s del lote %s almacenados en %s caducan en %s dias" % producto, subject="Caducidad Reactivo")
+
       
     #para testeo con boton 'Run Caducidad'        
     @api.multi

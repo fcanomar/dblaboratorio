@@ -10,7 +10,7 @@
             sequence="60"/>
             
         <menuitem id="menu_basesdedatos_laboratorio" name="Bases de Datos de Laboratorio"
-            parent="dblaboratorio.menu_laboratorio_root" sequence="1" />
+            parent="dblaboratorio.menu_laboratorio_root" sequence="10" />
             
         <menuitem id="menu_articulos_laboratorio" name="Productos de Laboratorio"
             parent="dblaboratorio.menu_laboratorio_root" sequence="1" />
