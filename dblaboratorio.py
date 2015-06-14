@@ -59,15 +59,20 @@ class dblaboratorio_product_template (models.Model) :
         
 
     
-    x_tipolabo = fields.Selection([('reactivo','Reactivo'),('materiallabo','Material de Laboratorio'),('materialrefe','Material de Referencia'),('patron','Patron'),('equipo','Equipo'),('generico','Genérico')],'Clase de Producto',default='generico') 
+    x_tipolabo = fields.Selection([('reactivo','Reactivo'),('materiallabo','Material de Laboratorio'),('materialrefe','Material de Referencia'),('patron','Patrón'),('equipo','Equipo'),('disolucion','Disolución'),('generico','Genérico')],'Clase de Producto',default='generico') 
     x_marca = fields.Many2one('dblaboratorio.marca','Marca', ondelete='cascade')
     x_formato = fields.Many2one('dblaboratorio.formato', 'Formato', ondelete='cascade')
-    x_conservacion = fields.Many2one('dblaboratorio.conservacion', 'Conservacion', ondelete='cascade',domain="[('name','=',x_espreact)]", related="x_espreact.x_conservacion", readonly=True)
+    x_conservacion = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade',domain="[('name','=',x_espreact)]", related="x_espreact.x_conservacion", readonly=True)
+    x_conservacioneditable = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade')
     x_estado = fields.Selection([('solido','Solido'),('liquido','Liquido'),('gaseoso','Gaseoso')],'Estado', domain="[('name','=',x_espreact)]", related="x_espreact.x_estado", readonly=True)
     x_tipocodigo = fields.Selection([('ean13','EAN13'),('qweb','Qweb')],'Tipo de Codigo')
     x_qweb = fields.Char('Codigo Qweb')
     x_espreact = fields.Many2one('dblaboratorio.reactivoesp','Cumple Especificaciones',ondelete='cascade')
     x_nri = fields.Char('NRI', related='x_espreact.x_nri', readonly=True)
+    x_variables = fields.Many2one('dblaboratorio.variables','Variables',ondelete='cascade')
+    x_estabilidad = fields.Many2one('dblaboratorio.estabilidad','Estabilidad',ondelete='cascade')
+    x_origen = fields.Many2one('dblaboratorio.origen','Origen',ondelete='cascade')
+
    
     _sql_constraints = [
     ('codigo_unico','UNIQUE(x_codigo)',"La referencia que pretende utilizar pertenece a un producto ya existente."),]       
@@ -116,6 +121,24 @@ class conservacion_reactivo(models.Model) :
 
     name = fields.Char('Conservacion')
     
+
+class variables_materiallabo(models.Model) :
+    _name = 'dblaboratorio.variables'
+
+    name = fields.Char('Variables')  
+      
+
+class estabilidad_disoluciones(models.Model) :
+    _name = 'dblaboratorio.estabilidad'
+
+    name = fields.Char('Estabilidad')  
+    
+ 
+class origen_disoluciones(models.Model) :
+    _name = 'dblaboratorio.origen'
+
+    name = fields.Char('Origen')  
+       
     
 class especificaciones_cm(models.Model):
     _name = 'dblaboratorio.reactivoesp' 

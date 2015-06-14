@@ -45,15 +45,24 @@
 
 					<field name="x_espreact" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
 					
-					<field name="x_marca" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
+					<field name="x_marca" attrs="{'invisible':[('x_tipolabo','!=','reactivo'),('x_tipolabo','!=','patron')]}"/>
 				
-					<field name="x_formato" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
+					<field name="x_formato" attrs="{'invisible':[('x_tipolabo','!=','reactivo'),('x_tipolabo','!=','patron')]}"/>
 
 					
 					<field name="x_estado" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
 					
 					<field name="x_conservacion" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" />
 					
+					<field name="x_conservacioneditable" attrs="{'invisible':[('x_tipolabo','!=','patron'),('x_tipolabo','!=','disolucion')]}" />
+					
+					<field name="x_variables" attrs="{'invisible':[('x_tipolabo','!=','materiallabo')]}" />
+					
+					<field name="x_estabilidad" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}" />
+					
+					<field name="x_origen" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}" />
+					
+					<!-- para testeo! -->
 					<button name="action_run_caducidad" string="Run Caducidad" type="object"/>
 					
 					
