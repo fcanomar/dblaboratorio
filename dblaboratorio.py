@@ -59,7 +59,7 @@ class dblaboratorio_product_template (models.Model) :
         
 
     
-    x_tipolabo = fields.Selection([('reactivo','Reactivo'),('materiallabo','Material de Laboratorio'),('materialrefe','Material de Referencia'),('patron','Patrón'),('equipo','Equipo'),('disolucion','Disolución'),('generico','Genérico')],'Clase de Producto',default='generico') 
+    x_tipolabo = fields.Selection([('reactivo','Reactivo'),('patron','Patrón'),('materiallabo','Material de Laboratorio'),('disolucion','Disolución'),('equipo','Equipo'),('materialref','Material de Referencia'),('generico','Genérico')],'Clase de Producto',default='generico') 
     x_marca = fields.Many2one('dblaboratorio.marca','Marca', ondelete='cascade')
     x_formato = fields.Many2one('dblaboratorio.formato', 'Formato', ondelete='cascade')
     x_conservacion = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade',domain="[('name','=',x_espreact)]", related="x_espreact.x_conservacion", readonly=True)
@@ -72,6 +72,21 @@ class dblaboratorio_product_template (models.Model) :
     x_variables = fields.Many2one('dblaboratorio.variables','Variables',ondelete='cascade')
     x_estabilidad = fields.Many2one('dblaboratorio.estabilidad','Estabilidad',ondelete='cascade')
     x_origen = fields.Many2one('dblaboratorio.origen','Origen',ondelete='cascade')
+    
+    #para equipos y material de referencia
+    x_modelo = fields.Char('Modelo')
+    x_nserie = fields.Char('Número de serie')
+    x_ubicacion = fields.Many2one('dblaboratorio,ubicacion','Ubicación',ondelete='cascade')
+    x_tipoequipo = fields.Char('Tipo de Equipo')
+    x_responsable = fields.Many2one('res.users','Responsable',ondelete='cascade')
+    x_inicioservicio = fields.Date('Inicio Servicio')
+    x_serviciotecnico = fields.Char('Servicio Técnico')
+    x_teccalibrar = fields.Char('Técnica a Calibrar')
+    x_control = fields.Selection([('si','Sí'),('no','No')],'Sometido a Control')
+    x_accesorios = fields.Char('Accesorios')
+    x_datostecnicos = fields.Char('Datos Técnicos')
+    x_alicuotas = fields.Char('Alícuotas')
+    
 
    
     _sql_constraints = [
@@ -137,8 +152,14 @@ class estabilidad_disoluciones(models.Model) :
 class origen_disoluciones(models.Model) :
     _name = 'dblaboratorio.origen'
 
-    name = fields.Char('Origen')  
-       
+    name = fields.Char('Origen') 
+     
+
+class ubicacion_equipos(models.Model) :
+    _name = 'dblaboratorio.ubicacion'
+
+    name = fields.Char('Ubicación')   
+        
     
 class especificaciones_cm(models.Model):
     _name = 'dblaboratorio.reactivoesp' 

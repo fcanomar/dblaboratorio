@@ -62,8 +62,37 @@
 					
 					<field name="x_origen" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}" />
 					
+					<!-- equipos y material de referencia -->
+					
+					<field name="x_modelo" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+					<field name="x_nserie" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+					<field name="x_ubicacion" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+					<field name="x_tipoequipo" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+					<field name="x_responsable" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+					<field name="x_inicioservicio" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+					<field name="x_serviciotecnico" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+					<field name="x_control" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+					<field name="x_accesorios" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+					<field name="x_datostecnicos" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+					<field name="x_teccalibrar" attrs="{'invisible':[('x_tipolabo','!=','materialref')]}"/>
+					
+					<field name="x_alicuotas" attrs="{'invisible':[('x_tipolabo','!=','materialref')]}"/>
+					
+					
 					<!-- para testeo! -->
 					<button name="action_run_caducidad" string="Run Caducidad" type="object"/>
+					
+					
 					
 					
 					<!--<field name="x_caducidad" attrs="{'invisible':[('x_tipolabo','!=','materialrefe')]}"/>-->
