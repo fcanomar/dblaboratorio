@@ -76,7 +76,7 @@ class dblaboratorio_product_template (models.Model) :
     #para equipos y material de referencia
     x_modelo = fields.Char('Modelo')
     x_nserie = fields.Char('Número de serie')
-    x_ubicacion = fields.Many2one('dblaboratorio,ubicacion','Ubicación',ondelete='cascade')
+    x_ubicacion = fields.Many2one('dblaboratorio.ubicacion','Ubicación',ondelete='cascade')
     x_tipoequipo = fields.Char('Tipo de Equipo')
     x_responsable = fields.Many2one('res.users','Responsable',ondelete='cascade')
     x_inicioservicio = fields.Date('Inicio Servicio')
