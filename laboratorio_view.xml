@@ -120,6 +120,17 @@
             </field>
         </record>
         
+        <record id="product_picking_search_view_dblabo" model="ir.ui.view">
+            <field name="name">stock.picking.search.view.dblabo</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+            <field name="arch" type="xml">
+            	<field name="group_id" position="before">
+            		<field name='invoice_state' ref='move_lines'/>
+            	</field>
+            </field>
+        </record>
+        
 <!--         <record id="reactivo_especificacion_search_view" model="ir.ui.view"> -->
 <!--             <field name="name">dblaboratorio.reactivoesp.search</field> -->
 <!--             <field name="model">dblaboratorio.reactivoesp</field> -->
