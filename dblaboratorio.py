@@ -112,19 +112,6 @@ class dblaboratorio_product_template (models.Model) :
 #             ref = self.x_matlabogen.x_nri
 #         
 #         return ref   
-    
-      
-    
-    @api.multi
-    def name_get(self):
-        #return_val = super(especificaciones_cm, self).name_get()
-        res = []
-
-        for product in self:
-            name = '[%s] ' % (self['x_nri'],) + self.name
-            res.append((product.id, (name)))
-            
-        return res   
 
 
 class calidad_cm(models.Model) :
