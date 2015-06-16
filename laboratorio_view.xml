@@ -177,6 +177,7 @@
 						<field name="x_nri" string="NRI" required="True"/>
 						<field name="x_estado"/>
 						<field name="x_conservacion"/>
+						<field name="x_equiposcalibrar"/>
 						<br></br>
 						<div colspan="2">
 						<field name="x_observaciones" nolabel="1" placeholder="Observaciones..."/>

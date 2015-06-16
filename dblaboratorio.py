@@ -76,7 +76,7 @@ class dblaboratorio_product_template (models.Model) :
     x_patrongen = fields.Many2one('dblaboratorio.patrongen','Cumple Especificaciones',ondelete='cascade')
     x_estado_p = fields.Selection([('solido','Solido'),('liquido','Liquido'),('gaseoso','Gaseoso')],'Estado', related="x_patrongen.x_estado", readonly=True)
     x_conservacion_p = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade',domain="[('name','=',x_patrongen)]", related="x_patrongen.x_conservacion", readonly=True)
-    x_equiposcalibrar = fields.Char('Equipos a Calibrar', related='x_patrongen.x_equiposcalibrar', readonly=True)
+    x_equiposcalibrar = fields.Char('Equipos/Técnicas a Calibrar', related='x_patrongen.x_equiposcalibrar', readonly=True)
     x_nri_p = fields.Char('NRI', related='x_patrongen.x_nri', readonly=True)
     
     #para equipos y material de referencia
