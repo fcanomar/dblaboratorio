@@ -59,7 +59,7 @@ class dblaboratorio_product_template (models.Model) :
         
 
     #reactivos y comunes
-    default_code = fields.Char('Referencia Interna', compute='_get_nri', store=True)
+    default_code = fields.Char('Referencia Interna', compute='_get_nri', store=True, readonly=False)
     x_tipolabo = fields.Selection([('reactivo','Reactivo'),('patron','Patrón'),('materiallabo','Material de Laboratorio'),('disolucion','Disolución'),('equipo','Equipo'),('materialref','Material de Referencia'),('generico','Genérico')],'Clase de Producto',default='generico') 
     x_marca = fields.Many2one('dblaboratorio.marca','Fabricante', ondelete='cascade')
     x_formato = fields.Many2one('dblaboratorio.formato', 'Formato', ondelete='cascade')
@@ -68,22 +68,21 @@ class dblaboratorio_product_template (models.Model) :
     x_tipocodigo = fields.Selection([('ean13','EAN13'),('qweb','Qweb')],'Tipo de Codigo')
     x_qweb = fields.Char('Codigo Qweb')
     x_espreact = fields.Many2one('dblaboratorio.reactivoesp','Cumple Especificaciones',ondelete='cascade')
-
-    x_estabilidad = fields.Many2one('dblaboratorio.estabilidad','Estabilidad',ondelete='cascade')
-    x_origen = fields.Many2one('dblaboratorio.origen','Origen',ondelete='cascade')
     
     #patrones
     x_patrongen = fields.Many2one('dblaboratorio.patrongen','Cumple Especificaciones',ondelete='cascade')
     x_estado_p = fields.Selection([('solido','Solido'),('liquido','Liquido'),('gaseoso','Gaseoso')],'Estado', related="x_patrongen.x_estado", readonly=True)
     x_conservacion_p = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade',domain="[('name','=',x_patrongen)]", related="x_patrongen.x_conservacion", readonly=True)
     x_equiposcalibrar = fields.Char('Equipos/Técnicas a Calibrar', related='x_patrongen.x_equiposcalibrar', readonly=True)
-    x_nri_p = fields.Char('NRI', related='x_patrongen.x_nri', readonly=True)
     
     #material de laboratorio
     x_matlabogen = fields.Many2one('dblaboratorio.matlabogen','Cumple Especificaciones', ondelete='cascade')
 
     #disoluciones
-    
+    x_estabilidad = fields.Date('Estabilidad')
+    x_origen_tipo = fields.Selection([('patron','Patrón'),('reactivo','Reactivo')],'Tipo de Origen')
+    x_origen_p = fields.Many2one('dblaboratorio.patrongen', 'Origen', ondelete='cascade')
+    x_origen_r = fields.Many2one('dblaboratorio.reactivoesp', 'Origen', ondelete='cascade')
     
     #para equipos y material de referencia
     x_modelo = fields.Char('Modelo')
@@ -112,32 +111,7 @@ class dblaboratorio_product_template (models.Model) :
          
             if record.x_tipolabo == 'materiallabo':
                 record.default_code = self.x_matlabogen.x_nri
-         
- 
 
-
-class calidad_cm(models.Model) :
-    _name = 'dblaboratorio.calidadcm'
-
-    name = fields.Char('Calidad CM')
-    x_eqespec = fields.One2many('dblaboratorio.calidadesmarca', 'x_calidadfab_id', string='Calidad Fabricante')
-    x_marca = fields.Many2one(string='Fabricante', related='x_eqespec.x_marca')
-
-
-    _sql_constraints = [
-    ('name_unique', 'UNIQUE(name)', "La calidad que pretende crear ya existe"),]
-
-
-class calidades_marca(models.Model) :
-    _name = 'dblaboratorio.calidadesmarca'
-
-    name = fields.Char('Calidad Fabricante')
-    x_calidadfab_id = fields.Many2one('dblaboratorio.calidadcm','Calidad Fabricante ID', ondelete='cascade', copy=True)
-    x_marca = fields.Many2one('dblaboratorio.marca','Fabricante', ondelete='cascade', copy=True)
-
-    _sql_constraints = [
-        ('name_unique', 'UNIQUE(name,x_marca)', "La calidad que pretende crear ya existe para dicho fabricante"),]
- 
     
 class marca_reactivo(models.Model) :
     _name = 'dblaboratorio.marca'
@@ -160,29 +134,11 @@ class conservacion_reactivo(models.Model) :
     name = fields.Char('Conservacion')
     
 
-class variables_materiallabo(models.Model) :
-    _name = 'dblaboratorio.variables'
-
-    name = fields.Char('Variables')  
-      
-
-class estabilidad_disoluciones(models.Model) :
-    _name = 'dblaboratorio.estabilidad'
-
-    name = fields.Char('Estabilidad')  
-    
- 
-class origen_disoluciones(models.Model) :
-    _name = 'dblaboratorio.origen'
-
-    name = fields.Char('Origen') 
-     
-
 class ubicacion_equipos(models.Model) :
     _name = 'dblaboratorio.ubicacion'
 
-    name = fields.Char('Ubicación')   
-        
+    name = fields.Char('Ubicación')
+
     
 class especificaciones_cm(models.Model):
     _name = 'dblaboratorio.reactivoesp' 
