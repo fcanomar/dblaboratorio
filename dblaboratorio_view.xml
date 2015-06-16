@@ -41,7 +41,10 @@
 					<button name="action_get_codigo_reactivo" string="Generar Referencia Reactivo" type="object"/>
 					</group>-->
 					
-					<field name="default_code" attrs="{'invisible':['|',('x_tipolabo','=','reactivo'),('x_tipolabo','=','patron')]}"/>
+					<!--  pruebas default code comun -->
+					<!--  <field name="default_code" attrs="{'invisible':[('x_tipolabo','!=','generico')]}"/> -->
+					
+					<field name="default_code"/>
 					
 					
 					<!-- reactivos y comunes -->
@@ -66,8 +69,14 @@
 					<field name="x_equiposcalibrar" attrs="{'invisible':[('x_tipolabo','!=','patron')]}" />
 					
 					
+					<!-- material de laboratorio -->
 					
-					<field name="x_variables" attrs="{'invisible':[('x_tipolabo','!=','materiallabo')]}" />
+					<field name="x_marca" attrs="{'invisible':[('x_tipolabo','!=','materiallabo')]}"/>
+					
+					<field name='x_matlabogen' attrs="{'invisible':[('x_tipolabo','!=','materiallabo')]}"/>
+					
+					
+					
 					
 					<field name="x_estabilidad" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}" />
 					

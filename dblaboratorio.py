@@ -59,8 +59,9 @@ class dblaboratorio_product_template (models.Model) :
         
 
     #reactivos y comunes
+    default_code = fields.Char('Referencia Interna', compute='_get_nri')
     x_tipolabo = fields.Selection([('reactivo','Reactivo'),('patron','Patrón'),('materiallabo','Material de Laboratorio'),('disolucion','Disolución'),('equipo','Equipo'),('materialref','Material de Referencia'),('generico','Genérico')],'Clase de Producto',default='generico') 
-    x_marca = fields.Many2one('dblaboratorio.marca','Marca', ondelete='cascade')
+    x_marca = fields.Many2one('dblaboratorio.marca','Fabricante', ondelete='cascade')
     x_formato = fields.Many2one('dblaboratorio.formato', 'Formato', ondelete='cascade')
     x_conservacion = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade',domain="[('name','=',x_espreact)]", related="x_espreact.x_conservacion", readonly=True)
     x_estado = fields.Selection([('solido','Solido'),('liquido','Liquido'),('gaseoso','Gaseoso')],'Estado', domain="[('name','=',x_espreact)]", related="x_espreact.x_estado", readonly=True)
@@ -68,7 +69,7 @@ class dblaboratorio_product_template (models.Model) :
     x_qweb = fields.Char('Codigo Qweb')
     x_espreact = fields.Many2one('dblaboratorio.reactivoesp','Cumple Especificaciones',ondelete='cascade')
     x_nri = fields.Char('NRI', related='x_espreact.x_nri', readonly=True)
-    x_variables = fields.Many2one('dblaboratorio.variables','Variables',ondelete='cascade')
+
     x_estabilidad = fields.Many2one('dblaboratorio.estabilidad','Estabilidad',ondelete='cascade')
     x_origen = fields.Many2one('dblaboratorio.origen','Origen',ondelete='cascade')
     
@@ -78,6 +79,11 @@ class dblaboratorio_product_template (models.Model) :
     x_conservacion_p = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade',domain="[('name','=',x_patrongen)]", related="x_patrongen.x_conservacion", readonly=True)
     x_equiposcalibrar = fields.Char('Equipos/Técnicas a Calibrar', related='x_patrongen.x_equiposcalibrar', readonly=True)
     x_nri_p = fields.Char('NRI', related='x_patrongen.x_nri', readonly=True)
+    
+    #material de laboratorio
+    x_matlabogen = fields.Many2one('dblaboratorio.matlabogen','Cumple Especificaciones', ondelete='cascade')
+
+    
     
     #para equipos y material de referencia
     x_modelo = fields.Char('Modelo')
@@ -94,9 +100,20 @@ class dblaboratorio_product_template (models.Model) :
     x_alicuotas = fields.Char('Alícuotas')
     
 
-   
-    _sql_constraints = [
-    ('codigo_unico','UNIQUE(x_codigo)',"La referencia que pretende utilizar pertenece a un producto ya existente."),]    
+    @api.depends('x_espreact','x_patrongen')
+    def _get_nri(self):
+        
+        ref = None
+        
+        if self.x_tipolabo == 'reactivo': 
+            ref = self.x_espreact.x_nri
+        
+        if self.x_tipolabo == 'materiallabo':
+            ref = self.x_matlabogen.x_nri
+        
+        return ref   
+    
+      
     
     @api.multi
     def name_get(self):
@@ -226,5 +243,27 @@ class patrones_generica(models.Model):
             res.append((patrongen.id, (name)))
             
         return res
+    
 
+class materiallaboratorio_generica(models.Model):
+    _name = 'dblaboratorio.matlabogen'
+    
+    name = fields.Char('Patrón')
+    x_nri = fields.Char('NRI')
+    x_observaciones = fields.Text('Observaciones')
+    
+    _sql_constraints = [
+    ('nri_unique', 'UNIQUE(x_nri)', "El NRI que pretende asignar ya existe."),]
+    
+    
+    @api.multi
+    def name_get(self):
+        #return_val = super(especificaciones_cm, self).name_get()
+        res = []
+
+        for item in self:
+            name = '[%s] ' % (self['x_nri'],) + self.name
+            res.append((item.id, (name)))
+            
+        return res
     
