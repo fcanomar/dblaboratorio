@@ -68,7 +68,6 @@ class dblaboratorio_product_template (models.Model) :
     x_tipocodigo = fields.Selection([('ean13','EAN13'),('qweb','Qweb')],'Tipo de Codigo')
     x_qweb = fields.Char('Codigo Qweb')
     x_espreact = fields.Many2one('dblaboratorio.reactivoesp','Cumple Especificaciones',ondelete='cascade')
-    x_nri = fields.Char('NRI', related='x_espreact.x_nri', readonly=True)
 
     x_estabilidad = fields.Many2one('dblaboratorio.estabilidad','Estabilidad',ondelete='cascade')
     x_origen = fields.Many2one('dblaboratorio.origen','Origen',ondelete='cascade')

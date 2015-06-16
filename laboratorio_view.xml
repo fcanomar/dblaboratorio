@@ -116,10 +116,6 @@
             	<filter name="filter_to_sell" position="after">
             		<filter name="filter_reactivo" string="Reactivos" domain="[('x_tipolabo', '=', 'reactivo')]"/>
             	</filter>
-            	<field name="categ_id" position="before">
-            		<field name='x_nri'/>
-            		<field name='x_espreact'/>
-            	</field>
             </field>
         </record>
         
@@ -221,10 +217,6 @@
             	<filter name="filter_to_sell" position="after">
             		<filter name="filter_patron" string="Patrón" domain="[('x_tipolabo', '=', 'patron')]"/>
             	</filter>
-            	<field name="categ_id" position="before">
-            		<field name='x_nri_p'/>
-            		<field name='x_patrongen'/>
-            	</field>
             </field>
         </record>
 		
@@ -298,10 +290,6 @@
             	<filter name="filter_to_sell" position="after">
             		<filter name="filter_materiallabo" string="Material de Laboratorio" domain="[('x_tipolabo', '=', 'materiallabo')]"/>
             	</filter>
-            	<field name="categ_id" position="before">
-            		<field name='x_nri_p'/>
-            		<field name='x_matlabogen'/>
-            	</field>
             </field>
         </record>
 		
