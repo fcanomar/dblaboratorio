@@ -82,6 +82,7 @@ class dblaboratorio_product_template (models.Model) :
     #material de laboratorio
     x_matlabogen = fields.Many2one('dblaboratorio.matlabogen','Cumple Especificaciones', ondelete='cascade')
 
+    #disoluciones
     
     
     #para equipos y material de referencia
