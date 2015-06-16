@@ -15,19 +15,21 @@
 					<field name="list_price" attrs="{'invisible':[('x_tipolabo','=','reactivo')]}" />
 				</field>
 				
+				
 				<field name="type" position="replace">
 					<field name="type"/>
 				</field>
+				
 				
 				<field name="ean13" position="before">
 					<field name="x_tipocodigo" />
 					<field name="x_qweb" attrs="{'invisible':[('x_tipocodigo','!=','qweb')]}" />
 				</field>
+				
 
 				<field name="ean13" position="replace">
 					<field name="ean13" attrs="{'invisible':[('x_tipocodigo','!=','ean13')]}" />
 				</field>
-				
 				
 				
 				<field name='default_code' position="replace">
@@ -40,13 +42,10 @@
 					<!--<group colspan="2" attrs="{'invisible':['|',('x_tipolabo','!=','reactivo'),('default_code','!=',False)]}">
 					<button name="action_get_codigo_reactivo" string="Generar Referencia Reactivo" type="object"/>
 					</group>-->
+
 					
-					<!--  pruebas default code comun -->
-					<!--  <field name="default_code" attrs="{'invisible':[('x_tipolabo','!=','generico')]}"/> -->
-					
-					<field name="default_code"/>
-					
-					
+					<field name="default_code" attrs="{'invisible':[('x_tipolabo','!=','generico')]}"/>
+
 					<!-- reactivos y comunes -->
 
 					<field name="x_espreact" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
@@ -82,6 +81,7 @@
 					
 					<field name="x_origen" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}" />
 					
+					
 					<!-- equipos y material de referencia -->
 					
 					<field name="x_modelo" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
@@ -111,19 +111,9 @@
 					
 					<!-- para testeo! -->
 					<button name="action_run_caducidad" string="Run Caducidad" type="object"/>
-					
-					
-					
-					
-					<!--<field name="x_caducidad" attrs="{'invisible':[('x_tipolabo','!=','materialrefe')]}"/>-->
-					<!--field name="x_today" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}" -->
-					<!--<field name="x_time" -->
-					<!--<field name="x_trestante" attrs="{'invisible':[('x_tipolabo','!=','materialrefe')]}" />-->
-					<!--<field name="x_daysrestante" attrs="{'invisible':[('x_tipolabo','!=','materialrefe'),]}" />-->
 
 	
 				</field>
-				
 			</field>
 		</record>
 
