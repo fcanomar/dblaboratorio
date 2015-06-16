@@ -74,8 +74,10 @@ class dblaboratorio_product_template (models.Model) :
     
     #patrones
     x_patrongen = fields.Many2one('dblaboratorio.patrongen','Cumple Especificaciones',ondelete='cascade')
+    x_estado_p = fields.Selection([('solido','Solido'),('liquido','Liquido'),('gaseoso','Gaseoso')],'Estado', related="x_patrongen.x_estado", readonly=True)
     x_conservacion_p = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade',domain="[('name','=',x_patrongen)]", related="x_patrongen.x_conservacion", readonly=True)
-    x_equiposcalibrar = fields.Char('Equipos a Calibrar', related='x_patrongen.x_equiposcalibrar')
+    x_equiposcalibrar = fields.Char('Equipos a Calibrar', related='x_patrongen.x_equiposcalibrar', readonly=True)
+    x_nri_p = fields.Char('NRI', related='x_patrongen.x_nri', readonly=True)
     
     #para equipos y material de referencia
     x_modelo = fields.Char('Modelo')
@@ -194,8 +196,10 @@ class patrones_generica(models.Model):
     
     name = fields.Char('Patrón')
     x_nri = fields.Char('NRI')
+    x_estado = fields.Selection([('solido','Solido'),('liquido','Liquido'),('gaseoso','Gaseoso')],'Estado')
     x_conservacion = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade')
-    x_equiposcalibrar = fields.Text('Equipos a Calibrar')
+    x_equiposcalibrar = fields.Char('Equipos a Calibrar')
+    x_observaciones = fields.Text('Observaciones')
     
     _sql_constraints = [
     ('nri_unique', 'UNIQUE(x_nri)', "El NRI que pretende asignar ya existe."),]

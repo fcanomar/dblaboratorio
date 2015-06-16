@@ -4,6 +4,7 @@
 
 		<!-- Top menu item -->
 		<!--groups="group_dblabo_usuario,group_dblabo_responsable"--> <!-- meter esto dentro del menuitem siguiente para definir los grupos que tendran acceso -->
+        
         <menuitem name="Laboratorio"
             id="dblaboratorio.menu_laboratorio_root"
 				
@@ -105,6 +106,8 @@
 <!--             </field> -->
 <!--         </record> -->
 
+		<!-- Vistas para búsquedas -->
+		
 		<record id="product_reactivo_search_view_purchase" model="ir.ui.view">
             <field name="name">product.reactivo.search.purchase.form</field>
             <field name="model">product.template</field>
@@ -143,6 +146,7 @@
 <!--             </field> -->
 <!--         </record> -->
 		
+		<!-- Menú para los Productos Reactivos -->
 		
 		<record id="dblaboratorio_reactivoart_action" model="ir.actions.act_window">
 			<field name="name">Reactivos</field>
@@ -157,7 +161,85 @@
 
 		<menuitem action="dblaboratorio_reactivoart_action" id="db_laboratorio_menu_reactivoart"
 			parent="dblaboratorio.menu_articulos_laboratorio" sequence="50" />
+			
 		
+		<!-- PATRONES  -->
+		
+		<!-- vistas para Patrones genéricos -->
+
+		<record id="dblaboratorio_patrongen_form" model="ir.ui.view">
+			<field name="name">dblaboratorio.patrongen.form</field>
+			<field name="model">dblaboratorio.patrongen</field>
+			<field name="arch" type="xml">
+				<form string="Patrones">
+					<group>
+						<field name="name" string="Patrón" required="True"/>
+						<field name="x_nri" string="NRI" required="True"/>
+						<field name="x_estado"/>
+						<field name="x_conservacion"/>
+						<br></br>
+						<div colspan="2">
+						<field name="x_observaciones" nolabel="1" placeholder="Observaciones..."/>
+						</div>
+					</group>
+				</form>
+			</field>
+		</record>
+
+		<record id="dblaboratorio_reactivoesp_tree" model="ir.ui.view">
+			<field name="name">dblaboratorio.reactivoesp.tree</field>
+			<field name="model">dblaboratorio.reactivoesp</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="x_nri" string="NRI"/>
+					<field name="name" string="Patrón"/>
+				</tree>
+			</field>
+		</record>
+		
+		<!-- Menú para Patrones Genéricos -->
+
+		<record id="dblaboratorio_patrongen_action" model="ir.actions.act_window">
+			<field name="name">Patrones</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">dblaboratorio.patrongen</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem action="dblaboratorio_patrongen_action" id="dblabo_patrongen_menu"
+			parent="dblaboratorio.menu_basesdedatos_laboratorio" sequence="50" />
+		
+		<!-- Vistas para Búsquedas en Menú Laboratorio -->
+		
+		<record id="product_reactivo_search_view_purchase" model="ir.ui.view">
+            <field name="name">product.patron.search.purchase.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="arch" type="xml">
+            	<filter name="filter_to_sell" position="after">
+            		<filter name="filter_patron" string="Patrón" domain="[('x_tipolabo', '=', 'patron')]"/>
+            	</filter>
+            	<field name="categ_id" position="before">
+            		<field name='x_nri_p'/>
+            		<field name='x_patrongen'/>
+            	</field>
+            </field>
+        </record>
+		
+		<!-- Menú para los Productos Patrones -->
+		
+		<record id="dblaboratorio_patronesprod_action" model="ir.actions.act_window">
+			<field name="name">Patrones</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">product.template</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">kanban,tree,form</field>
+			<field name="context">{'search_default_filter_patron':1}</field>
+		</record>
+
+		<menuitem action="dblaboratorio_patronesprod_action" id="db_laboratorio_menu_patronesprod"
+			parent="dblaboratorio.menu_articulos_laboratorio" sequence="50" />
 
 		
 	</data>
