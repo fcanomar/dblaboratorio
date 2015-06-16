@@ -186,9 +186,9 @@
 			</field>
 		</record>
 
-		<record id="dblaboratorio_reactivoesp_tree" model="ir.ui.view">
-			<field name="name">dblaboratorio.reactivoesp.tree</field>
-			<field name="model">dblaboratorio.reactivoesp</field>
+		<record id="dblaboratorio_patrongen_tree" model="ir.ui.view">
+			<field name="name">dblaboratorio.patrongen.tree</field>
+			<field name="model">dblaboratorio.patrongen</field>
 			<field name="arch" type="xml">
 				<tree>
 					<field name="x_nri" string="NRI"/>

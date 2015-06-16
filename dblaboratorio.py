@@ -96,7 +96,18 @@ class dblaboratorio_product_template (models.Model) :
 
    
     _sql_constraints = [
-    ('codigo_unico','UNIQUE(x_codigo)',"La referencia que pretende utilizar pertenece a un producto ya existente."),]       
+    ('codigo_unico','UNIQUE(x_codigo)',"La referencia que pretende utilizar pertenece a un producto ya existente."),]    
+    
+    @api.multi
+    def name_get(self):
+        #return_val = super(especificaciones_cm, self).name_get()
+        res = []
+
+        for product in self:
+            name = '[%s] ' % (self['x_nri'],) + self.name
+            res.append((product.id, (name)))
+            
+        return res   
 
 
 class calidad_cm(models.Model) :
