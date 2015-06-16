@@ -58,12 +58,11 @@ class dblaboratorio_product_template (models.Model) :
         self.enviar_mensajes_caducidad_reactivos(1)
         
 
-    
+    #reactivos y comunes
     x_tipolabo = fields.Selection([('reactivo','Reactivo'),('patron','Patrón'),('materiallabo','Material de Laboratorio'),('disolucion','Disolución'),('equipo','Equipo'),('materialref','Material de Referencia'),('generico','Genérico')],'Clase de Producto',default='generico') 
     x_marca = fields.Many2one('dblaboratorio.marca','Marca', ondelete='cascade')
     x_formato = fields.Many2one('dblaboratorio.formato', 'Formato', ondelete='cascade')
     x_conservacion = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade',domain="[('name','=',x_espreact)]", related="x_espreact.x_conservacion", readonly=True)
-    x_conservacioneditable = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade')
     x_estado = fields.Selection([('solido','Solido'),('liquido','Liquido'),('gaseoso','Gaseoso')],'Estado', domain="[('name','=',x_espreact)]", related="x_espreact.x_estado", readonly=True)
     x_tipocodigo = fields.Selection([('ean13','EAN13'),('qweb','Qweb')],'Tipo de Codigo')
     x_qweb = fields.Char('Codigo Qweb')
@@ -72,6 +71,11 @@ class dblaboratorio_product_template (models.Model) :
     x_variables = fields.Many2one('dblaboratorio.variables','Variables',ondelete='cascade')
     x_estabilidad = fields.Many2one('dblaboratorio.estabilidad','Estabilidad',ondelete='cascade')
     x_origen = fields.Many2one('dblaboratorio.origen','Origen',ondelete='cascade')
+    
+    #patrones
+    x_patrongen = fields.Many2one('dblaboratorio.patrongen','Cumple Especificaciones',ondelete='cascade')
+    x_conservacion_p = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade',domain="[('name','=',x_patrongen)]", related="x_patrongen.x_conservacion", readonly=True)
+    x_equiposcalibrar = fields.Char('Equipos a Calibrar', related='x_patrongen.x_equiposcalibrar')
     
     #para equipos y material de referencia
     x_modelo = fields.Char('Modelo')
@@ -184,5 +188,28 @@ class especificaciones_cm(models.Model):
             
         return res
     
+    
+class patrones_generica(models.Model):
+    _name = 'dblaboratorio.patrongen'
+    
+    name = fields.Char('Patrón')
+    x_nri = fields.Char('NRI')
+    x_conservacion = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade')
+    x_equiposcalibrar = fields.Text('Equipos a Calibrar')
+    
+    _sql_constraints = [
+    ('nri_unique', 'UNIQUE(x_nri)', "El NRI que pretende asignar ya existe."),]
+    
+    
+    @api.multi
+    def name_get(self):
+        #return_val = super(especificaciones_cm, self).name_get()
+        res = []
+
+        for patrongen in self:
+            name = '[%s] ' % (self['x_nri'],) + self.name
+            res.append((patrongen.id, (name)))
+            
+        return res
 
     

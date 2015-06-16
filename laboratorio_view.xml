@@ -127,6 +127,7 @@
             <field name="arch" type="xml">
             	<field name="group_id" position="before">
             		<field name='invoice_state' ref='move_lines'/>
+            		<!--<field name='ean13' eval='move_lines.product_id.ean13'/>-->
             	</field>
             </field>
         </record>
