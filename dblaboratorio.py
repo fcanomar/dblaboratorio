@@ -59,7 +59,7 @@ class dblaboratorio_product_template (models.Model) :
         
 
     #reactivos y comunes
-    default_code = fields.Char('Referencia Interna')
+    default_code = fields.Char('Referencia Interna', compute='_get_nri', store=True)
     x_tipolabo = fields.Selection([('reactivo','Reactivo'),('patron','Patrón'),('materiallabo','Material de Laboratorio'),('disolucion','Disolución'),('equipo','Equipo'),('materialref','Material de Referencia'),('generico','Genérico')],'Clase de Producto',default='generico') 
     x_marca = fields.Many2one('dblaboratorio.marca','Fabricante', ondelete='cascade')
     x_formato = fields.Many2one('dblaboratorio.formato', 'Formato', ondelete='cascade')
@@ -100,18 +100,20 @@ class dblaboratorio_product_template (models.Model) :
     x_alicuotas = fields.Char('Alícuotas')
     
 
-#     @api.depends('x_espreact','x_patrongen')
-#     def _get_nri(self):
-#         
-#         ref = None
-#         
-#         if self.x_tipolabo == 'reactivo': 
-#             ref = self.x_espreact.x_nri
-#         
-#         if self.x_tipolabo == 'materiallabo':
-#             ref = self.x_matlabogen.x_nri
-#         
-#         return ref   
+    @api.depends('x_espreact', 'x_patrongen', 'x_matlabogen')
+    def _get_nri(self):
+
+        for record in self:
+            if record.x_tipolabo == 'reactivo':
+                record.default_code = self.x_espreact.x_nri;
+                
+            if record.x_tipolabo == 'patron':
+                record.default_code = self.x_patrongen.x_nri
+         
+            if record.x_tipolabo == 'materiallabo':
+                record.default_code = self.x_matlabogen.x_nri
+         
+ 
 
 
 class calidad_cm(models.Model) :
