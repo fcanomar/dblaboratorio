@@ -50,7 +50,7 @@
 
 					<field name="x_espreact" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
 					
-					<field name="x_marca" attrs="{'invisible':[('x_tipolabo','!=','reactivo'),('x_tipolabo','!=','patron')]}"/>
+					<field name="x_marca" attrs="{'invisible':[('x_tipolabo','!=','reactivo'),('x_tipolabo','!=','patron'),('x_tipolabo','!=','materiallabo')]}"/>
 				
 					<field name="x_formato" attrs="{'invisible':[('x_tipolabo','!=','reactivo'),('x_tipolabo','!=','patron')]}"/>
 					
@@ -69,8 +69,6 @@
 					
 					
 					<!-- material de laboratorio -->
-					
-					<field name="x_marca" attrs="{'invisible':[('x_tipolabo','!=','materiallabo')]}"/>
 					
 					<field name='x_matlabogen' attrs="{'invisible':[('x_tipolabo','!=','materiallabo')]}"/>
 					
