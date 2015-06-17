@@ -21,13 +21,15 @@ class dblaboratorio_product_template (models.Model) :
         
         recordset = self.env['stock.quant'].search([['product_id.x_tipolabo','=','reactivo']])
         caducidades = recordset.mapped(lambda r : (fields.Date.from_string(r.lot_id.life_date)-date.today()).days)
-
+        
+        #solo los productos en ubicaciones internas
         i=0
         productos = []
         for item in caducidades:
             if item == dias:
                 a = (recordset[i].product_id.name, recordset[i].product_id.x_marca.name, recordset[i].product_id.x_formato.name , recordset[i].lot_id.name, recordset[i].location_id.name,  dias)
-                productos.append(a)
+                if recordset[i].location_id.usage == 'internal':
+                    productos.append(a)
             i = i + 1
             
         
@@ -36,7 +38,7 @@ class dblaboratorio_product_template (models.Model) :
         for item in productos:
             if item not in unique_productos:
                 unique_productos.append(item)
-                
+             
 
         for producto in unique_productos: 
             for user in group.users :   
