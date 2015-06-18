@@ -103,17 +103,54 @@
 					
 					<field name="x_inicioservicio" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
 					
-					<field name="x_serviciotecnico" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
-					
 					<field name="x_control" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
 					
 					<field name="x_accesorios" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+				
 					
-					<field name="x_datostecnicos" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					<group string='Calibración, verificación y mantenimiento' attrs="{'invisible':[('x_tipolabo','!=','equipo')]}">
+					
+						<field name="x_calibracion" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+						<field name="x_fcalibracion" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+						<field name="x_verificacion" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+						<field name="x_fverificacion" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+						<field name="x_mantenimiento" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+						<field name="x_fmantenimiento" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+					</group>
+					
+					
+					<group string='Datos técnicos' attrs="{'invisible':[('x_tipolabo','!=','equipo')]}">
+					
+						<field name="x_magnitud" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+						<field name="x_rango" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+						<field name="x_resolucion" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+						<field name="x_exactitud" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+					</group>
+					
+					<group string='Servicio técnico' attrs="{'invisible':[('x_tipolabo','!=','equipo')]}" colspan="2">
+					
+						<field name="x_serviciotecnico" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}" nolabel="1"/>
+					
+					</group>
+					
+
+					
 					
 					<field name="x_teccalibrar" attrs="{'invisible':[('x_tipolabo','!=','materialref')]}"/>
 					
-					<field name="x_alicuotas" attrs="{'invisible':[('x_tipolabo','!=','materialref')]}"/>
+					<field name="x_nalicuotas" attrs="{'invisible':[('x_tipolabo','!=','materialref')]}"/>
+					
+					<field name="x_valicuotas" attrs="{'invisible':[('x_tipolabo','!=','materialref')]}"/>
 					
 					
 					<!-- para testeo! -->

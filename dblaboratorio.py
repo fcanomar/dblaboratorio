@@ -62,7 +62,7 @@ class dblaboratorio_product_template (models.Model) :
 
     #reactivos y comunes
     default_code = fields.Char('Referencia Interna', compute='_get_nri', store=True, readonly=False)
-    x_tipolabo = fields.Selection([('reactivo','Reactivo'),('patron','Patrón'),('materiallabo','Material de Laboratorio'),('disolucion','Disolución'),('equipo','Equipo'),('materialref','Material de Referencia'),('generico','Genérico')],'Clase de Producto',default='generico') 
+    x_tipolabo = fields.Selection([('disolucion','Disolución'),('equipo','Equipo'),('generico','Genérico'),('materiallabo','Material de Laboratorio'),('materialref','Material de Referencia'),('patron','Patrón'),('reactivo','Reactivo')],'Clase de Producto',default='generico') 
     x_marca = fields.Many2one('dblaboratorio.marca','Fabricante', ondelete='cascade')
     x_formato = fields.Many2one('dblaboratorio.formato', 'Formato', ondelete='cascade')
     x_conservacion = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade',domain="[('name','=',x_espreact)]", related="x_espreact.x_conservacion", readonly=True)
@@ -90,16 +90,25 @@ class dblaboratorio_product_template (models.Model) :
     x_modelo = fields.Char('Modelo')
     x_nserie = fields.Char('Número de serie')
     x_ubicacion = fields.Many2one('dblaboratorio.ubicacion','Ubicación',ondelete='cascade')
-    x_tipoequipo = fields.Char('Tipo de Equipo')
+    x_tipoequipo = fields.Many2one('dblaboratorio.tipoequipo','Tipo de Equipo', ondelete='cascade')
     x_responsable = fields.Many2one('res.users','Responsable',ondelete='cascade')
     x_inicioservicio = fields.Date('Inicio Servicio')
-    x_serviciotecnico = fields.Char('Servicio Técnico')
+    x_serviciotecnico = fields.Many2many('res.partner',string='Servicio Técnico')
+    x_calibracion = fields.Selection([('int','Interna'),('ext','Externa')],'Calibración')
+    x_fcalibracion = fields.Many2one('dblaboratorio.frecuencia','Frecuencia de Calibración')
+    x_verificacion = fields.Selection([('int','Interna'),('ext','Externa')], 'Verificación')
+    x_fverificacion = fields.Many2one('dblaboratorio.frecuencia','Frecuencia de Verificación')
+    x_mantenimiento = fields.Selection([('int','Interno'),('ext','Externo')],'Mantenimiento')
+    x_fmantenimiento = fields.Many2one('dblaboratorio.frecuencia','Frecuencia de Mantenimiento')
     x_teccalibrar = fields.Char('Técnica a Calibrar')
     x_control = fields.Selection([('si','Sí'),('no','No')],'Sometido a Control')
     x_accesorios = fields.Char('Accesorios')
-    x_datostecnicos = fields.Char('Datos Técnicos')
-    x_alicuotas = fields.Char('Alícuotas')
-    
+    x_magnitud = fields.Many2one('dblaboratorio.magnitud','Magnitud')
+    x_rango = fields.Char('Rango')
+    x_resolucion = fields.Char('Resolución')
+    x_exactitud = fields.Char('Exactitud')
+    x_nalicuotas = fields.Char('Número Alícuotas')
+    x_valicuotas = fields.Char('Volumen Alícuotas')
 
     @api.depends('x_espreact', 'x_patrongen', 'x_matlabogen')
     def _get_nri(self):
@@ -141,6 +150,24 @@ class ubicacion_equipos(models.Model) :
 
     name = fields.Char('Ubicación')
 
+
+class tipo_equipo(models.Model) :
+    _name = 'dblaboratorio.tipoequipo'
+
+    name = fields.Char('Tipo de Equipo')
+    
+    
+class frecuencia_equipo(models.Model) :
+    _name = 'dblaboratorio.frecuencia'
+
+    name = fields.Char('Frecuencia')
+    
+    
+class magnitud_equipo(models.Model) :
+    _name = 'dblaboratorio.magnitud'
+
+    name = fields.Char('Magnitud')
+    
     
 class especificaciones_cm(models.Model):
     _name = 'dblaboratorio.reactivoesp' 
