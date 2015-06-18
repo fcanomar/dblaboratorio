@@ -42,7 +42,7 @@ class dblaboratorio_product_template (models.Model) :
 
         for producto in unique_productos: 
             for user in group.users :   
-                user.message_post(body="Los articulos del producto %s %s %s del lote %s almacenados en %s caducan en %s dias" % producto, subject="Caducidad Reactivo")
+                user.message_post(body="Las unidades del producto %s %s %s del lote %s almacenados en %s caducan en %s dias" % producto, subject="Caducidad Reactivo")
 
       
     #para testeo con boton 'Run Caducidad'        
