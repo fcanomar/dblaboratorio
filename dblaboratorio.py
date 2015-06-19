@@ -123,6 +123,50 @@ class dblaboratorio_product_template (models.Model) :
             if record.x_tipolabo == 'materiallabo':
                 record.default_code = self.x_matlabogen.x_nri
 
+#     @api.multi
+#     def name_get(self):
+#         #return_val = super(especificaciones_cm, self).name_get()
+#         res = []
+#  
+#         for item in self:
+#             name = self.name + ' %s %s' % (self['x_marca'], self['x_formato'])
+#             res.append((item.id, (name)))
+#              
+#         return res
+
+
+class dblaboratorio_product_product(models.Model) :
+    _inherit = "product.product"
+    
+    @api.multi
+    def name_get(self):
+ 
+        res = []
+     
+        for item in self:
+            
+            if item.default_code: 
+                code = '[%s] ' %(item.default_code)
+            else:
+                code = ''
+                
+            if item.x_marca.name:
+                marca = item.x_marca.name
+            else:
+                marca = ''
+                
+            if item.x_formato.name:
+                formato = item.x_formato.name
+            else:
+                formato = ''
+            
+            
+            
+            name = '%s%s %s %s' % (code, item.name, marca, formato)
+            res.append((item.id, (name)))
+             
+        return res
+
     
 class marca_reactivo(models.Model) :
     _name = 'dblaboratorio.marca'
