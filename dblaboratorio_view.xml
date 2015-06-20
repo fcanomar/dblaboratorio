@@ -75,7 +75,9 @@
 					
 					<!-- disoluciones -->
 					
-					<field name="x_estabilidad" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}" />
+					<field name="x_boolestabilidad" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
+					
+					<field name="x_estabilidad" attrs="{'invisible':['|',('x_tipolabo','!=','disolucion'),('x_boolestabilidad','=','no')]}" />
 					
 					<field name="x_origen_tipo" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
 					
@@ -154,7 +156,7 @@
 					
 					
 					<!-- para testeo! -->
-					<button name="action_run_caducidad" string="Run Caducidad" type="object"/>
+					<!--<button name="action_run_caducidad" string="Run Caducidad" type="object"/>-->
 
 	
 				</field>
