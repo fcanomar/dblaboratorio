@@ -75,22 +75,13 @@
 					
 					<!-- disoluciones -->
 					
-					<field name="x_boolestabilidad" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
-					
-					<field name="x_estabilidad" attrs="{'invisible':['|',('x_tipolabo','!=','disolucion'),('x_boolestabilidad','=','no')]}" />
-					
 					<field name="x_origen_tipo" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
 					
 					<field name="x_origen_p" attrs="{'invisible':['|',('x_tipolabo','!=','disolucion'),('x_origen_tipo','!=','patron')]}"/>
 					
 					<field name="x_origen_r" attrs="{'invisible':['|',('x_tipolabo','!=','disolucion'),('x_origen_tipo','!=','reactivo')]}"/>
 					
-					
-					
-					
-					
-					
-					
+
 					<!-- equipos y material de referencia -->
 					
 					<field name="x_modelo" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>

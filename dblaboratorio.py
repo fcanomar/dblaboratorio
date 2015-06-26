@@ -81,8 +81,6 @@ class dblaboratorio_product_template (models.Model) :
     x_matlabogen = fields.Many2one('dblaboratorio.matlabogen','Cumple Especificaciones', ondelete='cascade')
 
     #disoluciones
-    x_boolestabilidad = fields.Selection([('si','Sí'),('no','No')],'Caduca', default='si')
-    x_estabilidad = fields.Date('Estabilidad')
     x_origen_tipo = fields.Selection([('patron','Patrón'),('reactivo','Reactivo')],'Tipo de Origen')
     x_origen_p = fields.Many2one('dblaboratorio.patrongen', 'Origen', ondelete='cascade')
     x_origen_r = fields.Many2one('dblaboratorio.reactivoesp', 'Origen', ondelete='cascade')
