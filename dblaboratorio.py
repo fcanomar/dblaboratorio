@@ -279,7 +279,7 @@ class materiallaboratorio_generica(models.Model):
         res = []
 
         for item in self:
-            name = '[%s] ' % (self['x_nri'],) + self.name
+            name = '[%s] ' % (item['x_nri'],) + item.name
             res.append((item.id, (name)))
             
         return res
