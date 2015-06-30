@@ -139,7 +139,7 @@
 			<field name="res_model">product.template</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">kanban,tree,form</field>
-			<field name="context">{'search_default_filter_reactivo':1, 'default_x_tipolabo':'reactivo', 'default_type':'product', 'default_sale_ok':0}</field>
+			<field name="context">{'search_default_filter_reactivo':1, 'default_x_tipolabo':'reactivo', 'default_type':'product', 'default_sale_ok':0, 'default_categ_id':'Todos / Reactivos'}</field>
 		</record>
 
 		<menuitem action="dblaboratorio_reactivoart_action" id="db_laboratorio_menu_reactivoart"
@@ -217,7 +217,7 @@
 			<field name="res_model">product.template</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">kanban,tree,form</field>
-			<field name="context">{'search_default_filter_patron':1, 'default_x_tipolabo':'patron', 'default_type':'product', 'default_sale_ok':0}</field>
+			<field name="context">{'search_default_filter_patron':1, 'default_x_tipolabo':'patron', 'default_type':'product', 'default_sale_ok':0, 'default_categ_id':'Todos / Patrones'}</field>
 		</record>
 
 		<menuitem action="dblaboratorio_patronesprod_action" id="db_laboratorio_menu_patronesprod"
@@ -290,7 +290,7 @@
 			<field name="res_model">product.template</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">kanban,tree,form</field>
-			<field name="context">{'search_default_filter_materiallabo':1, 'default_x_tipolabo':'materiallabo', 'default_type':'consu', 'default_sale_ok':0}</field>
+			<field name="context">{'search_default_filter_materiallabo':1, 'default_x_tipolabo':'materiallabo', 'default_type':'consu', 'default_sale_ok':0, 'default_categ_id':'Todos / Material de Laboratorio'}</field>
 		</record>
 
 		<menuitem action="dblaboratorio_materiallaboprod_action" id="db_laboratorio_menu_materiallaboprod"
@@ -321,7 +321,7 @@
 			<field name="res_model">product.template</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">kanban,tree,form</field>
-			<field name="context">{'search_default_filter_disolucion':1, 'default_x_tipolabo':'disolucion', 'default_type':'product', 'default_sale_ok':0, 'default_purchase_ok':0}</field>
+			<field name="context">{'search_default_filter_disolucion':1, 'default_x_tipolabo':'disolucion', 'default_type':'product', 'default_sale_ok':0, 'default_purchase_ok':0, 'default_categ_id':'Todos / Disoluciones'}</field>
 		</record>
 
 		<menuitem action="dblaboratorio_disolucionprod_action" id="db_laboratorio_menu_disolucionprod"
@@ -351,7 +351,7 @@
 			<field name="res_model">product.template</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">kanban,tree,form</field>
-			<field name="context">{'search_default_filter_equipo':1, 'default_x_tipolabo':'equipo', 'default_type':'product', 'default_sale_ok':0}</field>
+			<field name="context">{'search_default_filter_equipo':1, 'default_x_tipolabo':'equipo', 'default_type':'product', 'default_sale_ok':0, 'default_categ_id':'Todos / Equipos'}</field>
 		</record>
 
 		<menuitem action="dblaboratorio_equipos_action" id="db_laboratorio_menu_equipos"
@@ -380,7 +380,7 @@
 			<field name="res_model">product.template</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">kanban,tree,form</field>
-			<field name="context">{'search_default_filter_materialref':1, 'default_x_tipolabo':'materialref', 'default_type':'product', 'default_sale_ok':0}</field>
+			<field name="context">{'search_default_filter_materialref':1, 'default_x_tipolabo':'materialref', 'default_type':'product', 'default_sale_ok':0, 'default_categ_id':'Todos / Material de Referencia'}</field>
 		</record>
 
 		<menuitem action="dblaboratorio_materialrefprod_action" id="db_laboratorio_menu_materialrefprod"
