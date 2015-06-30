@@ -139,7 +139,7 @@
 			<field name="res_model">product.template</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">kanban,tree,form</field>
-			<field name="context">{'search_default_filter_reactivo':1, 'default_x_tipolabo':'reactivo', 'default_type':'product', 'default_sale_ok':0, 'default_categ_id':'Todos / Reactivos'}</field>
+			<field name="context">{'search_default_filter_reactivo':1, 'default_x_tipolabo':'reactivo', 'default_type':'product', 'default_sale_ok':0, 'default_categ_id.id':'dblaboratorio.product_category_reactivos'}</field>
 		</record>
 
 		<menuitem action="dblaboratorio_reactivoart_action" id="db_laboratorio_menu_reactivoart"
@@ -217,7 +217,7 @@
 			<field name="res_model">product.template</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">kanban,tree,form</field>
-			<field name="context">{'search_default_filter_patron':1, 'default_x_tipolabo':'patron', 'default_type':'product', 'default_sale_ok':0, 'default_categ_id':'Todos / Patrones'}</field>
+			<field name="context">{'search_default_filter_patron':1, 'default_x_tipolabo':'patron', 'default_type':'product', 'default_sale_ok':0}</field>
 		</record>
 
 		<menuitem action="dblaboratorio_patronesprod_action" id="db_laboratorio_menu_patronesprod"

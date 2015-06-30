@@ -108,6 +108,32 @@ class dblaboratorio_product_template (models.Model) :
     x_exactitud = fields.Char('Exactitud')
     x_nalicuotas = fields.Char('Número Alícuotas')
     x_valicuotas = fields.Char('Volumen Alícuotas')
+    
+    @api.onchange('x_tipolabo')
+    def _set_categoria_producto(self):
+        
+        for record in self:
+            if record.x_tipolabo == 'reactivo':
+                record.categ_id = record.env['product.category'].search([('name','=','Reactivos')]);
+                
+            if record.x_tipolabo == 'patron':
+                record.categ_id = self.env['product.category'].search([('name','=','Patrones')]);
+          
+            if record.x_tipolabo == 'materiallabo':
+                record.categ_id = self.env['product.category'].search([('name','=','Material de Laboratorio')]);
+             
+            if record.x_tipolabo == 'disolucion':
+                record.categ_id = self.env['product.category'].search([('name','=','Disoluciones')]);
+                 
+            if record.x_tipolabo == 'equipo':
+                record.categ_id = self.env['product.category'].search([('name','=','Equipos')]);
+                 
+            if record.x_tipolabo == 'materialref':
+                record.categ_id = self.env['product.category'].search([('name','=','Material de Referencia')]);
+                
+            if record.x_tipolabo == 'generico':
+                record.categ_id = self.env['product.category'].search([('name','=','All')]);
+
 
     @api.depends('x_espreact', 'x_patrongen', 'x_matlabogen')
     def _get_nri(self):
@@ -121,7 +147,9 @@ class dblaboratorio_product_template (models.Model) :
          
             if record.x_tipolabo == 'materiallabo':
                 record.default_code = self.x_matlabogen.x_nri
-
+            
+                         
+   
 #     @api.multi
 #     def name_get(self):
 #         #return_val = super(especificaciones_cm, self).name_get()
