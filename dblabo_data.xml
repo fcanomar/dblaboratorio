@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+
+	<data>
+
+	    <record id="product_category_reactivos" model="product.category">
+           <field name="parent_id" ref="product.product_category_all"/>
+           <field name="name">Reactivos</field>
+        </record>
+        
+        <record id="product_category_patrones" model="product.category">
+           <field name="parent_id" ref="product.product_category_all"/>
+           <field name="name">Patrones</field>
+        </record>
+        
+        <record id="product_category_materiallabo" model="product.category">
+           <field name="parent_id" ref="product.product_category_all"/>
+           <field name="name">Material de Laboratorio</field>
+        </record>
+        
+        <record id="product_category_disoluciones" model="product.category">
+           <field name="parent_id" ref="product.product_category_all"/>
+           <field name="name">Disoluciones</field>
+        </record>
+        
+        <record id="product_category_equipos" model="product.category">
+           <field name="parent_id" ref="product.product_category_all"/>
+           <field name="name">Equipos</field>
+        </record>
+        
+        <record id="product_category_materialref" model="product.category">
+           <field name="parent_id" ref="product.product_category_all"/>
+           <field name="name">Material de Referencia</field>
+        </record>
+
+	</data>
+
+</openerp>
