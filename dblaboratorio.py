@@ -9,55 +9,7 @@ from datetime import date
 
 class dblaboratorio_product_template (models.Model) :
     _inherit = "product.template"
-    
- 
-    @api.multi
-    def enviar_mensajes_caducidad_reactivos(self, dias):
         
-        #Responsable tambien pertenece al grupo Usuario
-        group = self.env['res.groups'].search([['full_name','=','Bases de Datos de Laboratorio / Usuario']])
-        
-        recordset = self.env['stock.quant'].search([['product_id.x_tipolabo','=','reactivo']])
-        caducidades = recordset.mapped(lambda r : (fields.Date.from_string(r.lot_id.life_date)-date.today()).days)
-        
-        #solo los productos en ubicaciones internas
-        i=0
-        productos = []
-        for item in caducidades:
-            if item == dias:
-                a = (recordset[i].product_id.name, recordset[i].product_id.x_marca.name, recordset[i].product_id.x_formato.name , recordset[i].lot_id.name, recordset[i].location_id.name,  dias)
-                if recordset[i].location_id.usage == 'internal':
-                    productos.append(a)
-            i = i + 1
-            
-        
-        #only one message for each lot
-        unique_productos = []
-        for item in productos:
-            if item not in unique_productos:
-                unique_productos.append(item)
-             
-
-        for producto in unique_productos: 
-            for user in group.users :   
-                user.message_post(body="Las unidades del producto %s %s %s del lote %s almacenados en %s caducan en %s dias" % producto, subject="Caducidad Reactivo")
-
-      
-    #para testeo con boton 'Run Caducidad'        
-    @api.multi
-    def action_run_caducidad(self):
-        self.enviar_mensajes_caducidad_reactivos(30)
-        self.enviar_mensajes_caducidad_reactivos(7)
-        self.enviar_mensajes_caducidad_reactivos(1)
-              
-    
-    @api.model
-    def run_caducidad_scheduler(self):
-        self.enviar_mensajes_caducidad_reactivos(30)
-        self.enviar_mensajes_caducidad_reactivos(7)
-        self.enviar_mensajes_caducidad_reactivos(1)
-        
-
     #reactivos y comunes
     default_code = fields.Char('Referencia Interna', compute='_get_nri', store=True, readonly=False)
     x_tipolabo = fields.Selection([('disolucion','Disolución'),('equipo','Equipo'),('generico','Genérico'),('materiallabo','Material de Laboratorio'),('materialref','Material de Referencia'),('patron','Patrón'),('reactivo','Reactivo')],'Clase de Producto',default='generico') 
@@ -138,15 +90,184 @@ class dblaboratorio_product_template (models.Model) :
 
         for record in self:
             if record.x_tipolabo == 'reactivo':
-                record.default_code = self.x_espreact.x_nri;
+                record.default_code = record.x_espreact.x_nri;
                 
             if record.x_tipolabo == 'patron':
-                record.default_code = self.x_patrongen.x_nri
+                record.default_code = record.x_patrongen.x_nri
          
             if record.x_tipolabo == 'materiallabo':
-                record.default_code = self.x_matlabogen.x_nri
+                record.default_code = record.x_matlabogen.x_nri
             
+    
+    #CADUCIDADES
                          
+    @api.multi
+    def enviar_mensajes_caducidad_reactivos(self, dias):
+        
+        #Responsable tambien pertenece al grupo Usuario
+        group = self.env['res.groups'].search([['full_name','=','Bases de Datos de Laboratorio / Usuario']])
+        
+        recordset = self.env['stock.quant'].search([['product_id.x_tipolabo','=','reactivo']])
+        caducidades = recordset.mapped(lambda r : (False if r.lot_id.life_date==False else (fields.Date.from_string(r.lot_id.life_date)-date.today()).days))
+        
+        #solo los productos en ubicaciones internas
+        i=0
+        productos = []
+        for item in caducidades:
+            if item == dias:
+                a = (recordset[i].product_id.product_tmpl_id.default_code, recordset[i].product_id.name, recordset[i].product_id.x_marca.name, recordset[i].product_id.x_formato.name , recordset[i].lot_id.name, recordset[i].location_id.name,  dias)
+                if recordset[i].location_id.usage == 'internal':
+                    productos.append(a)
+            i = i + 1
+            
+        
+        #only one message for each lot
+        unique_productos = []
+        for item in productos:
+            if item not in unique_productos:
+                unique_productos.append(item)
+             
+
+        for producto in unique_productos: 
+            for user in group.users :   
+                user.message_post(body="Las unidades del producto %s %s %s %s del lote %s almacenados en %s caducan en %s dias" % producto, subject="Caducidad Reactivo")
+
+    
+    @api.multi
+    def enviar_mensajes_caducidad_patrones(self, dias):
+        
+        #Responsable tambien pertenece al grupo Usuario
+        group = self.env['res.groups'].search([['full_name','=','Bases de Datos de Laboratorio / Usuario']])
+        
+        recordset = self.env['stock.quant'].search([['product_id.x_tipolabo','=','patron']])
+        caducidades = recordset.mapped(lambda r : (False if r.lot_id.life_date==False else (fields.Date.from_string(r.lot_id.life_date)-date.today()).days))
+        
+        #solo los productos en ubicaciones internas
+        i=0
+        productos = []
+        for item in caducidades:
+            if item == dias:
+                a = (recordset[i].product_id.product_tmpl_id.default_code,recordset[i].product_id.name, recordset[i].product_id.x_marca.name, recordset[i].product_id.x_formato.name , recordset[i].lot_id.name, recordset[i].location_id.name,  dias)
+                if recordset[i].location_id.usage == 'internal':
+                    productos.append(a)
+            i = i + 1
+            
+        
+        #only one message for each lot
+        unique_productos = []
+        for item in productos:
+            if item not in unique_productos:
+                unique_productos.append(item)
+             
+
+        for producto in unique_productos: 
+            for user in group.users :   
+                user.message_post(body="Las unidades del producto %s %s %s %s del lote %s almacenados en %s caducan en %s dias" % producto, subject="Caducidad Patrón")
+
+    
+    @api.multi
+    def enviar_mensajes_caducidad_materialref(self, dias):
+        
+        #Responsable tambien pertenece al grupo Usuario
+        group = self.env['res.groups'].search([['full_name','=','Bases de Datos de Laboratorio / Usuario']])
+        
+        recordset = self.env['stock.quant'].search([['product_id.x_tipolabo','=','materialref']])
+        caducidades = recordset.mapped(lambda r : (False if r.lot_id.life_date==False else (fields.Date.from_string(r.lot_id.life_date)-date.today()).days))
+        
+        #solo los productos en ubicaciones internas
+        i=0
+        productos = []
+        for item in caducidades:
+            if item == dias:
+                a = (recordset[i].product_id.product_tmpl_id.default_code,recordset[i].product_id.name, recordset[i].product_id.x_marca.name, recordset[i].product_id.x_formato.name , recordset[i].lot_id.name, recordset[i].location_id.name,  dias)
+                if recordset[i].location_id.usage == 'internal':
+                    productos.append(a)
+            i = i + 1
+            
+        
+        #only one message for each lot
+        unique_productos = []
+        for item in productos:
+            if item not in unique_productos:
+                unique_productos.append(item)
+             
+
+        for producto in unique_productos: 
+            for user in group.users :   
+                user.message_post(body="Las unidades del producto %s %s %s %s del lote %s almacenados en %s caducan en %s dias" % producto, subject="Caducidad Material de Referencia")
+
+    
+    @api.multi
+    def enviar_mensajes_caducidad_disoluciones(self, dias):
+        
+        #Responsable tambien pertenece al grupo Usuario
+        group = self.env['res.groups'].search([['full_name','=','Bases de Datos de Laboratorio / Usuario']])
+        
+        recordset = self.env['stock.quant'].search([['product_id.x_tipolabo','=','disolucion']])
+        caducidades = recordset.mapped(lambda r : (False if r.lot_id.life_date==False else (fields.Date.from_string(r.lot_id.life_date)-date.today()).days))
+        
+        #solo los productos en ubicaciones internas
+        i=0
+        productos = []
+        for item in caducidades:
+            if item == dias:
+                origen = (recordset[i].product_id.x_origen_p.name if recordset[i].product_id.x_origen_p.name else recordset[i].product_id.x_origen_p.name) 
+                a = (recordset[i].product_id.product_tmpl_id.default_code,recordset[i].product_id.name, origen, dias)
+                if recordset[i].location_id.usage == 'internal':
+                    productos.append(a)
+            i = i + 1
+            
+        
+        #only one message for each lot
+        unique_productos = []
+        for item in productos:
+            if item not in unique_productos:
+                unique_productos.append(item)
+             
+
+        for producto in unique_productos: 
+            for user in group.users :   
+                user.message_post(body="La disolucion %s %s de origen %s caduca en %s dias" % producto, subject="Caducidad Disolución")
+                
+      
+    #para testeo con boton 'Run Caducidad'        
+    @api.multi
+    def action_run_caducidad(self):
+        self.enviar_mensajes_caducidad_reactivos(30)
+        self.enviar_mensajes_caducidad_reactivos(7)
+        self.enviar_mensajes_caducidad_reactivos(1)
+        
+        self.enviar_mensajes_caducidad_patrones(30)
+        self.enviar_mensajes_caducidad_patrones(7)
+        self.enviar_mensajes_caducidad_patrones(1)
+        
+        self.enviar_mensajes_caducidad_materialref(30)
+        self.enviar_mensajes_caducidad_materialref(7)
+        self.enviar_mensajes_caducidad_materialref(1)
+        
+        self.enviar_mensajes_caducidad_disoluciones(30)
+        self.enviar_mensajes_caducidad_disoluciones(7)
+        self.enviar_mensajes_caducidad_disoluciones(1)
+              
+    #aquí se puede cambiar cuándo se envían avisos de caducidades
+    @api.model
+    def run_caducidad_scheduler(self):
+        self.enviar_mensajes_caducidad_reactivos(30)
+        self.enviar_mensajes_caducidad_reactivos(7)
+        self.enviar_mensajes_caducidad_reactivos(1)
+        
+        self.enviar_mensajes_caducidad_patrones(30)
+        self.enviar_mensajes_caducidad_patrones(7)
+        self.enviar_mensajes_caducidad_patrones(1)
+        
+        self.enviar_mensajes_caducidad_materialref(30)
+        self.enviar_mensajes_caducidad_materialref(7)
+        self.enviar_mensajes_caducidad_materialref(1)
+        
+        self.enviar_mensajes_caducidad_disoluciones(30)
+        self.enviar_mensajes_caducidad_disoluciones(7)
+        self.enviar_mensajes_caducidad_disoluciones(1)
+           
    
 #     @api.multi
 #     def name_get(self):
@@ -162,6 +283,23 @@ class dblaboratorio_product_template (models.Model) :
 
 class dblaboratorio_product_product(models.Model) :
     _inherit = "product.product"
+
+# Para rellenar NRI en las variantes de producto
+#    
+#     default_code = fields.Char('Referencia Interna', compute='_get_nri', store=True, readonly=False)
+#     
+#     @api.depends('product_tmpl_id')
+#     def _get_nri(self):
+# 
+#         for record in self:
+#             if record.product_tmpl_id.x_tipolabo == 'reactivo':
+#                 record.default_code = record.product_tmpl_id.x_espreact.x_nri;
+#                 
+#             if record.product_tmpl_id.x_tipolabo == 'patron':
+#                 record.default_code = record.product_tmpl_id.x_patrongen.x_nri
+#          
+#             if record.product_tmpl_id.x_tipolabo == 'materiallabo':
+#                 record.default_code = record.product_tmpl_id.x_matlabogen.x_nri
     
     @api.multi
     def name_get(self):

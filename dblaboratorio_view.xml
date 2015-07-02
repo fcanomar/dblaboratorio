@@ -147,7 +147,7 @@
 					
 					
 					<!-- para testeo! -->
-					<!--<button name="action_run_caducidad" string="Run Caducidad" type="object"/>-->
+					<button name="action_run_caducidad" string="Run Caducidad" type="object"/>
 
 	
 				</field>

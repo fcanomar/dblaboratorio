@@ -26,7 +26,7 @@
         <record id="product_category_disoluciones" model="product.category">
            <field name="parent_id" ref="product.product_category_all"/>
            <field name="name">Disoluciones</field>
-           <field name="route_ids" eval="[(6,0,[ref('stock_route_recepcionlabo')])]"/>
+           <field name="route_ids" eval="[(6,0,[ref('stock_route_prepararlabo')])]"/>
         </record>
         
         <record id="product_category_equipos" model="product.category">
