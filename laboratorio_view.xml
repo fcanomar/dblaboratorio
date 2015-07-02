@@ -10,7 +10,7 @@
         
         <menuitem name="Laboratorio"
             id="dblaboratorio.menu_laboratorio_root"
-			groups="group_dblabo_usuario,group_dblabo_responsable"	
+			groups="group_dblabo_responsable,group_dblabo_usuario"	
             sequence="60"/>
             
         <menuitem id="menu_basesdedatos_laboratorio" name="Bases de Datos de Laboratorio"

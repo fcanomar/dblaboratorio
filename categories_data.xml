@@ -7,31 +7,38 @@
 	    <record id="product_category_reactivos" model="product.category">
            <field name="parent_id" ref="product.product_category_all"/>
            <field name="name">Reactivos</field>
+           <field name="route_ids" eval="[(6,0,[ref('stock_route_desechado'),ref('stock_route_existenciasalmacen')])]"/>
+           <field name="removal_strategy_id" ref="product_expiry.removal_fefo"/>
         </record>
         
         <record id="product_category_patrones" model="product.category">
            <field name="parent_id" ref="product.product_category_all"/>
            <field name="name">Patrones</field>
+           <field name="route_ids" eval="[(6,0,[ref('stock_route_recepcionlabo')])]"/>
         </record>
         
         <record id="product_category_materiallabo" model="product.category">
            <field name="parent_id" ref="product.product_category_all"/>
            <field name="name">Material de Laboratorio</field>
+           <field name="route_ids" eval="[(6,0,[ref('stock_route_recepcionlabo')])]"/>
         </record>
         
         <record id="product_category_disoluciones" model="product.category">
            <field name="parent_id" ref="product.product_category_all"/>
            <field name="name">Disoluciones</field>
+           <field name="route_ids" eval="[(6,0,[ref('stock_route_recepcionlabo')])]"/>
         </record>
         
         <record id="product_category_equipos" model="product.category">
            <field name="parent_id" ref="product.product_category_all"/>
+           <field name="route_ids" eval="[(6,0,[ref('stock_route_recepcionlabo')])]"/>
            <field name="name">Equipos</field>
         </record>
         
         <record id="product_category_materialref" model="product.category">
            <field name="parent_id" ref="product.product_category_all"/>
            <field name="name">Material de Referencia</field>
+           <field name="route_ids" eval="[(6,0,[ref('stock_route_recepcionlabo')])]"/>
         </record>
 
 	</data>
