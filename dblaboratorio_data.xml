@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+
+	<data>
+	
+		<!-- Warehouse -->
+		
+		<record id="stock.warehouse0" model="stock.warehouse">
+			<field name="name">CM EUROPA S.L.</field>
+			<field name="code">CM</field>
+			<field name="partner_id" ref="base.main_partner"/>
+		</record>
+		
+		<!-- Ubicaciones -->
+		
+		<record id="stock_location_almacen" model="stock.location">
+			<field name="name">Almacén</field>
+			<field name="location_id" ref="stock.stock_location_stock"/>
+			<field name="usage">internal</field>
+		</record>
+		
+		<record id="stock_location_laboratorio" model="stock.location">
+			<field name="name">Laboratorio</field>
+			<field name="location_id" ref="stock.stock_location_stock"/>
+			<field name="usage">internal</field>
+		</record>
+		
+		
+		<!-- Sequences -->
+        
+        <record id="sequence_recepcionlabo" model="ir.sequence">
+        	<field name="name">Recepción Laboratorio</field>
+        	<field name="code">stock.picking</field>
+        	<field name="prefix">CM\RL\</field>
+        	<field name="padding">5</field>
+        	<field name="number_increment">1</field>
+        </record>
+        
+        <record id="sequence_almacenlabo" model="ir.sequence">
+        	<field name="name">De Almaćen a Laboratorio</field>
+        	<field name="code">stock.picking</field>
+        	<field name="prefix">CM\AL\</field>
+        	<field name="padding">5</field>
+        	<field name="number_increment">1</field>
+        </record>
+        
+        <record id="sequence_prepararlabo" model="ir.sequence">
+        	<field name="name">Preparar en Laboratorio</field>
+        	<field name="code">stock.picking</field>
+        	<field name="prefix">CM\PL\</field>
+        	<field name="padding">5</field>
+        	<field name="number_increment">1</field>
+        </record>
+        
+        <record id="sequence_desechado" model="ir.sequence">
+        	<field name="name">Desechado</field>
+        	<field name="code">stock.picking</field>
+        	<field name="prefix">CM\DE\</field>
+        	<field name="padding">5</field>
+        	<field name="number_increment">1</field>
+        </record>
+		
+		
+		<!-- Tipos de Operaciones -->
+		
+        <record id="picking_type_recepcionlabo" model="stock.picking.type">
+        	<field name="name">Recepciones Laboratorio</field>
+        	<field name="sequence_id" ref="sequence_recepcionlabo"/>
+        	<field name="warehouse_id" ref="stock.warehouse0"/>
+        	<field name="default_location_src_id" ref="stock.stock_location_stock"/>
+        	<field name="default_location_dest_id" ref="stock_location_laboratorio"/>
+        	<field name="code">internal</field>
+        	<field name="sequence">2</field>
+        </record>
+        
+        <record id="picking_type_almacenalabo" model="stock.picking.type">
+        	<field name="name">De Almacén a Laboratorio</field>
+        	<field name="sequence_id" ref="sequence_almacenlabo"/>
+        	<field name="warehouse_id" ref="stock.warehouse0"/>
+        	<field name="default_location_src_id" ref="stock_location_almacen"/>
+        	<field name="default_location_dest_id" ref="stock_location_laboratorio"/>
+        	<field name="code">internal</field>
+        	<field name="sequence">3</field>
+        </record>
+        
+                
+        <record id="picking_type_prepararlabo" model="stock.picking.type">
+        	<field name="name">Preparar en Laboratorio</field>
+        	<field name="sequence_id" ref="sequence_prepararlabo"/>
+        	<field name="warehouse_id" ref="stock.warehouse0"/>
+        	<field name="default_location_src_id" ref="stock.location_production"/>
+        	<field name="default_location_dest_id" ref="stock_location_laboratorio"/>
+        	<field name="code">internal</field>
+        	<field name="sequence">4</field>
+        </record>
+        
+        <record id="picking_type_desechado" model="stock.picking.type">
+        	<field name="name">Desechado</field>
+        	<field name="sequence_id" ref="sequence_desechado"/>
+        	<field name="warehouse_id" ref="stock.warehouse0"/>
+        	<field name="default_location_src_id" ref="stock_location_laboratorio"/>
+        	<field name="default_location_dest_id" ref="stock.stock_location_scrapped"/>
+        	<field name="code">internal</field>
+        	<field name="sequence">5</field>
+        </record>
+       
+        
+        
+        <!-- Reglas de Abastecimiento -->
+        
+        <record id="stock_procurement_prepararlabo" model="procurement.rule">
+        	<field name="name">Preparar en Laboratorio</field>
+        	<field name="location_id" ref="stock_location_laboratorio"/>
+        	<field name="warehouse_id" ref="stock.warehouse0"/>
+        	<!-- <field name="route_id" pruebo a no incluirlo. seguramente me lo rellene solo cuando añada a ruta -->
+        	<field name="action">move</field>
+        	<field name="picking_type_id" ref="picking_type_prepararlabo"/>
+        	<field name="location_src_id" ref="stock.location_production"/>
+        </record>
+        
+        <!-- Reglas Push -->
+        
+        <record id="stock_push_existenciasalmacen" model="stock.location.path">
+        	<field name="name">De Existencias a Almacén</field>
+        	<field name="picking_type_id" ref="picking_type_recepcionlabo"/>
+        	<field name="location_from_id" ref="stock.stock_location_stock"/>
+        	<field name="location_dest_id" ref="stock_location_almacen"/>
+        	<field name="auto">manual</field>
+        	<field name="delay">1</field>
+        </record>
+        
+        <record id="stock_push_recepcionlabo" model="stock.location.path">
+        	<field name="name">Recepción Laboratorio</field>
+        	<field name="picking_type_id" ref="picking_type_recepcionlabo"/>
+        	<field name="location_from_id" ref="stock.stock_location_stock"/>
+        	<field name="location_dest_id" ref="stock_location_laboratorio"/>
+        	<field name="auto">manual</field>
+        	<field name="delay">1</field>
+        </record>
+        
+        <record id="stock_push_desechado" model="stock.location.path">
+        	<field name="name">Desechado</field>
+        	<field name="picking_type_id" ref="picking_type_desechado"/>
+        	<field name="location_from_id" ref="stock_location_laboratorio"/>
+        	<field name="location_dest_id" ref="stock.stock_location_scrapped"/>
+        	<field name="auto">manual</field>
+        	<field name="delay">1</field>
+        </record>
+        
+        <!-- esta puede que no sea necesaria -->
+        
+<!--         <record id="stock_push_prepararlabo" model="stock.location.path">
+        	<field name="name">Preparar Laboratorio</field>
+        	<field name="picking_type_id" ref="picking_type_prepararlabo"/>
+        	<field name="location_from_id" ref="stock.stock_location_production"/>
+        	<field name="location_dest_id" ref="stock_location_laboratorio"/>
+        	<field name="auto">manual</field>
+        	<field name="delay">1</field>
+        </record> -->
+        
+        
+        <!-- Rutas -->
+        
+        <record id="stock_route_prepararlabo" model="stock.location.route">
+        	<field name="name">Preparar en Laboratorio</field>
+        	<field name="product_category_selectable" eval="True"/>
+        	<field name="pull_ids" eval="[(6,0,[ref('stock_procurement_prepararlabo')])]"/>
+        </record>
+        
+        <record id="stock_route_existenciasalmacen" model="stock.location.route">
+        	<field name="name">De Existencias a Almacén</field>
+        	<field name="product_category_selectable" eval="True"/>
+        	<field name="push_ids" eval="[(6,0,[ref('stock_push_existenciasalmacen')])]"/>
+        </record>
+        
+        <record id="stock_route_recepcionlabo" model="stock.location.route">
+        	<field name="name">Recepción Laboratorio</field>
+        	<field name="product_category_selectable" eval="True"/>
+        	<field name="push_ids" eval="[(6,0,[ref('stock_push_recepcionlabo')])]"/>
+        </record>
+        
+        <record id="stock_route_desechado" model="stock.location.route">
+        	<field name="name">Desechado</field>
+        	<field name="product_category_selectable" eval="True"/>
+        	<field name="push_ids" eval="[(6,0,[ref('stock_push_desechado')])]"/>
+        </record>
+        
+        
+        
+        
+        
+        
+        
+
+
+<!-- 	    <record id="push_existencias_almacen" model="stock.location.path"> -->
+<!--            <field name="name">De Existencias a Almacén</field> -->
+<!--            <field name="location_from_id" ref="stock.stock_location_stock"/> -->
+<!--            <field name="location_dest_id" ref="stock.stock_location_stock"/> -->
+<!--            <field name="picking_type_id">operation_type_recepcionlabo</field> -->
+<!--            <field name="auto">manual</field> -->
+<!--            <field name="delay">1</field> -->
+<!--         </record> -->
+        
+
+        
+	</data>
+
+</openerp>
