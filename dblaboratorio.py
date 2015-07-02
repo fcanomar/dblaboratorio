@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import datetime
 
-import openerp
 from openerp import models, fields, api
 from datetime import date
 
@@ -311,4 +309,3 @@ class materiallaboratorio_generica(models.Model):
             res.append((item.id, (name)))
             
         return res
-    
