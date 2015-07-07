@@ -25,7 +25,7 @@ class dblaboratorio_product_template (models.Model) :
     x_patrongen = fields.Many2one('dblaboratorio.patrongen','Cumple Especificaciones',ondelete='cascade')
     x_estado_p = fields.Selection([('solido','Solido'),('liquido','Liquido'),('gaseoso','Gaseoso')],'Estado', related="x_patrongen.x_estado", readonly=True)
     x_conservacion_p = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade',domain="[('name','=',x_patrongen)]", related="x_patrongen.x_conservacion", readonly=True)
-    x_equiposcalibrar = fields.Char('Equipos/Técnicas a Calibrar', related='x_patrongen.x_equiposcalibrar', readonly=True)
+    x_equiposcalibrar = fields.Char('Equipos/Métodos a Calibrar', related='x_patrongen.x_equiposcalibrar', readonly=True)
     
     #material de laboratorio
     x_matlabogen = fields.Many2one('dblaboratorio.matlabogen','Cumple Especificaciones', ondelete='cascade')
@@ -49,7 +49,7 @@ class dblaboratorio_product_template (models.Model) :
     x_fverificacion = fields.Many2one('dblaboratorio.frecuencia','Frecuencia de Verificación')
     x_mantenimiento = fields.Selection([('int','Interno'),('ext','Externo')],'Mantenimiento')
     x_fmantenimiento = fields.Many2one('dblaboratorio.frecuencia','Frecuencia de Mantenimiento')
-    x_teccalibrar = fields.Char('Técnica a Calibrar')
+    x_teccalibrar = fields.Char('Método a Calibrar')
     x_control = fields.Selection([('si','Sí'),('no','No')],'Sometido a Control')
     x_accesorios = fields.Char('Accesorios')
     x_magnitud = fields.Many2one('dblaboratorio.magnitud','Magnitud')
@@ -407,7 +407,7 @@ class patrones_generica(models.Model):
     x_nri = fields.Char('NRI')
     x_estado = fields.Selection([('solido','Solido'),('liquido','Liquido'),('gaseoso','Gaseoso')],'Estado')
     x_conservacion = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade')
-    x_equiposcalibrar = fields.Char('Equipos a Calibrar')
+    x_equiposcalibrar = fields.Char('Equipos/Métodos a Calibrar')
     x_observaciones = fields.Text('Observaciones')
     
     _sql_constraints = [
