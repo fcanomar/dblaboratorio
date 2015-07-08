@@ -33,9 +33,9 @@ class dblaboratorio_product_template (models.Model) :
     #disoluciones
     x_disolvente = fields.Many2one('dblaboratorio.disolvente', 'Disolvente')
     x_origen_tipo = fields.Selection([('disolucion','Disolución'),('patron','Patrón'),('reactivo','Reactivo')],'Tipo de Origen')
-    x_origen_p = fields.Many2one('dblaboratorio.patrongen', 'Origen', ondelete='cascade')
-    x_origen_r = fields.Many2one('dblaboratorio.reactivoesp', 'Origen', ondelete='cascade')
     x_origen_d = fields.Many2one('product.template', 'Origen', domain="[('x_tipolabo','=','disolucion')]")
+    x_origen_p = fields.Many2one('dblaboratorio.patrongen', 'Origen', ondelete='cascade', default="_get_origen")
+    x_origen_r = fields.Many2one('dblaboratorio.reactivoesp', 'Origen', ondelete='cascade', default="_get_origen")
     x_conservacion_d = fields.Many2one("dblaboratorio.conservacion", "Conservación")
     
     #para equipos y material de referencia
@@ -61,6 +61,20 @@ class dblaboratorio_product_template (models.Model) :
     x_exactitud = fields.Char('Exactitud')
     x_nalicuotas = fields.Char('Número Alícuotas')
     x_valicuotas = fields.Char('Volumen Alícuotas')
+    
+    
+    @api.onchange('x_origen_d')
+    @api.one
+    def _get_origen(self):
+        
+        if self.x_origen_tipo == 'disolucion':
+        
+            if self.x_origen_d.x_origen_p: 
+                self.x_origen_p = self.x_origen_d.x_origen_p
+            
+            if self.x_origen_d.x_origen_r: 
+                self.x_origen_r = self.x_origen_d.x_origen_r
+        
     
     @api.onchange('x_tipolabo')
     def _set_categoria_producto(self):

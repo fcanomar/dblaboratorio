@@ -325,8 +325,6 @@
 					<span> </span>
 					<field name="x_origen_r"/>
 					<span></span>
-					<field name="x_origen_d"/>
-					<span></span>
 				</field>
 			</field>
 		</record>
