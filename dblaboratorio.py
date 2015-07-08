@@ -49,7 +49,7 @@ class dblaboratorio_product_template (models.Model) :
     x_fverificacion = fields.Many2one('dblaboratorio.frecuencia','Frecuencia de Verificación')
     x_mantenimiento = fields.Selection([('int','Interno'),('ext','Externo')],'Mantenimiento')
     x_fmantenimiento = fields.Many2one('dblaboratorio.frecuencia','Frecuencia de Mantenimiento')
-    x_teccalibrar = fields.Many2many('Métodos a Calibrar','dblaboratorio.metodo')
+    x_teccalibrar = fields.Char('Métodos a Calibrar')
     x_control = fields.Selection([('si','Sí'),('no','No')],'Sometido a Control')
     x_accesorios = fields.Char('Accesorios')
     x_magnitud = fields.Many2one('dblaboratorio.magnitud','Magnitud')
