@@ -31,9 +31,10 @@ class dblaboratorio_product_template (models.Model) :
     x_matlabogen = fields.Many2one('dblaboratorio.matlabogen','Cumple Especificaciones', ondelete='cascade')
 
     #disoluciones
-    x_origen_tipo = fields.Selection([('patron','Patrón'),('reactivo','Reactivo')],'Tipo de Origen')
+    x_origen_tipo = fields.Selection([('disolucion','Disolución'),('patron','Patrón'),('reactivo','Reactivo')],'Tipo de Origen')
     x_origen_p = fields.Many2one('dblaboratorio.patrongen', 'Origen', ondelete='cascade')
     x_origen_r = fields.Many2one('dblaboratorio.reactivoesp', 'Origen', ondelete='cascade')
+    x_origen_d = fields.Many2one('product.template', 'Origen', domain="[('x_tipolabo','=','disolucion')]")
     
     #para equipos y material de referencia
     x_modelo = fields.Char('Modelo')
@@ -279,6 +280,24 @@ class dblaboratorio_product_template (models.Model) :
 #             res.append((item.id, (name)))
 #              
 #         return res
+
+    @api.multi
+    def name_get(self):
+ 
+        res = []
+     
+        for item in self:
+            
+            if item.x_tipolabo=='disolucion': 
+                
+                origen = (item.x_origen_p.name if item.x_origen_p.name else item.x_origen_p.name)
+                               
+                name = '%s de %s' % (item.name, origen)
+                
+            res.append((item.id, (name)))
+             
+        return res
+
 
 
 class dblaboratorio_product_product(models.Model) :

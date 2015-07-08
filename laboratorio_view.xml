@@ -312,6 +312,24 @@
             	</filter>
             </field>
         </record>
+        
+        <!-- Añade Marca y Formato al Kanban de Disolucion -->
+		
+		<record id="dblabo_kanban_disolucion" model="ir.ui.view">
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="product.product_template_kanban_view" />
+			<field name="arch" type="xml">
+				<field name="name" position="after">
+					<span> de </span>
+					<field name="x_origen_p"/>
+					<span> </span>
+					<field name="x_origen_r"/>
+					<span></span>
+					<field name="x_origen_d"/>
+					<span></span>
+				</field>
+			</field>
+		</record>
 		
 		<!-- Menús -->
 		
