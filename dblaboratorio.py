@@ -31,10 +31,12 @@ class dblaboratorio_product_template (models.Model) :
     x_matlabogen = fields.Many2one('dblaboratorio.matlabogen','Cumple Especificaciones', ondelete='cascade')
 
     #disoluciones
+    x_disolvente = fields.Many2one('dblaboratorio.disolvente', 'Disolvente')
     x_origen_tipo = fields.Selection([('disolucion','Disolución'),('patron','Patrón'),('reactivo','Reactivo')],'Tipo de Origen')
     x_origen_p = fields.Many2one('dblaboratorio.patrongen', 'Origen', ondelete='cascade')
     x_origen_r = fields.Many2one('dblaboratorio.reactivoesp', 'Origen', ondelete='cascade')
     x_origen_d = fields.Many2one('product.template', 'Origen', domain="[('x_tipolabo','=','disolucion')]")
+    x_conservacion_d = fields.Many2one("dblaboratorio.conservacion", "Conservación")
     
     #para equipos y material de referencia
     x_modelo = fields.Char('Modelo')
@@ -399,6 +401,11 @@ class metodos_calibrar(models.Model):
     _name = 'dblaboratorio.metodo'
     
     name = fields.Char('Método')
+    
+class disolvente_disolucion(models.Model):
+    _name = "dblaboratorio.disolvente"
+    
+    name = fields.Char('Disolvente')
   
   
 class especificaciones_cm(models.Model):

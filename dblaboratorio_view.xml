@@ -75,6 +75,8 @@
 					
 					<!-- disoluciones -->
 					
+					<field name="x_disolvente" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
+					
 					<field name="x_origen_tipo" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
 					
 					<field name="x_origen_p" attrs="{'invisible':['|',('x_tipolabo','!=','disolucion'),('x_origen_tipo','!=','patron')]}"/>
@@ -83,7 +85,9 @@
 					
 					<field name="x_origen_d" attrs="{'invisible':['|',('x_tipolabo','!=','disolucion'),('x_origen_tipo','!=','disolucion')]}"/>
 					
+					<field name="x_conservacion_d" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}" />
 
+					
 					<!-- equipos y material de referencia -->
 					
 					<field name="x_modelo" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
