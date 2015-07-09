@@ -40,6 +40,7 @@ class dblaboratorio_product_template (models.Model) :
     
     #para equipos y material de referencia
     x_modelo = fields.Char('Modelo')
+    x_marca = fields.Many2one()
     x_nserie = fields.Char('Número de serie')
     x_ubicacion = fields.Many2one('dblaboratorio.ubicacion','Ubicación',ondelete='cascade')
     x_tipoequipo = fields.Many2one('dblaboratorio.tipoequipo','Tipo de Equipo', ondelete='cascade')
@@ -308,7 +309,8 @@ class dblaboratorio_product_template (models.Model) :
                 
                 origen = (item.x_origen_p.name if item.x_origen_p.name else item.x_origen_p.name)
                                
-                name = '%s de %s' % (item.name, origen)
+                if origen:
+                    name = '%s de %s' % (item.name, origen)
                 
             res.append((item.id, (name)))
              
@@ -348,12 +350,12 @@ class dblaboratorio_product_product(models.Model) :
             else:
                 code = ''
                 
-            if item.x_marca.name:
+            if item.x_marca:
                 marca = item.x_marca.name
             else:
                 marca = ''
                 
-            if item.x_formato.name:
+            if item.x_formato:
                 formato = item.x_formato.name
             else:
                 formato = ''
