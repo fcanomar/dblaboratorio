@@ -400,7 +400,7 @@ class especificaciones_cm(models.Model):
         res = []
 
         for item in self:
-            name = '[%s] ' % (item['x_nri'],) + self.item
+            name = '[%s] ' % (item['x_nri'],) + item.name
             res.append((item.id, (name)))
             
         return res
