@@ -399,9 +399,9 @@ class especificaciones_cm(models.Model):
         #return_val = super(especificaciones_cm, self).name_get()
         res = []
 
-        for reactivoesp in self:
-            name = '[%s] ' % (self['x_nri'],) + self.name
-            res.append((reactivoesp.id, (name)))
+        for item in self:
+            name = '[%s] ' % (item['x_nri'],) + self.item
+            res.append((item.id, (name)))
             
         return res
     
