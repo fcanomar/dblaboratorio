@@ -6,6 +6,11 @@ from openerp import models, fields, api
 from datetime import date
 
 
+class dblaboratorio_stock_production_lot(models.Model):
+    _inherit = "stock.production.lot"
+    
+    x_riqueza = fields.Char("Riqueza")
+    
 
 class dblaboratorio_product_template (models.Model) :
     _inherit = "product.template"
