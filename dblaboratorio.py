@@ -25,8 +25,8 @@ class dblaboratorio_product_template (models.Model) :
     x_patrongen = fields.Many2one('dblaboratorio.patrongen','Cumple Especificaciones',ondelete='cascade')
     x_estado_p = fields.Selection([('solido','Solido'),('liquido','Liquido'),('gaseoso','Gaseoso')],'Estado', related="x_patrongen.x_estado", readonly=True)
     x_conservacion_p = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade',domain="[('name','=',x_patrongen)]", related="x_patrongen.x_conservacion", readonly=True)
-    x_equiposcalibrar = fields.Char('Métodos a Calibrar --prueba')
-    #x_equiposcalibrar = fields.Many2many('Métodos a Calibrar', related='x_patrongen.x_equiposcalibrar', readonly=True)
+    #x_equiposcalibrar = fields.Char('Métodos a Calibrar --prueba')
+    x_equiposcalibrar = fields.Many2many(related='x_patrongen.x_equiposcalibrar', string='Métodos a Calibrar',  readonly=True)
     
     #material de laboratorio
     x_matlabogen = fields.Many2one('dblaboratorio.matlabogen','Cumple Especificaciones', ondelete='cascade')
@@ -380,7 +380,7 @@ class magnitud_equipo(models.Model) :
 class metodos_calibrar(models.Model):
     _name = 'dblaboratorio.metodo'
     
-    name = fields.Char('Método')
+    name = fields.Char('Nombre')
     #x_patron_ids = fields.Many2many("dblaboratorio.patrongen")
   
   
