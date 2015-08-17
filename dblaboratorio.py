@@ -25,7 +25,8 @@ class dblaboratorio_product_template (models.Model) :
     x_patrongen = fields.Many2one('dblaboratorio.patrongen','Cumple Especificaciones',ondelete='cascade')
     x_estado_p = fields.Selection([('solido','Solido'),('liquido','Liquido'),('gaseoso','Gaseoso')],'Estado', related="x_patrongen.x_estado", readonly=True)
     x_conservacion_p = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade',domain="[('name','=',x_patrongen)]", related="x_patrongen.x_conservacion", readonly=True)
-    x_equiposcalibrar = fields.Char('Equipos/Métodos a Calibrar', related='x_patrongen.x_equiposcalibrar', readonly=True)
+    x_equiposcalibrar = fields.Char('Métodos a Calibrar --prueba')
+    #x_equiposcalibrar = fields.Many2many('Métodos a Calibrar', related='x_patrongen.x_equiposcalibrar', readonly=True)
     
     #material de laboratorio
     x_matlabogen = fields.Many2one('dblaboratorio.matlabogen','Cumple Especificaciones', ondelete='cascade')
@@ -380,6 +381,7 @@ class metodos_calibrar(models.Model):
     _name = 'dblaboratorio.metodo'
     
     name = fields.Char('Método')
+    #x_patron_ids = fields.Many2many("dblaboratorio.patrongen")
   
   
 class especificaciones_cm(models.Model):
@@ -413,7 +415,7 @@ class patrones_generica(models.Model):
     x_nri = fields.Char('NRI')
     x_estado = fields.Selection([('solido','Solido'),('liquido','Liquido'),('gaseoso','Gaseoso')],'Estado')
     x_conservacion = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade')
-    x_equiposcalibrar = fields.Char('Equipos/Métodos a Calibrar')
+    x_equiposcalibrar = fields.Many2many('dblaboratorio.metodo', 'patron_metodo_rel', 'patron_id','metodo_id', 'Métodos a Calibrar')
     x_observaciones = fields.Text('Observaciones')
     
     _sql_constraints = [
