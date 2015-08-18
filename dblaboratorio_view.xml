@@ -3,7 +3,7 @@
 <openerp>
 	<data>
 	
-		<!-- LOTE / RIQUEZA EN PATRONES -->
+		<!-- LOTE : RIQUEZA EN PATRONES -->
 		<record id="dblabo_stock_production_lot" model="ir.ui.view">
 		
 			<field name="model">stock.production.lot</field>
@@ -12,8 +12,9 @@
 			<field name="arch" type="xml">
 				<field name="ref" position="after">
 					
-					<group string="Datos Técnicos">
+					<group string="Datos Técnicos" attrs="{'invisible':[('x_tipolabo','!=','patron')]}" >
 						<field name="x_riqueza"/>
+						<field name="x_tipolabo" invisible="1"/>
 					</group>
 					
 				</field>
