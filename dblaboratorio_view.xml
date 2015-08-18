@@ -101,6 +101,9 @@
 					
 					<field name="x_origen_r" attrs="{'invisible':['|',('x_tipolabo','!=','disolucion'),('x_origen_tipo','!=','reactivo')]}"/>
 					
+					<field name="x_origen" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
+					
+					
 
 					<!-- equipos y material de referencia -->
 					

@@ -42,6 +42,7 @@ class dblaboratorio_product_template (models.Model) :
     x_origen_tipo = fields.Selection([('patron','Patrón'),('reactivo','Reactivo')],'Tipo de Origen')
     x_origen_p = fields.Many2one('dblaboratorio.patrongen', 'Origen', ondelete='cascade')
     x_origen_r = fields.Many2one('dblaboratorio.reactivoesp', 'Origen', ondelete='cascade')
+    x_origen = fields.Char('Origen (inicial)', compute='_get_origen_dis', readonly=True)
     
     #para equipos y material de referencia
     x_modelo = fields.Char('Modelo')
@@ -66,6 +67,20 @@ class dblaboratorio_product_template (models.Model) :
     x_exactitud = fields.Char('Exactitud')
     x_nalicuotas = fields.Char('Número Alícuotas')
     x_valicuotas = fields.Char('Volumen Alícuotas')
+    
+    @api.multi
+    def _get_origen_dis(self):
+        
+        for record in self:
+            if (record.x_tipolabo=='disolucion'):
+                
+                if (record.x_origen_tipo == 'reactivo'):
+                    record.x_origen = record.x_origen_r.name + " (" + record.x_origen_r.x_nri + ")"
+                
+                if (record.x_origen_tipo == 'patron'):
+                    record.x_origen = record.x_origen_p.name + " (" + record.x_origen_p.x_nri + ")"
+        
+        
     
     @api.onchange('x_tipolabo')
     def _set_categoria_producto(self):
