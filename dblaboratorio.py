@@ -81,7 +81,9 @@ class dblaboratorio_product_template (models.Model) :
                 if (record.x_origen_tipo == 'patron'):
                     record.x_origen = record.x_origen_p.name + " (" + record.x_origen_p.x_nri + ")"
         
-        
+                if (record.x_origen_tipo == 'disolucion'):
+                    record.x_origen = record.x_origen_d.x_origen
+                    
     
     @api.onchange('x_tipolabo')
     def _set_categoria_producto(self):
