@@ -39,9 +39,10 @@ class dblaboratorio_product_template (models.Model) :
     x_matlabogen = fields.Many2one('dblaboratorio.matlabogen','Cumple Especificaciones', ondelete='cascade')
 
     #disoluciones
-    x_origen_tipo = fields.Selection([('patron','Patrón'),('reactivo','Reactivo')],'Tipo de Origen')
+    x_origen_tipo = fields.Selection([('disolucion','Disolución'),('patron','Patrón'),('reactivo','Reactivo')],'Tipo de Origen')
     x_origen_p = fields.Many2one('dblaboratorio.patrongen', 'Origen', ondelete='cascade')
     x_origen_r = fields.Many2one('dblaboratorio.reactivoesp', 'Origen', ondelete='cascade')
+    x_origen_d = fields.Many2one('product.template', 'Origen', ondelete='cascade', domain="[('x_tipolabo','=','disolucion')]")
     x_origen = fields.Char('Origen (inicial)', compute='_get_origen_dis', readonly=True)
     
     #para equipos y material de referencia
