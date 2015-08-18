@@ -436,7 +436,7 @@ class patrones_generica(models.Model):
         res = []
 
         for patrongen in self:
-            name = '[%s] ' % (self['x_nri'],) + self.name
+            name = '[%s] ' % (patrongen['x_nri'],) + patrongen.name
             res.append((patrongen.id, (name)))
             
         return res
