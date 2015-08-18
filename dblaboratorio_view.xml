@@ -103,7 +103,7 @@
 					
 					<field name="x_origen_d" attrs="{'invisible':['|',('x_tipolabo','!=','disolucion'),('x_origen_tipo','!=','disolucion')]}"/>
 					
-					<field name="x_origen" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
+					<field name="x_origen" invisible="1"/>
 					
 					
 
