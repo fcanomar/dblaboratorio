@@ -306,6 +306,21 @@ class dblaboratorio_product_template (models.Model) :
 #              
 #         return res
 
+    @api.multi
+    def name_get(self):
+        
+        res=[]
+        
+        for item in self:
+            
+            if (item.x_tipolabo == "disolucion"):
+            
+                name = item.name + ' de ' + item.x_origen
+                res.append((item.id,(name)))
+            
+        return res
+            
+
 
 class dblaboratorio_product_product(models.Model) :
     _inherit = "product.product"
