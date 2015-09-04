@@ -11,6 +11,10 @@
 			
 			<field name="arch" type="xml">
 				<field name="ref" position="after">
+				
+<!-- 					<field name="use_date" position="replace"/> -->
+<!-- 					<field name="removal_date" position="replace"/> -->
+<!-- 					<field name="alert_date" position="replace"/> -->
 					
 					<group string="Datos Técnicos" attrs="{'invisible':[('x_tipolabo','!=','patron')]}" >
 						<field name="x_riqueza"/>
