@@ -11,6 +11,10 @@
 			
 			<field name="arch" type="xml">
 				<field name="ref" position="after">
+				
+<!-- 					<field name="use_date" position="replace"/> -->
+<!-- 					<field name="removal_date" position="replace"/> -->
+<!-- 					<field name="alert_date" position="replace"/> -->
 					
 					<group string="Datos Técnicos" attrs="{'invisible':[('x_tipolabo','!=','patron')]}" >
 						<field name="x_riqueza"/>
@@ -85,25 +89,13 @@
 					
 					<field name="x_conservacion_p" attrs="{'invisible':[('x_tipolabo','!=','patron')]}"/>
 					
-					<field name="x_equiposcalibrar" attrs="{'invisible':[('x_tipolabo','!=','patron')]}"/>
+
 					
 					
 					<!-- material de laboratorio -->
 					
 					<field name='x_matlabogen' attrs="{'invisible':[('x_tipolabo','!=','materiallabo')]}"/>
-					
-					
-					<!-- disoluciones -->
-					
-					<field name="x_origen_tipo" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
-					
-					<field name="x_origen_p" attrs="{'invisible':['|',('x_tipolabo','!=','disolucion'),('x_origen_tipo','!=','patron')]}"/>
-					
-					<field name="x_origen_r" attrs="{'invisible':['|',('x_tipolabo','!=','disolucion'),('x_origen_tipo','!=','reactivo')]}"/>
-					
-					<field name="x_origen_d" attrs="{'invisible':['|',('x_tipolabo','!=','disolucion'),('x_origen_tipo','!=','disolucion')]}"/>
-					
-					<field name="x_origen" invisible="1"/>
+				
 					
 					
 
@@ -124,7 +116,59 @@
 					<field name="x_control" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
 					
 					<field name="x_accesorios" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+
+									
+					<!-- Disoluciones -->
+					
+					<group String="Origen" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}" colspan="2"/>
+					
+							<field name="x_origen_tipo" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
+					
+							<field name="x_origen_p" attrs="{'invisible':['|',('x_tipolabo','!=','disolucion'),('x_origen_tipo','!=','patron')]}"/>
+					
+							<field name="x_origen_r" attrs="{'invisible':['|',('x_tipolabo','!=','disolucion'),('x_origen_tipo','!=','reactivo')]}"/>
+					
+							<field name="x_origen_d" attrs="{'invisible':['|',('x_tipolabo','!=','disolucion'),('x_origen_tipo','!=','disolucion')]}"/>
+					
+							<field name="x_origen" invisible="1"/>						
+					
+					<!-- para testeo! -->
+					<!--<button name="action_run_caducidad" string="Run Caducidad" type="object"/>-->
+
+	
+				</field>
 				
+				<field name="description" position="before">
+				
+				
+					<!-- Patrones -->
+	
+					<group String="Calibraciones" attrs="{'invisible':[('x_tipolabo','!=','patron')]}" colspan="4">
+					
+						<field name="x_metodoscalibrar" attrs="{'invisible':[('x_tipolabo','!=','patron')]}"/>
+					
+						<field name="x_equiposcalibrar" attrs="{'invisible':[('x_tipolabo','!=','patron')]}"/>
+						
+					</group>
+					
+					
+					
+					<!-- Equipos -->
+					
+					<group colspan="2">
+					
+					<group string='Datos técnicos' attrs="{'invisible':[('x_tipolabo','!=','equipo')]}">
+					
+						<field name="x_magnitud" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+						<field name="x_rango" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+						<field name="x_resolucion" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+						<field name="x_exactitud" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+					</group>
+					
 					
 					<group string='Calibración, verificación y mantenimiento' attrs="{'invisible':[('x_tipolabo','!=','equipo')]}">
 					
@@ -142,17 +186,6 @@
 					
 					</group>
 					
-					
-					<group string='Datos técnicos' attrs="{'invisible':[('x_tipolabo','!=','equipo')]}">
-					
-						<field name="x_magnitud" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
-					
-						<field name="x_rango" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
-					
-						<field name="x_resolucion" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
-					
-						<field name="x_exactitud" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
-					
 					</group>
 					
 					<group string='Servicio técnico' attrs="{'invisible':[('x_tipolabo','!=','equipo')]}" colspan="2">
@@ -161,21 +194,38 @@
 					
 					</group>
 					
-
+					<separator/>
+					<separator/>
+					<separator/>
+					
+					<!-- Material de Referencia -->
+					
+					<group colspan="2">
+					
+					<group>
+					<group String="Métodos a Calibrar" attrs="{'invisible':[('x_tipolabo','!=','materialref')]}" colspan="4">
+					
+						<field name="x_metodoscalibrar" attrs="{'invisible':[('x_tipolabo','!=','materialref')]}" nolabel="1"/>
+					
+					</group>
+					</group>
+					
+					<group>
+					<group String="Alícuotas" attrs="{'invisible':[('x_tipolabo','!=','materialref')]}">
+					
+						<field name="x_nalicuotas" attrs="{'invisible':[('x_tipolabo','!=','materialref')]}"/>
+					
+						<field name="x_valicuotas" attrs="{'invisible':[('x_tipolabo','!=','materialref')]}"/>
+					
+					</group>
+					</group>
+					
+					</group>
 					
 					
-					<field name="x_teccalibrar" attrs="{'invisible':[('x_tipolabo','!=','materialref')]}"/>
-					
-					<field name="x_nalicuotas" attrs="{'invisible':[('x_tipolabo','!=','materialref')]}"/>
-					
-					<field name="x_valicuotas" attrs="{'invisible':[('x_tipolabo','!=','materialref')]}"/>
-					
-					
-					<!-- para testeo! -->
-					<!--<button name="action_run_caducidad" string="Run Caducidad" type="object"/>-->
-
-	
 				</field>
+				
+				
 			</field>
 		</record>
 
