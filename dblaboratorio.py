@@ -314,9 +314,20 @@ class dblaboratorio_product_template (models.Model) :
         for item in self:
             
             if (item.x_tipolabo == "disolucion"):
+                if (item.x_origen):
+                    name = item.name + ' de ' + item.x_origen
+                else:
+                    name = item.name   
             
-                name = item.name + ' de ' + item.x_origen
-                res.append((item.id,(name)))
+            if (item.x_tipolabo == "materiallabo"):
+                if (item.x_matlabogen.x_nri):
+                    name = '[%s] ' % (item.x_matlabogen.x_nri) + item.name 
+            
+            else:
+                name = item.name
+                
+            res.append((item.id,(name)))
+            
             
         return res
             
@@ -349,24 +360,29 @@ class dblaboratorio_product_product(models.Model) :
      
         for item in self:
             
-            if item.default_code: 
-                code = '[%s] ' %(item.default_code)
-            else:
-                code = ''
+            if (item.x_tipolabo == 'reactivo'):
+            
+                if item.default_code: 
+                    code = '[%s] ' %(item.default_code)
+                else:
+                    code = ''
                 
-            if item.x_marca.name:
-                marca = item.x_marca.name
-            else:
-                marca = ''
+                if item.x_marca.name:
+                    marca = item.x_marca.name
+                else:
+                    marca = ''
                 
-            if item.x_formato.name:
-                formato = item.x_formato.name
+                if item.x_formato.name:
+                    formato = item.x_formato.name
+                else:
+                    formato = ''
+            
+                name = '%s%s %s %s' % (code, item.name, marca, formato)
+                
             else:
-                formato = ''
-            
-            
-            
-            name = '%s%s %s %s' % (code, item.name, marca, formato)
+                
+                name = item.name
+                
             res.append((item.id, (name)))
              
         return res
@@ -492,7 +508,10 @@ class materiallaboratorio_generica(models.Model):
         res = []
 
         for item in self:
-            name = '[%s] ' % (item['x_nri'],) + item.name
+            if (item.x_nri):
+                name = '[%s] ' % (item['x_nri'],) + item.name
+            else:
+                name = item.name
             res.append((item.id, (name)))
             
         return res
