@@ -10,13 +10,6 @@
 			<field name="inherit_id" ref="stock.view_production_lot_form"/>
 			
 			<field name="arch" type="xml">
-				
-<!-- 				<field name="use_date" position="replace"/> -->
-<!-- 					<field name="use_date" invisible="1"/> -->
-<!--  				<field name="removal_date" position="replace"/> -->
-<!--  					<field name="removal_date" invisible="1"/> -->
-<!--  				<field name="alert_date" position="replace"/> -->
-<!--  					<field name="alert_date" invisible="1"/> -->
 			
 				<field name="ref" position="after">
 					
@@ -26,6 +19,19 @@
 					</group>
 					
 				</field>
+				
+<!-- 				 <field name="use_date" position="replace"> -->
+<!--  					<field name="use_date" invisible="1"/>  -->
+<!--  				</field> -->
+ 				
+<!--  				<field name="removal_date" position="replace"> -->
+<!--  					<field name="removal_date" invisible="1"/> -->
+<!--  				</field> -->
+ 				
+<!--  				<field name="alert_date" position="replace"> -->
+<!--  					<field name="alert_date" invisible="1"/> -->
+<!--  				</field> -->
+				
 			</field>
 		
 		</record>
