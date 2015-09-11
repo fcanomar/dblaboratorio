@@ -321,9 +321,9 @@
 			<field name="inherit_id" ref="product.product_template_kanban_view" />
 			<field name="arch" type="xml">
 				<field name="name" position="after">
-					<t t-if="x_tipolabo=='Disolución'">
-					<span> de </span>
-					<field name="x_origen"/>
+					<t t-if="x_tipolabo=='disolucion'">
+						<span> de </span>
+						<field name="x_origen"/>
 					</t>
 				</field>
 			</field>

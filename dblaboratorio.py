@@ -11,7 +11,6 @@ class dblaboratorio_stock_production_lot(models.Model):
     
     x_riqueza = fields.Char("Riqueza")
     x_tipolabo = fields.Selection(related='product_id.product_tmpl_id.x_tipolabo')
-    
 
 class dblaboratorio_product_template (models.Model) :
     _inherit = "product.template"
