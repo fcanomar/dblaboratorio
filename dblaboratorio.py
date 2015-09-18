@@ -11,7 +11,6 @@ class dblaboratorio_stock_production_lot(models.Model):
     
     x_riqueza = fields.Char("Riqueza")
     x_tipolabo = fields.Selection(related='product_id.product_tmpl_id.x_tipolabo')
-    
 
 class dblaboratorio_product_template (models.Model) :
     _inherit = "product.template"
@@ -32,8 +31,8 @@ class dblaboratorio_product_template (models.Model) :
     x_estado_p = fields.Selection([('solido','Solido'),('liquido','Liquido'),('gaseoso','Gaseoso')],'Estado', related="x_patrongen.x_estado", readonly=True)
     x_conservacion_p = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade',domain="[('name','=',x_patrongen)]", related="x_patrongen.x_conservacion", readonly=True)
     #x_equiposcalibrar = fields.Char('Métodos a Calibrar --prueba')
-    x_metodoscalibrar = fields.Many2many(related='x_patrongen.x_metodoscalibrar', string='Métodos a Calibrar',  readonly=True)
-    x_equiposcalibrar = fields.Many2many(related='x_patrongen.x_equiposcalibrar', string='Equipos a Calibrar',  readonly=True)
+    x_metodoscalibrar = fields.Many2many(related='x_patrongen.x_metodoscalibrar', string='Métodos a Calibrar')
+    x_equiposcalibrar = fields.Many2many(related='x_patrongen.x_equiposcalibrar', string='Equipos a Calibrar')
     
     #material de laboratorio
     x_matlabogen = fields.Many2one('dblaboratorio.matlabogen','Cumple Especificaciones', ondelete='cascade')
@@ -314,9 +313,20 @@ class dblaboratorio_product_template (models.Model) :
         for item in self:
             
             if (item.x_tipolabo == "disolucion"):
+                if (item.x_origen):
+                    name = item.name + ' de ' + item.x_origen
+                else:
+                    name = item.name   
             
-                name = item.name + ' de ' + item.x_origen
-                res.append((item.id,(name)))
+            if (item.x_tipolabo == "materiallabo"):
+                if (item.x_matlabogen.x_nri):
+                    name = '[%s] ' % (item.x_matlabogen.x_nri) + item.name 
+            
+            else:
+                name = item.name
+                
+            res.append((item.id,(name)))
+            
             
         return res
             
@@ -349,24 +359,29 @@ class dblaboratorio_product_product(models.Model) :
      
         for item in self:
             
-            if item.default_code: 
-                code = '[%s] ' %(item.default_code)
-            else:
-                code = ''
+            if (item.x_tipolabo == 'reactivo'):
+            
+                if item.default_code: 
+                    code = '[%s] ' %(item.default_code)
+                else:
+                    code = ''
                 
-            if item.x_marca.name:
-                marca = item.x_marca.name
-            else:
-                marca = ''
+                if item.x_marca.name:
+                    marca = item.x_marca.name
+                else:
+                    marca = ''
                 
-            if item.x_formato.name:
-                formato = item.x_formato.name
+                if item.x_formato.name:
+                    formato = item.x_formato.name
+                else:
+                    formato = ''
+            
+                name = '%s%s %s %s' % (code, item.name, marca, formato)
+                
             else:
-                formato = ''
-            
-            
-            
-            name = '%s%s %s %s' % (code, item.name, marca, formato)
+                
+                name = item.name
+                
             res.append((item.id, (name)))
              
         return res
@@ -492,7 +507,10 @@ class materiallaboratorio_generica(models.Model):
         res = []
 
         for item in self:
-            name = '[%s] ' % (item['x_nri'],) + item.name
+            if (item.x_nri):
+                name = '[%s] ' % (item['x_nri'],) + item.name
+            else:
+                name = item.name
             res.append((item.id, (name)))
             
         return res
