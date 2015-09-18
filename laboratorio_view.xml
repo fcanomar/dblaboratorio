@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
 	<data>
-
 		
 		
 		<!-- TOP MENUS -->
@@ -18,6 +17,24 @@
             
         <menuitem id="menu_articulos_laboratorio" name="Productos de Laboratorio"
             parent="dblaboratorio.menu_laboratorio_root" sequence="1" />
+            
+        
+       	<!-- Kanban de Producto (reactivos y disoluciones)-->
+		
+		<record id="dblabo_kanban_producto" model="ir.ui.view">
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="product.product_template_kanban_view" />
+			<field name="arch" type="xml">
+				<field name="name" position="after">
+					<span> </span>
+					<field name="x_marca"/>
+					<span> </span>
+					<field name="x_formato"/>
+					<span> </span>
+					<field name="x_origen"/>
+				</field>
+			</field>
+		</record>
             
             
         <!-- REACTIVOS -->
@@ -68,22 +85,6 @@
 
 		<menuitem action="dblaboratorio_reactivoesp_action" id="db_calidadcm_menu_reactivoesp"
 			parent="dblaboratorio.menu_basesdedatos_laboratorio" sequence="50" />
-			
-		
-		<!-- Añade Marca y Formato al Kanban de Producto -->
-		
-		<record id="dblabo_kanban_producto" model="ir.ui.view">
-			<field name="model">product.template</field>
-			<field name="inherit_id" ref="product.product_template_kanban_view" />
-			<field name="arch" type="xml">
-				<field name="name" position="after">
-					<span> </span>
-					<field name="x_marca"/>
-					<span> </span>
-					<field name="x_formato"/>
-				</field>
-			</field>
-		</record>
 		
 		
 		<!-- Vista Lista para los Productos -->
@@ -314,19 +315,7 @@
             </field>
         </record>
         
-        <!-- Añade Origen al Kanban -->
-		
-		<record id="dblabo_kanban_producto" model="ir.ui.view">
-			<field name="model">product.template</field>
-			<field name="inherit_id" ref="product.product_template_kanban_view" />
-			<field name="arch" type="xml">
-				<field name="name" position="after">
-					<!--<span> de </span>-->
-					<span> </span>
-					<field name="x_origen"/>
-				</field>
-			</field>
-		</record>
+
 		
 		<!-- Menús -->
 		
