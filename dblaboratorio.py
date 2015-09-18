@@ -90,7 +90,7 @@ class dblaboratorio_product_template (models.Model) :
         
         for record in self:
             if record.x_tipolabo == 'reactivo':
-                record.categ_id = record.env['product.category'].search([('name','=','Reactivos')]);
+                record.categ_id = self.env['product.category'].search([('name','=','Reactivos')]);
                 
             if record.x_tipolabo == 'patron':
                 record.categ_id = self.env['product.category'].search([('name','=','Patrones')]);

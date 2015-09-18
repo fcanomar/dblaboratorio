@@ -321,7 +321,7 @@
 			<field name="inherit_id" ref="product.product_template_kanban_view" />
 			<field name="arch" type="xml">
 				<field name="name" position="after">
-					<span> de </span>
+					<!--<span> de </span>-->
 					<field name="x_origen"/>
 				</field>
 			</field>
