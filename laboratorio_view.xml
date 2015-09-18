@@ -322,6 +322,7 @@
 			<field name="arch" type="xml">
 				<field name="name" position="after">
 					<!--<span> de </span>-->
+					<span> </span>
 					<field name="x_origen"/>
 				</field>
 			</field>
