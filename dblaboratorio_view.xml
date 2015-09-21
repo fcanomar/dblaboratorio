@@ -3,7 +3,8 @@
 <openerp>
 	<data>
 		
-		<!-- LOTE : RIQUEZA EN PATRONES -->
+		<!-- Formulario de Lote : Riqueza en Patrones -->
+		
 		<record id="dblabo_stock_production_lot" model="ir.ui.view">
 		
 			<field name="model">stock.production.lot</field>
@@ -18,7 +19,7 @@
 						<field name="x_tipolabo" invisible="1"/>
 					</group>
 					
-				</field>
+			</field>
 				
 <!-- 				 <field name="use_date" position="replace"> -->
 <!--  					<field name="use_date" invisible="1"/>  -->
@@ -38,7 +39,7 @@
 		
 		
 		
-		<!-- Incluir búsqueda por referencia interna -->
+		<!-- Incluir búsqueda por Referencia Interna -->
 		
 		<record id="oroduct_laboratorio_search" model="ir.ui.view">
 		<field name="model">product.template</field>
@@ -98,6 +99,7 @@
 					
 					<field name="default_code" attrs="{'invisible':['|',('x_tipolabo','=','reactivo'),'|',('x_tipolabo','=','patron'),('x_tipolabo','=','materiallabo')]}"/>
 
+					
 					<!-- reactivos y comunes -->
 
 					<field name="x_espreact" attrs="{'invisible':[('x_tipolabo','!=','reactivo')]}"/>
@@ -117,15 +119,11 @@
 					
 					<field name="x_conservacion_p" attrs="{'invisible':[('x_tipolabo','!=','patron')]}"/>
 					
-
-					
 					
 					<!-- material de laboratorio -->
 					
 					<field name='x_matlabogen' attrs="{'invisible':[('x_tipolabo','!=','materiallabo')]}"/>
 				
-					
-					
 
 					<!-- equipos y material de referencia -->
 					
@@ -165,6 +163,7 @@
 
 	
 				</field>
+				
 				
 				<field name="description" position="before">
 				

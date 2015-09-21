@@ -25,6 +25,15 @@
 			<field name="model">product.template</field>
 			<field name="inherit_id" ref="product.product_template_kanban_view" />
 			<field name="arch" type="xml">
+			
+				<!-- comment this part if [nri] is displayed twice -->
+				<field name="name" position="before">
+					<span t-if="record.default_code.value">
+                      [<field name="default_code"/>]
+                    </span>
+				</field>
+				<!-- comment this part if [nri] is displayed twice -->
+				
 				<field name="name" position="after">
 					<span> </span>
 					<field name="x_marca"/>
@@ -33,6 +42,7 @@
 					<span> </span>
 					<field name="x_origen"/>
 				</field>
+				
 			</field>
 		</record>
             
