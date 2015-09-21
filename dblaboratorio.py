@@ -16,6 +16,7 @@ class dblaboratorio_product_template (models.Model) :
     _inherit = "product.template"
         
     #reactivos y comunes
+    display_name = fields.Char(string="Name", compute='_compute_display_name')
     default_code = fields.Char('Referencia Interna', compute='_get_nri', store=True, readonly=False)
     x_tipolabo = fields.Selection([('disolucion','Disolución'),('equipo','Equipo'),('generico','Genérico'),('materiallabo','Material de Laboratorio'),('materialref','Material de Referencia'),('patron','Patrón'),('reactivo','Reactivo')],'Clase de Producto',default='generico') 
     x_marca = fields.Many2one('dblaboratorio.marca','Fabricante', ondelete='cascade')
@@ -306,29 +307,24 @@ class dblaboratorio_product_template (models.Model) :
 #         return res
 
     @api.multi
-    def name_get(self):
-        
-        res=[]
-        
+    @api.depends('x_tipolabo','default_code','x_origen','x_matlabogen')
+    def _compute_display_name(self):
+
         for item in self:
             
             if (item.x_tipolabo == "disolucion"):
                 if (item.x_origen):
-                    name = item.name + ' de ' + item.x_origen
+                    item.display_name = item.name + ' de ' + item.x_origen
                 else:
-                    name = item.name   
+                    item.display_name = item.name   
             
             if (item.x_tipolabo == "materiallabo"):
                 if (item.x_matlabogen.x_nri):
-                    name = '[%s] ' % (item.x_matlabogen.x_nri) + item.name 
+                    item.display_name = '[%s] ' % (item.x_matlabogen.x_nri) + item.name 
             
             else:
-                name = item.name
-                
-            res.append((item.id,(name)))
-            
-            
-        return res
+                item.display_name = item.name
+
             
 
 
