@@ -171,8 +171,8 @@
 					<!-- Patrones -->
 	
 					<group String="Calibraciones" attrs="{'invisible':[('x_tipolabo','!=','patron')]}" colspan="4">
-					
-						<field name="x_metodoscalibrar" attrs="{'invisible':[('x_tipolabo','!=','patron')]}"/>
+						
+						<field name="x_metodos" attrs="{'invisible':[('x_tipolabo','!=','patron')]}"/>
 					
 						<field name="x_equiposcalibrar" attrs="{'invisible':[('x_tipolabo','!=','patron')]}"/>
 						
