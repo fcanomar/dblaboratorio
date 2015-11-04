@@ -127,17 +127,29 @@
 
 					<!-- equipos y material de referencia -->
 					
+					<field name="x_fabricante_equipo" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+					<field name="x_marca_equipo" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+					<field name="x_nserie" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
 					<field name="x_modelo" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
 					
 					<field name="x_nserie" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
 					
 					<field name="x_ubicacion" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
 					
+					<field name="x_ubicacion_docu" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
 					<field name="x_tipoequipo" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
 					
 					<field name="x_responsable" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
 					
 					<field name="x_inicioservicio" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+					<field name="x_dado_baja" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
+					<field name="x_finservicio" attrs="{'invisible':['|',('x_tipolabo','!=','equipo'),('x_dado_baja','!=',True)]}"/>
 					
 					<field name="x_control" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
 					

@@ -52,11 +52,16 @@ class dblaboratorio_product_template (models.Model) :
     
     #para equipos y material de referencia
     x_modelo = fields.Char('Modelo')
+    x_marca_equipo = fields.Many2one('dblaboratorio.marcaequipo', 'Marca', ondelete="cascade")
+    x_fabricante_equipo = fields.Many2one('dblaboratorio.fabricanteequipo', 'Fabricante', ondelete="cascade")
     x_nserie = fields.Char('Número de serie')
-    x_ubicacion = fields.Many2one('dblaboratorio.ubicacion','Ubicación',ondelete='cascade')
+    x_ubicacion = fields.Many2one('dblaboratorio.ubicacion','Ubicación Equipo',ondelete='cascade')
+    x_ubicacion_docu = fields.Many2one('dblaboratorio.ubicaciondocu','Ubicación Documentación',ondelete='cascade')
     x_tipoequipo = fields.Many2one('dblaboratorio.tipoequipo','Tipo de Equipo', ondelete='cascade')
     x_responsable = fields.Many2one('res.users','Responsable',ondelete='cascade')
     x_inicioservicio = fields.Date('Inicio Servicio')
+    x_dado_baja = fields.Boolean('Dado de Baja')
+    x_finservicio = fields.Date('Fin Servicio')
     x_serviciotecnico = fields.Many2many('res.partner',string='Servicio Técnico')
     x_calibracion = fields.Selection([('int','Interna'),('ext','Externa')],'Calibración')
     x_fcalibracion = fields.Many2one('dblaboratorio.frecuencia','Frecuencia de Calibración')
@@ -409,11 +414,27 @@ class conservacion_reactivo(models.Model) :
     name = fields.Char('Conservacion')
     
 
+class ubicacion_docu_equipos(models.Model) :
+    _name = 'dblaboratorio.ubicaciondocu'
+
+    name = fields.Char('Ubicación Documentación')
+    
+    
 class ubicacion_equipos(models.Model) :
     _name = 'dblaboratorio.ubicacion'
 
-    name = fields.Char('Ubicación')
+    name = fields.Char('Ubicación Equipo')
+    
+    
+class marca_equipos(models.Model) :
+    _name = 'dblaboratorio.marcaequipo'
 
+    name = fields.Char('Marca')   
+
+class fabricante_equipos(models.Model) :
+    _name = 'dblaboratorio.fabricanteequipo'
+
+    name = fields.Char('Fabricante')  
 
 class tipo_equipo(models.Model) :
     _name = 'dblaboratorio.tipoequipo'
