@@ -23,3 +23,9 @@ access_dblabo_product_template,access.dblabo.product.template,model_product_temp
 access_dblabo_product_product,access.dblabo.product.product,model_product_product,group_dblabo_responsable,1,1,1,1
 access_dblabo_metodo_responsable,access.dblabo.metodo.responsable,model_dblaboratorio_metodo,group_dblabo_responsable,1,1,1,1
 access_dblabo_metodo_usuario,access.dblabo.metodo.usuario,model_dblaboratorio_metodo,group_dblabo_usuario,1,0,0,0
+access_dblabo_ubicacion_docu_responsable,access.dblabo.ubicacion.docu..responsable,model_dblaboratorio_ubicaciondocu,group_dblabo_responsable,1,1,1,1
+access_dblabo_marca_equipo_responsable,access.dblabo.marca.equipo.responsable,model_dblaboratorio_marcaequipo,group_dblabo_responsable,1,1,1,1
+access_dblabo_fabricante_equipo_responsable,access.dblabo.fabricante.equipo.responsable,model_dblaboratorio_fabricanteequipo,group_dblabo_responsable,1,1,1,1
+access_dblabo_ubicacion_docu_usuario,access.dblabo.ubicacion.docu..usuario,model_dblaboratorio_ubicaciondocu,group_dblabo_usuario,1,0,0,0
+access_dblabo_marca_equipo_usuario,access.dblabo.marca.equipo.usuario,model_dblaboratorio_marcaequipo,group_dblabo_usuario,1,0,0,0
+access_dblabo_fabricante_equipo_usuario,access.dblabo.fabricante.equipo.usuario,model_dblaboratorio_fabricanteequipo,group_dblabo_usuario,1,0,0,0
