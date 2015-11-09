@@ -131,8 +131,6 @@
 					
 					<field name="x_marca_equipo" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
 					
-					<field name="x_nserie" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
-					
 					<field name="x_modelo" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
 					
 					<field name="x_nserie" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
