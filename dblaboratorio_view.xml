@@ -264,7 +264,23 @@
 					<group>
 					<group String="Métodos a Calibrar" attrs="{'invisible':[('x_tipolabo','!=','materialref')]}" colspan="4">
 					
-						<field name="x_metodoscalibrar" attrs="{'invisible':[('x_tipolabo','!=','materialref')]}" nolabel="1"/>
+						<field name="x_metodoscalibrar" nolabel="1">
+						
+<!--  						<form name="x_metodoscalibrar_form"> -->
+<!-- 								<field name="x_metodo"/> -->
+<!-- 								<field name="x_vasignado"/> -->
+<!-- 								<field name="x_incertidumbre"/> -->
+<!-- 								<field name="x_sigma"/> -->
+<!-- 						</form> -->
+						
+						<tree name="x_metodoscalibrar_tree" editable="buttom">
+								<field name="x_metodo"/>
+								<field name="x_vasignado"/>
+								<field name="x_incertidumbre"/>
+								<field name="x_sigma"/>
+						</tree>
+						
+						</field>
 					
 					</group>
 					</group>

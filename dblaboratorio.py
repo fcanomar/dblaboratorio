@@ -465,8 +465,8 @@ class metodo_line(models.Model):
     
     x_materialref_id = fields.Many2one('product.template', ondelete='cascade')  
     x_metodo = fields.Many2one('dblaboratorio.metodo','Método', ondelete='cascade', required=True, select=True)
-    x_vasignado = fields.Char('Valor Asignado (Va)')
-    x_incertidumbre = fields.Char('Incertidumbre Expandida U(k=2)')
+    x_vasignado = fields.Char('Valor Asignado, Va')
+    x_incertidumbre = fields.Char('Incertidumbre Expandida, U(k=2)')
     x_sigma = fields.Char('Sigma')
     #x_patron_ids = fields.Many2many("dblaboratorio.patrongen")
   
