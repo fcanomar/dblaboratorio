@@ -467,7 +467,7 @@ class metodo_line(models.Model):
     x_metodo = fields.Many2one('dblaboratorio.metodo','Método', ondelete='cascade', required=True, select=True)
     x_vasignado = fields.Char('Valor Asignado, Va')
     x_incertidumbre = fields.Char('Incertidumbre Expandida, U(k=2)')
-    x_sigma = fields.Char('Sigma')
+    x_sigma = fields.Char('Sigma, ' + u'\u03C3')
     #x_patron_ids = fields.Many2many("dblaboratorio.patrongen")
   
   
