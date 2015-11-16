@@ -34,7 +34,6 @@ class dblaboratorio_product_template (models.Model) :
     #x_equiposcalibrar = fields.Char('Métodos a Calibrar --prueba')
     #x_metodoscalibrar = fields.Many2many(related='x_patrongen.x_equiposcalibrar', string='Metodos a Calibrar')
     x_equiposcalibrar = fields.Many2many(related='x_patrongen.x_equiposcalibrar', string='Equipos a Calibrar')
-    x_metodoscalibrar = fields.Many2many(related='x_patrongen.x_equiposcalibrar', string='Metodos a Calibrar')
     x_metodos = fields.Many2many(related='x_patrongen.x_metodoscalibrar', string='Métodos a Calibrar')
     
     #para testeo patrones
@@ -78,6 +77,8 @@ class dblaboratorio_product_template (models.Model) :
     x_exactitud = fields.Char('Exactitud')
     x_nalicuotas = fields.Char('Número Alícuotas')
     x_valicuotas = fields.Char('Volumen Alícuotas')
+    x_metodoscalibrar = fields.One2many('dblaboratorio.metodoline', 'x_materialref_id', string='Métodos a Calibrar')
+    #fields.Many2many('dblaboratorio.metodo', 'patron_metodo_rel', 'patron_id','metodo_id', 'Métodos a Calibrar')
     
     @api.multi
     def _get_origen_dis(self):
@@ -458,6 +459,15 @@ class metodos_calibrar(models.Model):
     _name = 'dblaboratorio.metodo'
     
     name = fields.Char('Nombre')
+    
+class metodo_line(models.Model):
+    _name = 'dblaboratorio.metodoline'
+    
+    x_materialref_id = fields.Many2one('product.template', ondelete='cascade')  
+    x_metodo = fields.Many2one('dblaboratorio.metodo','Método', ondelete='cascade', required=True, select=True)
+    x_vasignado = fields.Char('Valor Asignado (Va)')
+    x_incertidumbre = fields.Char('Incertidumbre Expandida U(k=2)')
+    x_sigma = fields.Char('Sigma')
     #x_patron_ids = fields.Many2many("dblaboratorio.patrongen")
   
   

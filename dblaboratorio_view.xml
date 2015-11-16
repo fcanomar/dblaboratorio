@@ -123,6 +123,28 @@
 					<!-- material de laboratorio -->
 					
 					<field name='x_matlabogen' attrs="{'invisible':[('x_tipolabo','!=','materiallabo')]}"/>
+					
+<!-- 					<field name="x_metodoscalibrar"> -->
+					
+<!-- 						<form name="x_metodoscalibrar_form"> -->
+<!-- 							<group> -->
+<!-- 								<field name="x_metodo"/> -->
+<!-- 								<field name="x_vasignado"/> -->
+<!-- 								<field name="x_incertidumbre"/> -->
+<!-- 								<field name="x_sigma"/> -->
+<!-- 							</group> -->
+<!-- 						</form> -->
+						
+<!-- 						<tree name="x_metodoscalibrar_tree"> -->
+<!-- 							<group> -->
+<!-- 								<field name="x_metodo"/> -->
+<!-- 								<field name="x_vasignado"/> -->
+<!-- 								<field name="x_incertidumbre"/> -->
+<!-- 								<field name="x_sigma"/> -->
+<!-- 							</group> -->
+<!-- 						</tree> -->
+
+<!-- 					</field>      	 -->
 				
 
 					<!-- equipos y material de referencia -->
