@@ -41,7 +41,7 @@
 		
 		<!-- Incluir búsqueda por Referencia Interna -->
 		
-		<record id="oroduct_laboratorio_search" model="ir.ui.view">
+		<record id="product_laboratorio_search" model="ir.ui.view">
 		<field name="model">product.template</field>
 			<field name="inherit_id" ref="product.product_template_search_view"/>
 			
@@ -50,6 +50,7 @@
 				<field name="categ_id" position="before">
 
 						<field name="default_code"/>
+						<field name="x_metodoscalibrar"/>
 					
 				</field>
 			</field>
@@ -174,6 +175,7 @@
 					<field name="x_control" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
 					
 					<field name="x_accesorios" attrs="{'invisible':[('x_tipolabo','!=','equipo')]}"/>
+					
 
 									
 					<!-- Disoluciones -->
