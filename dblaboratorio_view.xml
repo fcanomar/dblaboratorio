@@ -50,7 +50,8 @@
 				<field name="categ_id" position="before">
 
 						<field name="default_code"/>
-						<field name="x_metodoscalibrar"/>
+						<field string="Método a Calibrar" name="x_metodoscalibrar" filter_domain="[('x_metodoscalibrar.x_metodo.name','ilike',self)]"/>
+     
 					
 				</field>
 			</field>
