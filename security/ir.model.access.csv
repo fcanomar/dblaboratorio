@@ -32,3 +32,7 @@ access_dblabo_fabricante_equipo_usuario,access.dblabo.fabricante.equipo.usuario,
 access_dblabo_res_partner_usuario,access.dblabo.res.partner.usuario,base.model_res_partner,group_dblabo_usuario,1,0,0,0
 access_dblabo_res_partner_responsable,access.dblabo.res.partner.responsable,base.model_res_partner,group_dblabo_responsable,1,1,1,1
 access_dblabo_account_invoice_report_responsable,access.dblabo.account.invoice.report.responsable,account.model_account_invoice_report,group_dblabo_responsable,1,0,1,0
+access_dblabo_metodos_calibrar_responsable,access.dblabo.metodos.calibrar.responsable,model_dblaboratorio_metodos_calibrar,group_dblabo_responsable,1,1,1,1
+access_dblabo_metodos_calibrar_usuario,access.dblabo.metodos.calibrar.usuario,model_dblaboratorio_metodos_calibrar,group_dblabo_usuario,1,0,1,0
+access_dblabo_metodo_line_responsable,access.dblabo.metodo.line.responsable,model_dblaboratorio_metodo_line,group_dblabo_responsable,1,1,1,1
+access_dblabo_metodo_line_usuario,access.dblabo.metodo.line.usuario,model_dblaboratorio_metodo_line,group_dblabo_usuario,1,0,1,0
