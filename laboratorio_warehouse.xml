@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<!-- Incluir búsqueda por Referencia Interna -->
+
+		<record id="laboratorio_desecho_search" model="ir.ui.view">
+		<field name="model">stock.picking</field>
+			<field name="inherit_id" ref="stock.view_picking_internal_search"/>
+
+			<field name="arch" type="xml">
+
+				<field name="partner_id" position="before">
+					
+					<field string="NRI" name="move_lines" filter_domain="[('move_lines.product_id.default_code','ilike',self)]"/>
+
+				</field>
+			</field>
+		</record>
+
+
+	</data>
+</openerp>

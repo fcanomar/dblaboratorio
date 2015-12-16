@@ -6,7 +6,7 @@ Añade los campos necesarios para la base de datos de productos de laboratorio
 """,
 'author' : 'Francisco Cano Marchal',
 'depends' : ['base','purchase','administracioncm','product_expiry','stock','sale'],
-'data' : ['security/dblabo_security.xml','security/ir.model.access.csv','dblaboratorio_view.xml','laboratorio_view.xml','sequences.xml','caducidad_scheduler.xml'],
+'data' : ['security/dblabo_security.xml','security/ir.model.access.csv','dblaboratorio_view.xml','laboratorio_view.xml','sequences.xml','caducidad_scheduler.xml','laboratorio_warehouse.xml'],
 'demo': [],
 'installable' : True,
 'auto_install' : False,
