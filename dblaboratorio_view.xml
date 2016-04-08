@@ -14,12 +14,17 @@
 			
 				<field name="ref" position="after">
 					
-					<group string="Datos Técnicos" attrs="{'invisible':[('x_tipolabo','!=','patron')]}" >
+					<group string="Datos Técnicos Patrones" attrs="{'invisible':[('x_tipolabo','!=','patron')]}" >
 						<field name="x_riqueza"/>
 						<field name="x_tipolabo" invisible="1"/>
 					</group>
-					
-			</field>
+
+					<group string="Datos Preparación Disoluciones" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}" >
+						<field name="x_preparado_por"/>
+						<field name="x_fecha_preparacion"/>
+					</group>
+
+				</field>
 				
 <!-- 				 <field name="use_date" position="replace"> -->
 <!--  					<field name="use_date" invisible="1"/>  -->

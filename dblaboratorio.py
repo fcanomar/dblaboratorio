@@ -4,7 +4,7 @@
 
 from openerp import models, fields, api
 from datetime import date
-
+from openerp import SUPERUSER_ID
 
 class dblaboratorio_stock_production_lot(models.Model):
     _inherit = "stock.production.lot"
@@ -553,3 +553,14 @@ class materiallaboratorio_generica(models.Model):
             res.append((item.id, (name)))
             
         return res
+
+class dblaboratorio_lot (models.Model) :
+    _inherit = "stock.production.lot"
+
+    @api.depends('x_preparado_por')
+    def _get_user(self):
+        current_user_id = self.env['res.users'].search([['id','=',SUPERUSER_ID]]).partner_id.id
+
+    x_preparado_por = fields.Many2one('res.users', 'Preparado por', ondelete='cascade', default = _get_user)
+    x_fecha_preparacion = fields.Date('Fecha Preparación', default=date.today())
+
