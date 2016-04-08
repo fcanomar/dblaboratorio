@@ -48,7 +48,14 @@ class dblaboratorio_product_template (models.Model) :
     x_origen_r = fields.Many2one('dblaboratorio.reactivoesp', 'Origen', ondelete='cascade')
     x_origen_d = fields.Many2one('product.template', 'Origen', ondelete='cascade', domain="[('x_tipolabo','=','disolucion')]")
     x_origen = fields.Char('Origen (inicial)', compute='_get_origen_dis', readonly=True)
-    
+    x_concentracion = fields.Char('Concentración')
+    x_estabilidad = fields.Char('Estabilidad')
+    #x_estabilidad = fields.Many2one('dblaboratorio.estabilidad', 'Estabilidad', ondelete='cascade')
+    x_conservacion = fields.Char('Conservacion')
+    #x_conservacion = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelte='cascade')
+    x_ubicacion = fields.Char('Ubicación')
+    x_uso_habitual = fields.Char('Uso habitual')
+
     #para equipos y material de referencia
     x_modelo = fields.Char('Modelo')
     x_marca_equipo = fields.Many2one('dblaboratorio.marcaequipo', 'Marca', ondelete="cascade")

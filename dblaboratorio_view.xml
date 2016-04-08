@@ -180,6 +180,17 @@
 
 									
 					<!-- Disoluciones -->
+
+					<field name="x_concentracion" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
+
+					<field name="x_estabilidad" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
+
+					<field name="x_conservacion" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
+
+					<field name="x_ubicacion" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
+
+					<field name="x_uso_habitual" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
+
 					
 					<group String="Origen" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}" colspan="2"/>
 					
