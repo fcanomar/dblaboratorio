@@ -557,10 +557,12 @@ class materiallaboratorio_generica(models.Model):
 class dblaboratorio_lot (models.Model) :
     _inherit = "stock.production.lot"
 
-    @api.depends('x_preparado_por')
-    def _get_user(self):
-        current_user_id = self.env['res.users'].search([['id','=',SUPERUSER_ID]]).partner_id.id
+    # @api.depends('x_preparado_por')
+    # def _get_user(self):
+    #     current_user_id = self.env['res.users'].search([['id','=',SUPERUSER_ID]]).partner_id.id
+    #     return current_user_id
 
-    x_preparado_por = fields.Many2one('res.users', 'Preparado por', ondelete='cascade', default = _get_user)
+    #x_preparado_por = fields.Many2one('res.users', 'Preparado por', ondelete='cascade')
+    x_preparado_por = fields.Many2one('res.users', 'Preparado por', ondelete='cascade', default= lambda self: self.env.user.id)
     x_fecha_preparacion = fields.Date('Fecha Preparación', default=date.today())
 

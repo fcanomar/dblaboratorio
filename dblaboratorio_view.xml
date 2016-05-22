@@ -19,7 +19,7 @@
 						<field name="x_tipolabo" invisible="1"/>
 					</group>
 
-					<group string="Datos Preparación Disoluciones" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}" >
+					<group string="Preparación Disolución" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}" >
 						<field name="x_preparado_por"/>
 						<field name="x_fecha_preparacion"/>
 					</group>
