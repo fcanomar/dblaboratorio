@@ -3,8 +3,7 @@
 
 
 from openerp import models, fields, api
-from datetime import date
-from openerp import SUPERUSER_ID
+from datetime import datetime, date, timedelta
 
 class dblaboratorio_stock_production_lot(models.Model):
     _inherit = "stock.production.lot"
@@ -49,7 +48,8 @@ class dblaboratorio_product_template (models.Model) :
     x_origen_d = fields.Many2one('product.template', 'Origen', ondelete='cascade', domain="[('x_tipolabo','=','disolucion')]")
     x_origen = fields.Char('Origen (inicial)', compute='_get_origen_dis', readonly=True)
     x_concentracion = fields.Char('Concentración')
-    x_estabilidad = fields.Char('Estabilidad')
+    x_estabilidad = fields.Integer('Estabilidad')
+    x_estabilidad_unidad = fields. Selection([('dias','Días'),('meses','Meses'),('años','Años')])
     #x_estabilidad = fields.Many2one('dblaboratorio.estabilidad', 'Estabilidad', ondelete='cascade')
     x_conservacion = fields.Char('Conservacion')
     #x_conservacion = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelte='cascade')
@@ -557,12 +557,39 @@ class materiallaboratorio_generica(models.Model):
 class dblaboratorio_lot (models.Model) :
     _inherit = "stock.production.lot"
 
-    # @api.depends('x_preparado_por')
-    # def _get_user(self):
-    #     current_user_id = self.env['res.users'].search([['id','=',SUPERUSER_ID]]).partner_id.id
-    #     return current_user_id
+    @api.multi
+    #@api.depends('life_date')
+    @api.onchange('x_fecha_preparacion')
+    def _get_life_date(self):
 
-    #x_preparado_por = fields.Many2one('res.users', 'Preparado por', ondelete='cascade')
+        #considero los meses de 30 días y los años de 365
+        delta=timedelta(0)
+
+        if self.product_id.x_estabilidad_unidad=='dias':
+            delta=timedelta(days=self.product_id.x_estabilidad)
+
+        elif self.product_id.x_estabilidad_unidad=='meses':
+            delta=timedelta(days=self.product_id.x_estabilidad*30)
+
+        elif self.product_id.x_estabilidad_unidad=='años':
+            delta=timedelta(days=self.product_id.x_estabilidad*365)
+
+        #life_date = self.x_fecha_preparacion + delta
+
+        #print("Delta")
+        #print(delta)
+        #print("Fecha preparacion " + self.x_fecha_preparacion)
+
+        life_date = datetime.strptime(self.x_fecha_preparacion, '%Y-%m-%d %H:%M:%S') + delta
+
+
+        self.life_date = datetime.strftime(life_date, '%Y-%m-%d %H:%M:%S')
+        #return datetime.strftime(life_date, '%Y-%m-%d %H:%M:%S')
+
+
     x_preparado_por = fields.Many2one('res.users', 'Preparado por', ondelete='cascade', default= lambda self: self.env.user.id)
-    x_fecha_preparacion = fields.Date('Fecha Preparación', default=date.today())
+    x_fecha_preparacion = fields.Datetime('Fecha Preparación', default=date.today())
+    life_date = fields.Datetime('End of Life Date',
+            help='This is the date on which the goods with this Serial Number may become dangerous and must not be consumed.', compute=_get_life_date)
+
 

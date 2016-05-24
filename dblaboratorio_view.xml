@@ -188,7 +188,13 @@
 
 					<field name="x_concentracion" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
 
+					<group colspan="3">
+
 					<field name="x_estabilidad" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
+
+					<field name="x_estabilidad_unidad" nolabel="1" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
+
+					</group>
 
 					<field name="x_conservacion" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
 
