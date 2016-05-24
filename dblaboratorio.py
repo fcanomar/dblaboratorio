@@ -51,10 +51,9 @@ class dblaboratorio_product_template (models.Model) :
     x_estabilidad = fields.Integer('Estabilidad')
     x_estabilidad_unidad = fields. Selection([('dias','Día(s)'),('meses','Mes(es)'),('anos','Año(s)')])
     #x_estabilidad = fields.Many2one('dblaboratorio.estabilidad', 'Estabilidad', ondelete='cascade')
-    x_conservacion = fields.Char('Conservacion')
-    #x_conservacion = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelte='cascade')
+    x_conservacion = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelete='cascade')
     x_ubicacion = fields.Char('Ubicación')
-    x_uso_habitual = fields.Char('Uso habitual')
+    x_uso_habitual = fields.Many2one('dblaboratorio.usohabitual', 'Uso habitual', ondelete='cascade')
 
     #para equipos y material de referencia
     x_modelo = fields.Char('Modelo')
@@ -466,7 +465,12 @@ class metodos_calibrar(models.Model):
     _name = 'dblaboratorio.metodo'
     
     name = fields.Char('Nombre')
-    
+
+class usohabitual(models.Model):
+    _name = 'dblaboratorio.usohabitual'
+
+    name = fields.Char('Uso Habitual')
+
 class metodo_line(models.Model):
     _name = 'dblaboratorio.metodoline'
     
