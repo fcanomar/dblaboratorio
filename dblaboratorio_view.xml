@@ -188,22 +188,14 @@
 
 					<field name="x_concentracion" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
 
-					<group colspan="3">
-
-					<field name="x_estabilidad" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
-
-					<field name="x_estabilidad_unidad" nolabel="1" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
-
-					</group>
-
 					<field name="x_conservacion" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
 
 					<field name="x_ubicacion" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
 
 					<field name="x_uso_habitual" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
 
-					
-					<group String="Origen" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}" colspan="2"/>
+
+					<group String="Origen" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}" colspan="2">
 					
 							<field name="x_origen_tipo" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}"/>
 					
@@ -213,10 +205,24 @@
 					
 							<field name="x_origen_d" attrs="{'invisible':['|',('x_tipolabo','!=','disolucion'),('x_origen_tipo','!=','disolucion')]}"/>
 					
-							<field name="x_origen" invisible="1"/>						
-					
+							<field name="x_origen" invisible="1"/>
+					</group>
 					<!-- para testeo! -->
 					<!--<button name="action_run_caducidad" string="Run Caducidad" type="object"/>-->
+
+
+
+					<group String="Estabilidad" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}" colspan="2">
+
+						<label for="x_estabilidad" string="Estabilidad"/>
+						<div>
+						<field name="x_estabilidad" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}" class="oe_inline"/>
+							<div> </div>
+						<field name="x_estabilidad_unidad" nolabel="1" attrs="{'invisible':[('x_tipolabo','!=','disolucion')]}" class="oe_inline"/>
+						</div>
+
+					</group>
+
 
 	
 				</field>

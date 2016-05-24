@@ -49,7 +49,7 @@ class dblaboratorio_product_template (models.Model) :
     x_origen = fields.Char('Origen (inicial)', compute='_get_origen_dis', readonly=True)
     x_concentracion = fields.Char('Concentración')
     x_estabilidad = fields.Integer('Estabilidad')
-    x_estabilidad_unidad = fields. Selection([('dias','Días'),('meses','Meses'),('años','Años')])
+    x_estabilidad_unidad = fields. Selection([('dias','Día(s)'),('meses','Mes(es)'),('anos','Año(s)')])
     #x_estabilidad = fields.Many2one('dblaboratorio.estabilidad', 'Estabilidad', ondelete='cascade')
     x_conservacion = fields.Char('Conservacion')
     #x_conservacion = fields.Many2one('dblaboratorio.conservacion', 'Conservación', ondelte='cascade')
@@ -571,7 +571,7 @@ class dblaboratorio_lot (models.Model) :
         elif self.product_id.x_estabilidad_unidad=='meses':
             delta=timedelta(days=self.product_id.x_estabilidad*30)
 
-        elif self.product_id.x_estabilidad_unidad=='años':
+        elif self.product_id.x_estabilidad_unidad=='anos':
             delta=timedelta(days=self.product_id.x_estabilidad*365)
 
         #life_date = self.x_fecha_preparacion + delta
