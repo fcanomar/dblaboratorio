@@ -591,7 +591,7 @@ class dblaboratorio_lot (models.Model) :
         #return datetime.strftime(life_date, '%Y-%m-%d %H:%M:%S')
 
 
-    x_preparado_por = fields.Many2one('res.users', 'Preparado por', ondelete='cascade', default= lambda self: self.env.user.id)
+    x_preparado_por = fields.Many2one('res.users', 'Preparado por', ondelete='cascade', default= lambda self: self.env['res.users'].browse(self.env.user.id))
     x_fecha_preparacion = fields.Datetime('Fecha Preparación', default=date.today())
     life_date = fields.Datetime('End of Life Date',
             help='This is the date on which the goods with this Serial Number may become dangerous and must not be consumed.', compute=_get_life_date)
